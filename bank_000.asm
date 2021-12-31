@@ -406,7 +406,7 @@ HeaderSGBFlag::
     db $00
 
 HeaderCartridgeType::
-    db $22
+    db $1b;$22
 
 HeaderROMSize::
     db $05
@@ -11098,9 +11098,13 @@ jr_000_37d7:
     sla e                                         ; $37e0: $cb $23
     rl d                                          ; $37e2: $cb $12
     ld a, e                                       ; $37e4: $7b
-    ldh [$f4], a                                  ; $37e5: $e0 $f4
+    ;ldh [$f4], a                                  ; $37e5: $e0 $f4
+	nop
+	nop
     ld a, d                                       ; $37e7: $7a
-    ldh [$f3], a                                  ; $37e8: $e0 $f3
+    ;ldh [$f3], a                                  ; $37e8: $e0 $f3
+	nop
+	nop
     ld hl, $d0dc                                  ; $37ea: $21 $dc $d0
     ld de, $0000                                  ; $37ed: $11 $00 $00
     ld b, $08                                     ; $37f0: $06 $08
@@ -11118,11 +11122,14 @@ jr_000_37f2:
     sla e                                         ; $37fb: $cb $23
     rl d                                          ; $37fd: $cb $12
     ld a, e                                       ; $37ff: $7b
-    ldh [$f6], a                                  ; $3800: $e0 $f6
+    ;ldh [$f6], a                                  ; $3800: $e0 $f6
+	nop
+	nop
     ld a, d                                       ; $3802: $7a
-    ldh [$f5], a                                  ; $3803: $e0 $f5
+    ;ldh [$f5], a                                  ; $3803: $e0 $f5
+	nop
+	nop
     ret                                           ; $3805: $c9
-
 
 Call_000_3806:
     xor a                                         ; $3806: $af

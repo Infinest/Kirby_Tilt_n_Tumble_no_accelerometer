@@ -7225,17 +7225,23 @@ jr_005_655f:
     ld a, $40                                     ; $65e4: $3e $40
     ld [$4000], a                                 ; $65e6: $ea $00 $40
     ld b, $02                                     ; $65e9: $06 $02
-    call Call_005_6889                            ; $65eb: $cd $89 $68
-    ld a, d                                       ; $65ee: $7a
-    ldh [$f7], a                                  ; $65ef: $e0 $f7
-    ld a, e                                       ; $65f1: $7b
-    ldh [$f8], a                                  ; $65f2: $e0 $f8
-    ld b, $03                                     ; $65f4: $06 $03
-    call Call_005_6889                            ; $65f6: $cd $89 $68
-    ld a, d                                       ; $65f9: $7a
-    ldh [$f9], a                                  ; $65fa: $e0 $f9
-    ld a, e                                       ; $65fc: $7b
-    ldh [$fa], a                                  ; $65fd: $e0 $fa
+	
+	ld a, $7f
+	ldh [$f7], a 
+	ldh [$f9], a  
+	ld a, $ff
+	ldh [$f8], a 
+	ldh [$fa], a  
+	
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	nop
+	
     ld b, $04                                     ; $65ff: $06 $04
     call Call_005_6889                            ; $6601: $cd $89 $68
     ld a, d                                       ; $6604: $7a

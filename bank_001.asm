@@ -4974,8 +4974,10 @@ jr_001_6072:
     jr jr_001_6092                                ; $6081: $18 $0f
 
 jr_001_6083:
-    call Call_000_3125                            ; $6083: $cd $25 $31
-    ret c                                         ; $6086: $d8
+    ;call Call_000_3125                            ; $6083: $cd $25 $31
+	;ret c                                         ; $6086: $d8
+	call CHECK_A_BUTTON_FOR_JUMP				   ; This enables jumping by pressing A
+    ret nc
 
     call Call_000_1475                            ; $6087: $cd $75 $14
     ld a, $05                                     ; $608a: $3e $05
@@ -7988,11 +7990,11 @@ Jump_001_71cb:
     ret                                           ; $71df: $c9
 
 
-    rst $38                                       ; $71e0: $ff
-    rst $38                                       ; $71e1: $ff
-    rst $38                                       ; $71e2: $ff
-    rst $38                                       ; $71e3: $ff
-    rst $38                                       ; $71e4: $ff
+CHECK_A_BUTTON_FOR_JUMP:
+	ld a, [$c101]
+	rra
+	ret
+	
     rst $38                                       ; $71e5: $ff
     rst $38                                       ; $71e6: $ff
     rst $38                                       ; $71e7: $ff

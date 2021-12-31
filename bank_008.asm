@@ -3273,10 +3273,14 @@ jr_008_523d:
     rr h                                          ; $5288: $cb $1c
     rr l                                          ; $528a: $cb $1d
     ld a, h                                       ; $528c: $7c
-    ldh [$f7], a                                  ; $528d: $e0 $f7
+    ;ldh [$f7], a                                  ; $528d: $e0 $f7
+	nop
+	nop
     ld a, l                                       ; $528f: $7d
     and $f0                                       ; $5290: $e6 $f0
-    ldh [$f8], a                                  ; $5292: $e0 $f8
+    ;ldh [$f8], a                                  ; $5292: $e0 $f8
+	nop
+	nop
     ldh a, [$91]                                  ; $5294: $f0 $91
     srl a                                         ; $5296: $cb $3f
     rr d                                          ; $5298: $cb $1a
@@ -3291,10 +3295,14 @@ jr_008_523d:
     rr d                                          ; $52aa: $cb $1a
     rr e                                          ; $52ac: $cb $1b
     ld a, d                                       ; $52ae: $7a
-    ldh [$f9], a                                  ; $52af: $e0 $f9
+    ;ldh [$f9], a                                  ; $52af: $e0 $f9
+	nop
+	nop
     ld a, e                                       ; $52b1: $7b
     and $f0                                       ; $52b2: $e6 $f0
-    ldh [$fa], a                                  ; $52b4: $e0 $fa
+    ;ldh [$fa], a                                  ; $52b4: $e0 $fa
+	nop
+	nop
     ld a, [$c211]                                 ; $52b6: $fa $11 $c2
     cp $01                                        ; $52b9: $fe $01
     jr nz, jr_008_52c9                            ; $52bb: $20 $0c
@@ -7446,7 +7454,10 @@ Call_008_69d2:
     cp $01                                        ; $6a13: $fe $01
     jr z, jr_008_6a2c                             ; $6a15: $28 $15
 
-    call Call_008_6b4d                            ; $6a17: $cd $4d $6b
+    ;call Call_008_6b4d                            ; $6a17: $cd $4d $6b
+	nop
+	nop
+	nop
     call Call_008_6f94                            ; $6a1a: $cd $94 $6f
     call Call_008_7098                            ; $6a1d: $cd $98 $70
     call Call_008_6aa6                            ; $6a20: $cd $a6 $6a
