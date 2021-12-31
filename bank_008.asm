@@ -6060,8 +6060,11 @@ Call_008_6231:
 
 
 Call_008_623c:
-    ld a, [$c132]                                 ; $623c: $fa $32 $c1
-    cp $00                                        ; $623f: $fe $00
+	jp SELECT_CHECK_1
+	nop
+	nop
+	
+SELECT_CHECK_SUCCESS_1:
     jr nz, jr_008_624e                            ; $6241: $20 $0b
 
     ld a, [$c100]                                 ; $6243: $fa $00 $c1
@@ -6079,6 +6082,7 @@ jr_008_624e:
     bit 4, a                                      ; $6255: $cb $67
     jr nz, jr_008_62c2                            ; $6257: $20 $69
 
+SELECT_CHECK_FAILED_1:
     ldh a, [$a5]                                  ; $6259: $f0 $a5
     ld b, a                                       ; $625b: $47
     ld a, [$c254]                                 ; $625c: $fa $54 $c2
@@ -6205,8 +6209,11 @@ jr_008_62f8:
 
 
 Call_008_62fe:
-    ld a, [$c132]                                 ; $62fe: $fa $32 $c1
-    cp $00                                        ; $6301: $fe $00
+	jp SELECT_CHECK_2
+	nop
+	nop
+	
+SELECT_CHECK_SUCCESS_2:
     jr nz, jr_008_6311                            ; $6303: $20 $0c
 
     ld a, [$c100]                                 ; $6305: $fa $00 $c1
@@ -6224,6 +6231,7 @@ jr_008_6311:
     bit 7, a                                      ; $6319: $cb $7f
     jp nz, Jump_008_638f                          ; $631b: $c2 $8f $63
 
+SELECT_CHECK_FAILED_2:
     ldh a, [$a5]                                  ; $631e: $f0 $a5
     ld b, a                                       ; $6320: $47
     ld a, [$c254]                                 ; $6321: $fa $54 $c2
@@ -9509,38 +9517,24 @@ jr_008_75a0:
     rst $38                                       ; $75dc: $ff
     rst $38                                       ; $75dd: $ff
     rst $38                                       ; $75de: $ff
-    rst $38                                       ; $75df: $ff
-    rst $38                                       ; $75e0: $ff
-    rst $38                                       ; $75e1: $ff
-    rst $38                                       ; $75e2: $ff
-    rst $38                                       ; $75e3: $ff
-    rst $38                                       ; $75e4: $ff
-    rst $38                                       ; $75e5: $ff
-    rst $38                                       ; $75e6: $ff
-    rst $38                                       ; $75e7: $ff
-    rst $38                                       ; $75e8: $ff
-    rst $38                                       ; $75e9: $ff
-    rst $38                                       ; $75ea: $ff
-    rst $38                                       ; $75eb: $ff
-    rst $38                                       ; $75ec: $ff
-    rst $38                                       ; $75ed: $ff
-    rst $38                                       ; $75ee: $ff
-    rst $38                                       ; $75ef: $ff
-    rst $38                                       ; $75f0: $ff
-    rst $38                                       ; $75f1: $ff
-    rst $38                                       ; $75f2: $ff
-    rst $38                                       ; $75f3: $ff
-    rst $38                                       ; $75f4: $ff
-    rst $38                                       ; $75f5: $ff
-    rst $38                                       ; $75f6: $ff
-    rst $38                                       ; $75f7: $ff
-    rst $38                                       ; $75f8: $ff
-    rst $38                                       ; $75f9: $ff
-    rst $38                                       ; $75fa: $ff
-    rst $38                                       ; $75fb: $ff
-    rst $38                                       ; $75fc: $ff
-    rst $38                                       ; $75fd: $ff
-    rst $38                                       ; $75fe: $ff
+	
+SELECT_CHECK_1:
+	ld a, [$c100]
+	bit 2, a
+	jp z, SELECT_CHECK_FAILED_1
+	ld a, [$c132]
+    cp $00
+	jp SELECT_CHECK_SUCCESS_1
+	
+SELECT_CHECK_2:
+	ld a, [$c100]
+	bit 2, a
+	jp z, SELECT_CHECK_FAILED_2
+    ld a, [$c132]
+    cp $00
+	jp SELECT_CHECK_SUCCESS_2
+	
+
     rst $38                                       ; $75ff: $ff
     rst $38                                       ; $7600: $ff
     rst $38                                       ; $7601: $ff

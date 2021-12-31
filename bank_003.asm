@@ -2246,7 +2246,7 @@ Jump_003_4dbe:
     ret                                           ; $4dc2: $c9
 
 
-    call Call_003_4e03                            ; $4dc3: $cd $03 $4e
+    call ACCELEROMETER_BYPASS                     ; $4dc3: $cd $03 $4e
     call Call_003_4e57                            ; $4dc6: $cd $57 $4e
     xor a                                         ; $4dc9: $af
     ldh [$f2], a                                  ; $4dca: $e0 $f2
@@ -2308,9 +2308,13 @@ Call_003_4e03:
     rla                                           ; $4e28: $17
     sla l                                         ; $4e29: $cb $25
     rla                                           ; $4e2b: $17
-    ldh [$f3], a                                  ; $4e2c: $e0 $f3
+    ;ldh [$f3], a                                  ; $4e2c: $e0 $f3
+	nop
+	nop
     ld a, l                                       ; $4e2e: $7d
-    ldh [$f4], a                                  ; $4e2f: $e0 $f4
+    ;ldh [$f4], a                                  ; $4e2f: $e0 $f4
+	nop
+	nop
     ld a, [$a040]                                 ; $4e31: $fa $40 $a0
     ld l, a                                       ; $4e34: $6f
     ld a, [$a050]                                 ; $4e35: $fa $50 $a0
@@ -2324,9 +2328,13 @@ Call_003_4e03:
     rla                                           ; $4e43: $17
     sla l                                         ; $4e44: $cb $25
     rla                                           ; $4e46: $17
-    ldh [$f5], a                                  ; $4e47: $e0 $f5
+    ;ldh [$f5], a                                  ; $4e47: $e0 $f5
+	nop
+	nop
     ld a, l                                       ; $4e49: $7d
-    ldh [$f6], a                                  ; $4e4a: $e0 $f6
+    ;ldh [$f6], a                                  ; $4e4a: $e0 $f6
+	nop
+	nop
     ld a, $55                                     ; $4e4c: $3e $55
     ld [$a000], a                                 ; $4e4e: $ea $00 $a0
     ld a, $aa                                     ; $4e51: $3e $aa
@@ -10857,38 +10865,33 @@ jr_003_78f7:
     ld a, d                                       ; $7abd: $7a
     inc e                                         ; $7abe: $1c
     dec e                                         ; $7abf: $1d
-    jr nc, jr_003_7ade                            ; $7ac0: $30 $1c
+    jr nc, $7ade                                  ; $7ac0: $30 $1c
 
     dec d                                         ; $7ac2: $15
     rst $38                                       ; $7ac3: $ff
     rst $38                                       ; $7ac4: $ff
-    rst $38                                       ; $7ac5: $ff
-    rst $38                                       ; $7ac6: $ff
-    rst $38                                       ; $7ac7: $ff
-    rst $38                                       ; $7ac8: $ff
-    rst $38                                       ; $7ac9: $ff
-    rst $38                                       ; $7aca: $ff
-    rst $38                                       ; $7acb: $ff
-    rst $38                                       ; $7acc: $ff
-    rst $38                                       ; $7acd: $ff
-    rst $38                                       ; $7ace: $ff
-    rst $38                                       ; $7acf: $ff
-    rst $38                                       ; $7ad0: $ff
-    rst $38                                       ; $7ad1: $ff
-    rst $38                                       ; $7ad2: $ff
-    rst $38                                       ; $7ad3: $ff
-    rst $38                                       ; $7ad4: $ff
-    rst $38                                       ; $7ad5: $ff
-    rst $38                                       ; $7ad6: $ff
-    rst $38                                       ; $7ad7: $ff
-    rst $38                                       ; $7ad8: $ff
+	
+ACCELEROMETER_BYPASS:
+	call Call_003_4e03
+	ld a, ($c100)
+	bit 7, a
+	jr z, DOWN_NOT_PRESSED
+DOWN_NOT_PRESSED:
+	bit 6, a
+	jr z, UP_NOT_PRESSED
+UP_NOT_PRESSED:
+	bit 5, a
+	jr z, LEFT_NOT_PRESSED
+LEFT_NOT_PRESSED:
+	bit 4, a
+RIGHT_NOT_PRESSED:
+	ret
+
     rst $38                                       ; $7ad9: $ff
     rst $38                                       ; $7ada: $ff
     rst $38                                       ; $7adb: $ff
     rst $38                                       ; $7adc: $ff
     rst $38                                       ; $7add: $ff
-
-jr_003_7ade:
     rst $38                                       ; $7ade: $ff
     rst $38                                       ; $7adf: $ff
     rst $38                                       ; $7ae0: $ff

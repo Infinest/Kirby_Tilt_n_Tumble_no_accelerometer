@@ -424,10 +424,10 @@ HeaderMaskROMVersion::
     db $00
 
 HeaderComplementCheck::
-    db $a2
+    db $00
 
 HeaderGlobalChecksum::
-    db $51, $86
+    db $00, $00
 
 Jump_000_0150:
     cp $11                                        ; $0150: $fe $11

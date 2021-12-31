@@ -7455,7 +7455,7 @@ jr_001_6efd:
 Jump_001_6eff:
     ld a, [$c101]                                 ; $6eff: $fa $01 $c1
     bit 2, a                                      ; $6f02: $cb $57
-    ret z                                         ; $6f04: $c8
+    ret											  ; Disables accelerometer recalibration on select press
 
     ld a, [$c101]                                 ; $6f05: $fa $01 $c1
     bit 3, a                                      ; $6f08: $cb $5f
