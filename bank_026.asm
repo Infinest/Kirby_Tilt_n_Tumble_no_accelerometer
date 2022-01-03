@@ -6124,7 +6124,7 @@ jr_026_5c34:
     db $fc                                        ; $5c80: $fc
     add a                                         ; $5c81: $87
     rst $38                                       ; $5c82: $ff
-    call nz, Call_000_3f3f                        ; $5c83: $c4 $3f $3f
+    call nz, $3f3f                                ; $5c83: $c4 $3f $3f
     nop                                           ; $5c86: $00
     nop                                           ; $5c87: $00
     nop                                           ; $5c88: $00
@@ -12498,7 +12498,8 @@ jr_026_7594:
     nop                                           ; $779d: $00
     nop                                           ; $779e: $00
     nop                                           ; $779f: $00
-    ld bc, $2101                                  ; $77a0: $01 $01 $21
+    ;ld bc, $2101                                  ; $77a0: $01 $01 $21
+    db $01, $01, $01							  ; Fix incorrect attribute for tile on level select screen. This caused an incorrectly flipped tile.
     ld bc, $0101                                  ; $77a3: $01 $01 $01
     ld bc, $0701                                  ; $77a6: $01 $01 $07
     ld bc, $0101                                  ; $77a9: $01 $01 $01

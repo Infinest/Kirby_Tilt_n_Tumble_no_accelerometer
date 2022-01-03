@@ -9410,7 +9410,7 @@ jr_024_64d3:
     inc bc                                        ; $6574: $03
     db $fc                                        ; $6575: $fc
     ccf                                           ; $6576: $3f
-    jp Jump_000_3fff                              ; $6577: $c3 $ff $3f
+    jp $3fff                                      ; $6577: $c3 $ff $3f
 
 
     rst $38                                       ; $657a: $ff

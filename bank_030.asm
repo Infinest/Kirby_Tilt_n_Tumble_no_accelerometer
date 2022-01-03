@@ -2781,7 +2781,7 @@ Jump_030_4e4e:
     cp $fe                                        ; $4ea0: $fe $fe
     cp $fe                                        ; $4ea2: $fe $fe
     cp $db                                        ; $4ea4: $fe $db
-    call c, Call_000_3dfe                         ; $4ea6: $dc $fe $3d
+    call c, $3dfe                                 ; $4ea6: $dc $fe $3d
     ld [hl], d                                    ; $4ea9: $72
     ld e, a                                       ; $4eaa: $5f
     ld [c], a                                     ; $4eab: $e2
@@ -2907,7 +2907,7 @@ Call_030_4efe:
 
 Call_030_4f4f:
 Jump_030_4f4f:
-    call nc, Call_000_3d73                        ; $4f4f: $d4 $73 $3d
+    call nc, $3d73                                ; $4f4f: $d4 $73 $3d
     cp $fe                                        ; $4f52: $fe $fe
     cp $fe                                        ; $4f54: $fe $fe
     cp $fe                                        ; $4f56: $fe $fe
@@ -3252,7 +3252,7 @@ Jump_030_4fd6:
     reti                                          ; $511e: $d9
 
 
-    call nc, Call_000_3d73                        ; $511f: $d4 $73 $3d
+    call nc, $3d73                                ; $511f: $d4 $73 $3d
     call nc, $cece                                ; $5122: $d4 $ce $ce
     adc $ce                                       ; $5125: $ce $ce
     rst $10                                       ; $5127: $d7
@@ -4491,7 +4491,7 @@ Jump_030_53d3:
     reti                                          ; $574e: $d9
 
 
-    call nc, Call_000_3d3d                        ; $574f: $d4 $3d $3d
+    call nc, $3d3d                                ; $574f: $d4 $3d $3d
     ld b, [hl]                                    ; $5752: $46
     ld b, a                                       ; $5753: $47
     pop de                                        ; $5754: $d1
@@ -6906,7 +6906,7 @@ Call_030_5f5f:
     reti                                          ; $634e: $d9
 
 
-    call nc, Call_000_3dd3                        ; $634f: $d4 $d3 $3d
+    call nc, $3dd3                                ; $634f: $d4 $d3 $3d
     ld l, a                                       ; $6352: $6f
     ld [hl], b                                    ; $6353: $70
     ld [hl], b                                    ; $6354: $70
@@ -7154,7 +7154,7 @@ Call_030_5f5f:
     ld b, d                                       ; $6491: $42
     ret nc                                        ; $6492: $d0
 
-    call nc, Call_000_3dce                        ; $6493: $d4 $ce $3d
+    call nc, $3dce                                ; $6493: $d4 $ce $3d
     ld [hl], d                                    ; $6496: $72
     ld e, a                                       ; $6497: $5f
     ld e, a                                       ; $6498: $5f
@@ -8236,7 +8236,7 @@ Call_030_5f5f:
 
     call nc, $d1d5                                ; $6a9a: $d4 $d5 $d1
     cp $d0                                        ; $6a9d: $fe $d0
-    call nc, Call_000_3d3d                        ; $6a9f: $d4 $3d $3d
+    call nc, $3d3d                                ; $6a9f: $d4 $3d $3d
     dec a                                         ; $6aa2: $3d
     dec a                                         ; $6aa3: $3d
     dec a                                         ; $6aa4: $3d
@@ -9340,7 +9340,7 @@ Call_030_70e8:
 
     call nc, $d7ce                                ; $714a: $d4 $ce $d7
     db $d3                                        ; $714d: $d3
-    jp nc, Jump_000_3dd6                          ; $714e: $d2 $d6 $3d
+    jp nc, $3dd6                                  ; $714e: $d2 $d6 $3d
 
     dec a                                         ; $7151: $3d
     dec a                                         ; $7152: $3d
@@ -10428,7 +10428,7 @@ Call_030_73ce:
     reti                                          ; $774e: $d9
 
 
-    call nc, Call_000_3d3d                        ; $774f: $d4 $3d $3d
+    call nc, $3d3d                                ; $774f: $d4 $3d $3d
     dec a                                         ; $7752: $3d
     ld d, a                                       ; $7753: $57
     ld e, c                                       ; $7754: $59

@@ -1319,7 +1319,7 @@ jr_01e_4594:
     rst $38                                       ; $45a7: $ff
     nop                                           ; $45a8: $00
     rst $38                                       ; $45a9: $ff
-    jp Jump_000_3cff                              ; $45aa: $c3 $ff $3c
+    jp $3cff                                      ; $45aa: $c3 $ff $3c
 
 
     inc a                                         ; $45ad: $3c

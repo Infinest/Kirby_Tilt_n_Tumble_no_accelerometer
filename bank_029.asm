@@ -2982,7 +2982,7 @@ jr_029_4c31:
     ldh a, [$08]                                  ; $4c4b: $f0 $08
     ld hl, sp+$08                                 ; $4c4d: $f8 $08
     ld hl, sp+$24                                 ; $4c4f: $f8 $24
-    call c, Call_000_3cc4                         ; $4c51: $dc $c4 $3c
+    call c, $3cc4                                 ; $4c51: $dc $c4 $3c
     call nz, $e43c                                ; $4c54: $c4 $3c $e4
     inc e                                         ; $4c57: $1c
     db $e4                                        ; $4c58: $e4
@@ -3476,7 +3476,7 @@ jr_029_4e3b:
     db $10                                        ; $4e4b: $10
     ld hl, sp+$08                                 ; $4e4c: $f8 $08
     ld hl, sp+$08                                 ; $4e4e: $f8 $08
-    call c, Call_000_3c24                         ; $4e50: $dc $24 $3c
+    call c, $3c24                                 ; $4e50: $dc $24 $3c
     call nz, $c43c                                ; $4e53: $c4 $3c $c4
     inc e                                         ; $4e56: $1c
     db $e4                                        ; $4e57: $e4
@@ -5383,7 +5383,7 @@ jr_029_560b:
     nop                                           ; $5621: $00
     nop                                           ; $5622: $00
     nop                                           ; $5623: $00
-    jp Jump_000_3cc3                              ; $5624: $c3 $c3 $3c
+    jp $3cc3                                      ; $5624: $c3 $c3 $3c
 
 
     rst $38                                       ; $5627: $ff
@@ -11493,7 +11493,7 @@ Call_029_6f7f:
     add a                                         ; $6f86: $87
     ld a, d                                       ; $6f87: $7a
     rst $38                                       ; $6f88: $ff
-    jp nz, Jump_000_3f3f                          ; $6f89: $c2 $3f $3f
+    jp nz, $3f3f                                  ; $6f89: $c2 $3f $3f
 
     nop                                           ; $6f8c: $00
     nop                                           ; $6f8d: $00

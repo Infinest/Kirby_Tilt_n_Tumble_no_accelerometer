@@ -7203,8 +7203,11 @@ jr_008_6861:
 
 
 Call_008_688d:
-    call Call_000_3125                            ; $688d: $cd $25 $31
-    jr c, jr_008_6897                             ; $6890: $38 $05
+    ;call Call_000_3125                            ; $688d: $cd $25 $31
+    ;jr c, jr_008_6897                             ; $6890: $38 $05
+	call CHECK_A_BUTTON_PRESSED				  	   ; Seems to control graphics in HRAM. Maybe times animation or something
+    jr nc, jr_008_6897							   ; We should also only trigger this on an A press instead of by sudden speed change
+
 
     ld a, $0c                                     ; $6892: $3e $0c
     ld [$c1d9], a                                 ; $6894: $ea $d9 $c1
@@ -7454,10 +7457,7 @@ Call_008_69d2:
     cp $01                                        ; $6a13: $fe $01
     jr z, jr_008_6a2c                             ; $6a15: $28 $15
 
-    ;call Call_008_6b4d                            ; $6a17: $cd $4d $6b
-	nop
-	nop
-	nop
+    call CHECK_SWITCH_RED_BLOCKS                  ; $6a17: $cd $4d $6b
     call Call_008_6f94                            ; $6a1a: $cd $94 $6f
     call Call_008_7098                            ; $6a1d: $cd $98 $70
     call Call_008_6aa6                            ; $6a20: $cd $a6 $6a
@@ -7671,12 +7671,12 @@ jr_008_6b47:
     ret                                           ; $6b4c: $c9
 
 
-Call_008_6b4d:
+CHECK_SWITCH_RED_BLOCKS:
     ld a, [$c1c5]                                 ; $6b4d: $fa $c5 $c1
     and $33                                       ; $6b50: $e6 $33
     ld [$c1c5], a                                 ; $6b52: $ea $c5 $c1
     ld a, [$c101]                                 ; $6b55: $fa $01 $c1
-    bit 0, a                                      ; $6b58: $cb $47
+    bit 1, a                                      ; $6b58: $cb $47
     ret z                                         ; $6b5a: $c8
 
     ld a, [$c1c5]                                 ; $6b5b: $fa $c5 $c1
@@ -7871,8 +7871,8 @@ Jump_008_6c8b:
 
 
 jr_008_6c9a:
-    call Call_008_6d2e                            ; $6c9a: $cd $2e $6d
-    jp Jump_008_6d80                              ; $6c9d: $c3 $80 $6d
+    call CHECK_RED_FLIP_TILES                     ; $6c9a: $cd $2e $6d
+    jp CHECK_BLUE_FLIP_TILES                      ; $6c9d: $c3 $80 $6d
 
 
 jr_008_6ca0:
@@ -7976,9 +7976,10 @@ jr_008_6d21:
     jp Jump_008_6dec                              ; $6d2b: $c3 $ec $6d
 
 
-Call_008_6d2e:
+CHECK_RED_FLIP_TILES:
     ld a, [$c100]                                 ; $6d2e: $fa $00 $c1
-    bit 0, a                                      ; $6d31: $cb $47
+    ;bit 0, a                                      ; $6d31: $cb $47
+    bit 1, a                                      ; Make red flip tiles also flip on B press
     jr z, jr_008_6d7a                             ; $6d33: $28 $45
 
     ld a, [$c1c9]                                 ; $6d35: $fa $c9 $c1
@@ -8020,7 +8021,7 @@ jr_008_6d7d:
     jp Jump_008_6e30                              ; $6d7d: $c3 $30 $6e
 
 
-Jump_008_6d80:
+CHECK_BLUE_FLIP_TILES:
     ld a, [$c100]                                 ; $6d80: $fa $00 $c1
     bit 1, a                                      ; $6d83: $cb $4f
     jr z, jr_008_6dcc                             ; $6d85: $28 $45

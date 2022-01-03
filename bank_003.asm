@@ -2250,8 +2250,10 @@ Jump_003_4dbe:
     call Call_003_4e57                            ; $4dc6: $cd $57 $4e
     xor a                                         ; $4dc9: $af
     ldh [$f2], a                                  ; $4dca: $e0 $f2
-    call Call_000_3125                            ; $4dcc: $cd $25 $31
-    ret c                                         ; $4dcf: $d8
+    ;call Call_000_3125                            ; $4dcc: $cd $25 $31
+    ;ret c                                         ; $4dcf: $d8
+	call CHECK_A_BUTTON_PRESSED_CONDITIONAL       ; Allows flipping and killing enemies by pressing a
+    ret nc
 
     ld a, $01                                     ; $4dd0: $3e $01
     ldh [$f2], a                                  ; $4dd2: $e0 $f2
@@ -2278,12 +2280,22 @@ Jump_003_4dbe:
     ldh [$f2], a                                  ; $4de4: $e0 $f2
     ld a, $0a                                     ; $4de6: $3e $0a
     ld [$0000], a                                 ; $4de8: $ea $00 $00
-    ld a, $40                                     ; $4deb: $3e $40
-    ld [$4000], a                                 ; $4ded: $ea $00 $40
-    ld a, $55                                     ; $4df0: $3e $55
-    ld [$a000], a                                 ; $4df2: $ea $00 $a0
-    ld a, $aa                                     ; $4df5: $3e $aa
-    ld [$a010], a                                 ; $4df7: $ea $10 $a0
+	
+	; Second RAM enable. Not to be used for MBC5
+    ;ld a, $40                                     ; $4deb: $3e $40
+    ;ld [$4000], a                                 ; $4ded: $ea $00 $40
+REPT 5
+	nop
+ENDR
+	
+	; This piece of code deletes the old accelerometer values and latches the new ones
+    ;ld a, $55                                     ; $4df0: $3e $55
+    ;ld [$a000], a                                 ; $4df2: $ea $00 $a0
+    ;ld a, $aa                                     ; $4df5: $3e $aa
+    ;ld [$a010], a                                 ; $4df7: $ea $10 $a0
+REPT 10
+	nop
+ENDR
     ld bc, $0800                                  ; $4dfa: $01 $00 $08
 
 jr_003_4dfd:
@@ -2302,10 +2314,18 @@ Call_003_4e03:
     ld [$c1a7], a                                 ; $4e0a: $ea $a7 $c1
     ld a, $0a                                     ; $4e0d: $3e $0a
     ld [$0000], a                                 ; $4e0f: $ea $00 $00
-    ld a, $40                                     ; $4e12: $3e $40
-    ld [$4000], a                                 ; $4e14: $ea $00 $40
+	
+	; Second RAM enable. Not to be used for MBC5
+    ;ld a, $40                                     ; $4e12: $3e $40
+    ;ld [$4000], a                                 ; $4e14: $ea $00 $40
+REPT 5
+	nop
+ENDR
+
+	; This reads the low byte of the Accelerometer X value
     ld a, [$a020]                                 ; $4e17: $fa $20 $a0
     ld l, a                                       ; $4e1a: $6f
+	; This reads the high byte of the Accelerometer X value
     ld a, [$a030]                                 ; $4e1b: $fa $30 $a0
     and $0f                                       ; $4e1e: $e6 $0f
     sla l                                         ; $4e20: $cb $25
@@ -2323,8 +2343,10 @@ Call_003_4e03:
     ;ldh [$f4], a                                  ; $4e2f: $e0 $f4
 	nop
 	nop
+	; This reads the low byte of the Accelerometer Y value
     ld a, [$a040]                                 ; $4e31: $fa $40 $a0
     ld l, a                                       ; $4e34: $6f
+	; This reads the low byte of the Accelerometer Y value
     ld a, [$a050]                                 ; $4e35: $fa $50 $a0
     ld h, a                                       ; $4e38: $67
     and $0f                                       ; $4e39: $e6 $0f
@@ -2337,17 +2359,17 @@ Call_003_4e03:
     sla l                                         ; $4e44: $cb $25
     rla                                           ; $4e46: $17
     ;ldh [$f5], a                                  ; $4e47: $e0 $f5
-	nop
-	nop
-    ld a, l                                       ; $4e49: $7d
+    ;ld a, l                                       ; $4e49: $7d
     ;ldh [$f6], a                                  ; $4e4a: $e0 $f6
+    ;ld a, $55                                     ; $4e4c: $3e $55
+    ;ld [$a000], a                                 ; $4e4e: $ea $00 $a0
+    ;ld a, $aa                                     ; $4e51: $3e $aa
+    ;ld [$a010], a                                 ; $4e53: $ea $10 $a0
+REPT 15
 	nop
-	nop
-    ld a, $55                                     ; $4e4c: $3e $55
-    ld [$a000], a                                 ; $4e4e: $ea $00 $a0
-    ld a, $aa                                     ; $4e51: $3e $aa
-    ld [$a010], a                                 ; $4e53: $ea $10 $a0
-    ret                                           ; $4e56: $c9
+ENDR
+
+    ret                                            ; $4e56: $c9
 
 
 Call_003_4e57:
@@ -2719,7 +2741,7 @@ Jump_003_4fed:
     ld bc, $0280                                  ; $5002: $01 $80 $02
     nop                                           ; $5005: $00
     nop                                           ; $5006: $00
-    call nz, Call_000_3c01                        ; $5007: $c4 $01 $3c
+    call nz, $3c01                                ; $5007: $c4 $01 $3c
     cp $c4                                        ; $500a: $fe $c4
     ld bc, $01c4                                  ; $500c: $01 $c4 $01
     nop                                           ; $500f: $00
@@ -10889,13 +10911,18 @@ jr_003_78f7:
 	
 ACCELEROMETER_BYPASS:
 	call Call_003_4e03
-	;ld a,[$c0a0]
-	;ld h, a
-	;ld a,[$c0a1]
-	;ld l, a
+	push bc
+
+	ld a, $7f                                     ; This will ensure that the accelerometer zero point will always stay at X: $7fff Y: $7fff
+	ld [$fff7],a
+	ld [$fff9],a
+	ld b, a
+	ld a, $ff
+	ld [$fff8],a
+	ld [$fffa],a
+	ld c, a
 	
 	ld hl, $05FF
-	ld bc, $7fff
 	ld d, b
 	ld e, c
 	ld a, [$c100]
@@ -10926,10 +10953,6 @@ DOWN_NOT_PRESSED:
 	sbc a, h
 	ld b, a
 	pop af
-
-	
-	
-	pop hl
 	
 UP_NOT_PRESSED:
 	bit 5, a
@@ -10970,4 +10993,5 @@ RIGHT_NOT_PRESSED:
 	inc hl
 	ld [hl], c
 DONT_JUMP:
+	pop bc
 	ret

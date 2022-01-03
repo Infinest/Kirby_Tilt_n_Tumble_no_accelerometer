@@ -12228,7 +12228,7 @@ jr_011_7e8b:
     ld a, b                                       ; $7f0a: $78
     ld a, b                                       ; $7f0b: $78
     ld b, b                                       ; $7f0c: $40
-    jp z, Jump_000_3e80                           ; $7f0d: $ca $80 $3e
+    jp z, $3e80                                   ; $7f0d: $ca $80 $3e
 
     rst $38                                       ; $7f10: $ff
     ldh [rNR51], a                                ; $7f11: $e0 $25

@@ -2211,7 +2211,7 @@ SECTION "ROM Bank $02e", ROMX[$4000], BANK[$2e]
     rst $38                                       ; $4884: $ff
     rst $28                                       ; $4885: $ef
     rst $38                                       ; $4886: $ff
-    jp Jump_000_3dff                              ; $4887: $c3 $ff $3d
+    jp $3dff                                      ; $4887: $c3 $ff $3d
 
 
     rst $38                                       ; $488a: $ff
@@ -3088,7 +3088,7 @@ Call_02e_48bb:
     rst $38                                       ; $4c1a: $ff
     di                                            ; $4c1b: $f3
     rst $38                                       ; $4c1c: $ff
-    call Call_000_3dff                            ; $4c1d: $cd $ff $3d
+    call $3dff                                    ; $4c1d: $cd $ff $3d
     rst $38                                       ; $4c20: $ff
     inc bc                                        ; $4c21: $03
     rst $38                                       ; $4c22: $ff

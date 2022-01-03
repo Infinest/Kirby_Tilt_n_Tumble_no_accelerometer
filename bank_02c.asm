@@ -8176,7 +8176,7 @@ jr_02c_6135:
     sbc c                                         ; $619a: $99
     rst $20                                       ; $619b: $e7
     inc h                                         ; $619c: $24
-    jp Jump_000_3cc3                              ; $619d: $c3 $c3 $3c
+    jp $3cc3                                      ; $619d: $c3 $c3 $3c
 
 
     rra                                           ; $61a0: $1f
@@ -9935,7 +9935,7 @@ jr_02c_68e1:
     nop                                           ; $693c: $00
     ld b, [hl]                                    ; $693d: $46
     nop                                           ; $693e: $00
-    call nc, Call_000_3e7f                        ; $693f: $d4 $7f $3e
+    call nc, $3e7f                                ; $693f: $d4 $7f $3e
     ld a, a                                       ; $6942: $7f
     ld a, h                                       ; $6943: $7c
     ld a, a                                       ; $6944: $7f

@@ -2196,7 +2196,7 @@ jr_02b_4995:
     db $ec                                        ; $4995: $ec
     inc c                                         ; $4996: $0c
     ldh a, [$3e]                                  ; $4997: $f0 $3e
-    call z, Call_000_3cfe                         ; $4999: $cc $fe $3c
+    call z, $3cfe                                 ; $4999: $cc $fe $3c
     ld a, h                                       ; $499c: $7c
     jr c, jr_02b_49d7                             ; $499d: $38 $38
 
@@ -4107,7 +4107,7 @@ jr_02b_5195:
     db $ec                                        ; $5195: $ec
     inc c                                         ; $5196: $0c
     ldh a, [$3e]                                  ; $5197: $f0 $3e
-    call z, Call_000_3cfe                         ; $5199: $cc $fe $3c
+    call z, $3cfe                                 ; $5199: $cc $fe $3c
     ld a, h                                       ; $519c: $7c
     jr c, jr_02b_51d7                             ; $519d: $38 $38
 

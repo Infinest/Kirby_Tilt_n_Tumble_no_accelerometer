@@ -1422,7 +1422,8 @@ jr_001_4945:
     jr nz, jr_001_4989                            ; $4949: $20 $3e
 
     ld a, [$c101]                                 ; $494b: $fa $01 $c1
-    bit 0, a                                      ; $494e: $cb $47
+    ;bit 0, a                                      ; $494e: $cb $47
+    bit 1, a                                      ; Row boat with B instead of A
     jr z, jr_001_4995                             ; $4950: $28 $43
 
     ld a, $20                                     ; $4952: $3e $20
@@ -4949,8 +4950,10 @@ jr_001_601e:
     jr nz, jr_001_6072                            ; $6059: $20 $17
 
 jr_001_605b:
-    call Call_000_3125                            ; $605b: $cd $25 $31
-    ret c                                         ; $605e: $d8
+    ;call Call_000_3125                            ; $605b: $cd $25 $31
+    ;ret c                                         ; $605e: $d8
+	call CHECK_A_BUTTON_PRESSED				  	   ; This enables jumping by pressing A when underneath a mesh
+    ret nc
 
     ld a, $02                                     ; $605f: $3e $02
     ld [$c109], a                                 ; $6061: $ea $09 $c1
@@ -4963,8 +4966,10 @@ jr_001_605b:
     jr jr_001_6092                                ; $6070: $18 $20
 
 jr_001_6072:
-    call Call_000_3125                            ; $6072: $cd $25 $31
-    ret c                                         ; $6075: $d8
+    ;call Call_000_3125                            ; $6072: $cd $25 $31
+    ;ret c                                         ; $6075: $d8
+	call CHECK_A_BUTTON_PRESSED				  	   ; This enables jumping by pressing A when ???
+    ret nc
 
     call Call_000_1475                            ; $6076: $cd $75 $14
     ld a, $03                                     ; $6079: $3e $03
@@ -4976,7 +4981,7 @@ jr_001_6072:
 jr_001_6083:
     ;call Call_000_3125                            ; $6083: $cd $25 $31
 	;ret c                                         ; $6086: $d8
-	call CHECK_A_BUTTON_FOR_JUMP				   ; This enables jumping by pressing A
+	call CHECK_A_BUTTON_PRESSED				  	   ; This enables jumping by pressing A
     ret nc
 
     call Call_000_1475                            ; $6087: $cd $75 $14
@@ -7989,12 +7994,11 @@ Jump_001_71cb:
     call Call_000_0ddc                            ; $71dc: $cd $dc $0d
     ret                                           ; $71df: $c9
 
-
-CHECK_A_BUTTON_FOR_JUMP:
-	ld a, [$c101]
-	rra
-	ret
-	
+	rst $38                                       ; $71e0: $ff
+	rst $38                                       ; $71e1: $ff
+	rst $38                                       ; $71e2: $ff
+	rst $38                                       ; $71e3: $ff
+	rst $38                                       ; $71e4: $ff
     rst $38                                       ; $71e5: $ff
     rst $38                                       ; $71e6: $ff
     rst $38                                       ; $71e7: $ff

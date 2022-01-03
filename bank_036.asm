@@ -9750,7 +9750,7 @@ Call_036_6739:
     cp $d2                                        ; $6a4e: $fe $d2
     cp $fe                                        ; $6a50: $fe $fe
     cp $d0                                        ; $6a52: $fe $d0
-    call nc, Call_000_3dce                        ; $6a54: $d4 $ce $3d
+    call nc, $3dce                                ; $6a54: $d4 $ce $3d
     add sp, $70                                   ; $6a57: $e8 $70
     ld [hl], b                                    ; $6a59: $70
     jp hl                                         ; $6a5a: $e9
@@ -9772,7 +9772,7 @@ Call_036_6739:
     cp $fe                                        ; $6a6e: $fe $fe
     cp $fe                                        ; $6a70: $fe $fe
     cp $fe                                        ; $6a72: $fe $fe
-    jp nc, Jump_000_3dd6                          ; $6a74: $d2 $d6 $3d
+    jp nc, $3dd6                                  ; $6a74: $d2 $d6 $3d
 
     dec l                                         ; $6a77: $2d
     inc hl                                        ; $6a78: $23
@@ -10185,7 +10185,7 @@ Call_036_6739:
     reti                                          ; $6cf4: $d9
 
 
-    call nc, Call_000_3dd7                        ; $6cf5: $d4 $d7 $3d
+    call nc, $3dd7                                ; $6cf5: $d4 $d7 $3d
     ld [hl], d                                    ; $6cf8: $72
     ld e, a                                       ; $6cf9: $5f
     ld [hl], e                                    ; $6cfa: $73
@@ -10529,7 +10529,7 @@ Call_036_6739:
     jp nc, $fed6                                  ; $6ede: $d2 $d6 $fe
 
     cp $fe                                        ; $6ee1: $fe $fe
-    jp nc, Jump_000_3dda                          ; $6ee3: $d2 $da $3d
+    jp nc, $3dda                                  ; $6ee3: $d2 $da $3d
 
     jp nz, $c4c4                                  ; $6ee6: $c2 $c4 $c4
 
@@ -11215,7 +11215,7 @@ Jump_036_723d:
     cp $d0                                        ; $72cd: $fe $d0
     call nc, $fefe                                ; $72cf: $d4 $fe $fe
     cp $fe                                        ; $72d2: $fe $fe
-    jp nc, Jump_000_3dd6                          ; $72d4: $d2 $d6 $3d
+    jp nc, $3dd6                                  ; $72d4: $d2 $d6 $3d
 
     ld [hl], d                                    ; $72d7: $72
     ld e, a                                       ; $72d8: $5f

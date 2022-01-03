@@ -6786,11 +6786,17 @@ jr_005_62fa:
 
     ld a, $0a                                     ; $631a: $3e $0a
     ld [$0000], a                                 ; $631c: $ea $00 $00
-    ld a, $40                                     ; $631f: $3e $40
-    ld [$4000], a                                 ; $6321: $ea $00 $40
+	
+	; Second RAM enable. Not to be used for MBC5
+    ;ld a, $40                                     ; $631f: $3e $40
+    ;ld [$4000], a                                 ; $6321: $ea $00 $40
+REPT 5
+	nop
+ENDR
+
     ld hl, $6311                                  ; $6324: $21 $11 $63
     ld b, $00                                     ; $6327: $06 $00
-    call Call_005_6889                            ; $6329: $cd $89 $68
+    call READ_FROM_SRAM                            ; $6329: $cd $89 $68
     ld a, d                                       ; $632c: $7a
     cp [hl]                                       ; $632d: $be
     jr nz, jr_005_6344                            ; $632e: $20 $14
@@ -6802,7 +6808,7 @@ jr_005_62fa:
 
     inc hl                                        ; $6335: $23
     ld b, $01                                     ; $6336: $06 $01
-    call Call_005_6889                            ; $6338: $cd $89 $68
+    call READ_FROM_SRAM                            ; $6338: $cd $89 $68
     ld a, d                                       ; $633b: $7a
     cp [hl]                                       ; $633c: $be
     jr nz, jr_005_6344                            ; $633d: $20 $05
@@ -6815,21 +6821,21 @@ jr_005_62fa:
 Jump_005_6344:
 jr_005_6344:
     ld de, $0000                                  ; $6344: $11 $00 $00
-    call Call_005_68fc                            ; $6347: $cd $fc $68
-    call Call_005_67da                            ; $634a: $cd $da $67
+    call SETUP_EEPROM_WRITE                      ; $6347: $cd $fc $68
+    call EEPROM_WRITE_ENABLE                      ; $634a: $cd $da $67
     ld hl, $6311                                  ; $634d: $21 $11 $63
     ld a, [hl+]                                   ; $6350: $2a
     ld d, a                                       ; $6351: $57
     ld e, [hl]                                    ; $6352: $5e
     ld b, $00                                     ; $6353: $06 $00
-    call Call_005_67eb                            ; $6355: $cd $eb $67
+    call WRITE_TO_SRAM                            ; $6355: $cd $eb $67
     ld hl, $6313                                  ; $6358: $21 $13 $63
     ld a, [hl+]                                   ; $635b: $2a
     ld d, a                                       ; $635c: $57
     ld e, [hl]                                    ; $635d: $5e
     ld b, $01                                     ; $635e: $06 $01
-    call Call_005_67eb                            ; $6360: $cd $eb $67
-    jp Jump_005_6878                              ; $6363: $c3 $78 $68
+    call WRITE_TO_SRAM                            ; $6360: $cd $eb $67
+    jp EEPROM_WRITE_DISABLE                       ; $6363: $c3 $78 $68
 
 
 jr_005_6366:
@@ -7063,7 +7069,7 @@ Call_005_64f1:
 
 jr_005_64fb:
     ld b, a                                       ; $64fb: $47
-    call Call_005_6889                            ; $64fc: $cd $89 $68
+    call READ_FROM_SRAM                            ; $64fc: $cd $89 $68
     ld a, e                                       ; $64ff: $7b
     add d                                         ; $6500: $82
     ld e, a                                       ; $6501: $5f
@@ -7080,7 +7086,7 @@ jr_005_64fb:
     jr nz, jr_005_64fb                            ; $6511: $20 $e8
 
     ld b, a                                       ; $6513: $47
-    call Call_005_6889                            ; $6514: $cd $89 $68
+    call READ_FROM_SRAM                            ; $6514: $cd $89 $68
     ld a, e                                       ; $6517: $7b
     cp l                                          ; $6518: $bd
     jr nz, jr_005_651f                            ; $6519: $20 $04
@@ -7102,15 +7108,15 @@ jr_005_6521:
 
 Call_005_6524:
 Jump_005_6524:
-    call Call_005_67da                            ; $6524: $cd $da $67
+    call EEPROM_WRITE_ENABLE                      ; $6524: $cd $da $67
 
 jr_005_6527:
     ldh a, [$90]                                  ; $6527: $f0 $90
     ld b, a                                       ; $6529: $47
-    call Call_005_6889                            ; $652a: $cd $89 $68
+    call READ_FROM_SRAM                            ; $652a: $cd $89 $68
     ldh a, [$91]                                  ; $652d: $f0 $91
     ld b, a                                       ; $652f: $47
-    call Call_005_67eb                            ; $6530: $cd $eb $67
+    call WRITE_TO_SRAM                            ; $6530: $cd $eb $67
     ldh a, [$92]                                  ; $6533: $f0 $92
     ld c, a                                       ; $6535: $4f
     ldh a, [$91]                                  ; $6536: $f0 $91
@@ -7122,18 +7128,18 @@ jr_005_6527:
     cp c                                          ; $6540: $b9
     jr nz, jr_005_6527                            ; $6541: $20 $e4
 
-    jp Jump_005_6878                              ; $6543: $c3 $78 $68
+    jp EEPROM_WRITE_DISABLE                       ; $6543: $c3 $78 $68
 
 
 Call_005_6546:
 Jump_005_6546:
-    call Call_005_67da                            ; $6546: $cd $da $67
+    call EEPROM_WRITE_ENABLE                      ; $6546: $cd $da $67
     ldh a, [$90]                                  ; $6549: $f0 $90
 
 jr_005_654b:
     ld b, a                                       ; $654b: $47
     ld de, $0000                                  ; $654c: $11 $00 $00
-    call Call_005_67eb                            ; $654f: $cd $eb $67
+    call WRITE_TO_SRAM                            ; $654f: $cd $eb $67
     ldh a, [$91]                                  ; $6552: $f0 $91
     ld c, a                                       ; $6554: $4f
     ldh a, [$90]                                  ; $6555: $f0 $90
@@ -7147,7 +7153,7 @@ jr_005_654b:
 jr_005_655f:
     ld b, a                                       ; $655f: $47
     ld de, $0000                                  ; $6560: $11 $00 $00
-    call Call_005_67eb                            ; $6563: $cd $eb $67
+    call WRITE_TO_SRAM                            ; $6563: $cd $eb $67
     ldh a, [$93]                                  ; $6566: $f0 $93
     ld c, a                                       ; $6568: $4f
     ldh a, [$92]                                  ; $6569: $f0 $92
@@ -7156,7 +7162,7 @@ jr_005_655f:
     cp c                                          ; $656e: $b9
     jr nz, jr_005_655f                            ; $656f: $20 $ee
 
-    jp Jump_005_6878                              ; $6571: $c3 $78 $68
+    jp EEPROM_WRITE_DISABLE                       ; $6571: $c3 $78 $68
 
 
     ld a, $00                                     ; $6574: $3e $00
@@ -7165,10 +7171,16 @@ jr_005_655f:
 
     ld a, $0a                                     ; $6579: $3e $0a
     ld [$0000], a                                 ; $657b: $ea $00 $00
-    ld a, $40                                     ; $657e: $3e $40
-    ld [$4000], a                                 ; $6580: $ea $00 $40
+
+	; Second RAM enable. Not to be used for MBC5
+    ;ld a, $40                                     ; $657e: $3e $40
+    ;ld [$4000], a                                 ; $6580: $ea $00 $40
+REPT 5
+	nop
+ENDR
+
     ld b, $04                                     ; $6583: $06 $04
-    call Call_005_6889                            ; $6585: $cd $89 $68
+    call READ_FROM_SRAM                            ; $6585: $cd $89 $68
     ld a, d                                       ; $6588: $7a
     and $01                                       ; $6589: $e6 $01
     ld [$c211], a                                 ; $658b: $ea $11 $c2
@@ -7181,15 +7193,21 @@ jr_005_655f:
 
     ld a, $0a                                     ; $6594: $3e $0a
     ld [$0000], a                                 ; $6596: $ea $00 $00
-    ld a, $40                                     ; $6599: $3e $40
-    ld [$4000], a                                 ; $659b: $ea $00 $40
-    call Call_005_67da                            ; $659e: $cd $da $67
+	
+    ; Second RAM enable. Not to be used for MBC5
+    ;ld a, $40                                     ; $6599: $3e $40
+    ;ld [$4000], a                                 ; $659b: $ea $00 $40
+REPT 5
+	nop
+ENDR
+	
+    call EEPROM_WRITE_ENABLE                      ; $659e: $cd $da $67
     ld a, [$c211]                                 ; $65a1: $fa $11 $c2
     ld d, a                                       ; $65a4: $57
     ld e, $00                                     ; $65a5: $1e $00
     ld b, $04                                     ; $65a7: $06 $04
-    call Call_005_67eb                            ; $65a9: $cd $eb $67
-    jp Jump_005_6878                              ; $65ac: $c3 $78 $68
+    call WRITE_TO_SRAM                            ; $65a9: $cd $eb $67
+    jp EEPROM_WRITE_DISABLE                       ; $65ac: $c3 $78 $68
 
 
     ld a, $00                                     ; $65af: $3e $00
@@ -7198,22 +7216,28 @@ jr_005_655f:
 
     ld a, $0a                                     ; $65b4: $3e $0a
     ld [$0000], a                                 ; $65b6: $ea $00 $00
-    ld a, $40                                     ; $65b9: $3e $40
-    ld [$4000], a                                 ; $65bb: $ea $00 $40
-    call Call_005_67da                            ; $65be: $cd $da $67
+	
+	; Second RAM enable. Not to be used for MBC5
+    ;ld a, $40                                     ; $65b9: $3e $40
+    ;ld [$4000], a                                 ; $65bb: $ea $00 $40
+REPT 5
+	nop
+ENDR
+	
+    call EEPROM_WRITE_ENABLE                      ; $65be: $cd $da $67
     ldh a, [$f7]                                  ; $65c1: $f0 $f7
     ld d, a                                       ; $65c3: $57
     ldh a, [$f8]                                  ; $65c4: $f0 $f8
     ld e, a                                       ; $65c6: $5f
     ld b, $02                                     ; $65c7: $06 $02
-    call Call_005_67eb                            ; $65c9: $cd $eb $67
+    call WRITE_TO_SRAM                            ; $65c9: $cd $eb $67
     ldh a, [$f9]                                  ; $65cc: $f0 $f9
     ld d, a                                       ; $65ce: $57
     ldh a, [$fa]                                  ; $65cf: $f0 $fa
     ld e, a                                       ; $65d1: $5f
     ld b, $03                                     ; $65d2: $06 $03
-    call Call_005_67eb                            ; $65d4: $cd $eb $67
-    jp Jump_005_6878                              ; $65d7: $c3 $78 $68
+    call WRITE_TO_SRAM                            ; $65d4: $cd $eb $67
+    jp EEPROM_WRITE_DISABLE                       ; $65d7: $c3 $78 $68
 
 
     ld a, $00                                     ; $65da: $3e $00
@@ -7222,8 +7246,14 @@ jr_005_655f:
 
     ld a, $0a                                     ; $65df: $3e $0a
     ld [$0000], a                                 ; $65e1: $ea $00 $00
-    ld a, $40                                     ; $65e4: $3e $40
-    ld [$4000], a                                 ; $65e6: $ea $00 $40
+	
+	; Second RAM enable. Not to be used for MBC5
+    ;ld a, $40                                     ; $65e4: $3e $40
+    ;ld [$4000], a                                 ; $65e6: $ea $00 $40
+REPT 5
+	nop
+ENDR
+	
     ld b, $02                                     ; $65e9: $06 $02
 	
 	ld a, $7f
@@ -7243,7 +7273,7 @@ jr_005_655f:
 	nop
 	
     ld b, $04                                     ; $65ff: $06 $04
-    call Call_005_6889                            ; $6601: $cd $89 $68
+    call READ_FROM_SRAM                            ; $6601: $cd $89 $68
     ld a, d                                       ; $6604: $7a
     and $01                                       ; $6605: $e6 $01
     ld [$c211], a                                 ; $6607: $ea $11 $c2
@@ -7259,16 +7289,22 @@ jr_005_655f:
     ret                                           ; $6618: $c9
 
 
-Jump_005_6619:
+SAVE_GAME:
     ld a, $00                                     ; $6619: $3e $00
     cp $01                                        ; $661b: $fe $01
     ret z                                         ; $661d: $c8
 
     ld a, $0a                                     ; $661e: $3e $0a
     ld [$0000], a                                 ; $6620: $ea $00 $00
-    ld a, $40                                     ; $6623: $3e $40
-    ld [$4000], a                                 ; $6625: $ea $00 $40
-    call Call_005_67da                            ; $6628: $cd $da $67
+	
+	; Second RAM enable. Not to be used for MBC5
+    ;ld a, $40                                     ; $6623: $3e $40
+    ;ld [$4000], a                                 ; $6625: $ea $00 $40
+REPT 5
+	nop
+ENDR
+	
+    call EEPROM_WRITE_ENABLE                      ; $6628: $cd $da $67
     ld hl, $c18e                                  ; $662b: $21 $8e $c1
     ld a, [$c15c]                                 ; $662e: $fa $5c $c1
     ld e, a                                       ; $6631: $5f
@@ -7289,7 +7325,7 @@ jr_005_6643:
     ld d, a                                       ; $6645: $57
     ld a, [hl-]                                   ; $6646: $3a
     ld e, a                                       ; $6647: $5f
-    call Call_005_67eb                            ; $6648: $cd $eb $67
+    call WRITE_TO_SRAM                            ; $6648: $cd $eb $67
     ldh a, [$90]                                  ; $664b: $f0 $90
     add $3c                                       ; $664d: $c6 $3c
     ld b, a                                       ; $664f: $47
@@ -7297,7 +7333,7 @@ jr_005_6643:
     ld d, a                                       ; $6651: $57
     ld a, [hl+]                                   ; $6652: $2a
     ld e, a                                       ; $6653: $5f
-    call Call_005_67eb                            ; $6654: $cd $eb $67
+    call WRITE_TO_SRAM                            ; $6654: $cd $eb $67
     ldh a, [$91]                                  ; $6657: $f0 $91
     ld c, a                                       ; $6659: $4f
     ldh a, [$90]                                  ; $665a: $f0 $90
@@ -7319,7 +7355,7 @@ jr_005_666d:
     ld d, a                                       ; $666f: $57
     ld a, [hl-]                                   ; $6670: $3a
     ld e, a                                       ; $6671: $5f
-    call Call_005_67eb                            ; $6672: $cd $eb $67
+    call WRITE_TO_SRAM                            ; $6672: $cd $eb $67
     ldh a, [$90]                                  ; $6675: $f0 $90
     add $3c                                       ; $6677: $c6 $3c
     ld b, a                                       ; $6679: $47
@@ -7327,7 +7363,7 @@ jr_005_666d:
     ld d, a                                       ; $667b: $57
     ld a, [hl+]                                   ; $667c: $2a
     ld e, a                                       ; $667d: $5f
-    call Call_005_67eb                            ; $667e: $cd $eb $67
+    call WRITE_TO_SRAM                            ; $667e: $cd $eb $67
     ldh a, [$91]                                  ; $6681: $f0 $91
     ld c, a                                       ; $6683: $4f
     ldh a, [$90]                                  ; $6684: $f0 $90
@@ -7336,7 +7372,7 @@ jr_005_666d:
     cp c                                          ; $6689: $b9
     jr nz, jr_005_666d                            ; $668a: $20 $e1
 
-    jp Jump_005_6878                              ; $668c: $c3 $78 $68
+    jp EEPROM_WRITE_DISABLE                       ; $668c: $c3 $78 $68
 
 
     ld a, $00                                     ; $668f: $3e $00
@@ -7345,9 +7381,15 @@ jr_005_666d:
 
     ld a, $0a                                     ; $6694: $3e $0a
     ld [$0000], a                                 ; $6696: $ea $00 $00
-    ld a, $40                                     ; $6699: $3e $40
-    ld [$4000], a                                 ; $669b: $ea $00 $40
-    call Call_005_67da                            ; $669e: $cd $da $67
+	
+	; Second RAM enable. Not to be used for MBC5
+    ;ld a, $40                                     ; $6699: $3e $40
+    ;ld [$4000], a                                 ; $669b: $ea $00 $40
+REPT 5
+	nop
+ENDR
+	
+    call EEPROM_WRITE_ENABLE                      ; $669e: $cd $da $67
     ld a, [$c15c]                                 ; $66a1: $fa $5c $c1
     ld e, a                                       ; $66a4: $5f
     sla a                                         ; $66a5: $cb $27
@@ -7364,12 +7406,12 @@ jr_005_666d:
 jr_005_66b6:
     ld b, a                                       ; $66b6: $47
     ld de, $0000                                  ; $66b7: $11 $00 $00
-    call Call_005_67eb                            ; $66ba: $cd $eb $67
+    call WRITE_TO_SRAM                            ; $66ba: $cd $eb $67
     ldh a, [$90]                                  ; $66bd: $f0 $90
     add $3c                                       ; $66bf: $c6 $3c
     ld b, a                                       ; $66c1: $47
     ld de, $0000                                  ; $66c2: $11 $00 $00
-    call Call_005_67eb                            ; $66c5: $cd $eb $67
+    call WRITE_TO_SRAM                            ; $66c5: $cd $eb $67
     ldh a, [$91]                                  ; $66c8: $f0 $91
     ld c, a                                       ; $66ca: $4f
     ldh a, [$90]                                  ; $66cb: $f0 $90
@@ -7378,7 +7420,7 @@ jr_005_66b6:
     cp c                                          ; $66d0: $b9
     jr nz, jr_005_66b6                            ; $66d1: $20 $e3
 
-    jp Jump_005_6878                              ; $66d3: $c3 $78 $68
+    jp EEPROM_WRITE_DISABLE                       ; $66d3: $c3 $78 $68
 
 
     ld a, $00                                     ; $66d6: $3e $00
@@ -7387,27 +7429,40 @@ jr_005_66b6:
 
     ld a, $0a                                     ; $66db: $3e $0a
     ld [$0000], a                                 ; $66dd: $ea $00 $00
-    ld a, $40                                     ; $66e0: $3e $40
-    ld [$4000], a                                 ; $66e2: $ea $00 $40
-    call Call_005_67da                            ; $66e5: $cd $da $67
+	
+	; Second RAM enable. Not to be used for MBC5
+    ;ld a, $40                                     ; $66e0: $3e $40
+    ;ld [$4000], a                                 ; $66e2: $ea $00 $40
+REPT 5
+	nop
+ENDR
+	
+    call EEPROM_WRITE_ENABLE                      ; $66e5: $cd $da $67
     jp Jump_005_6662                              ; $66e8: $c3 $62 $66
 
 
+LOAD_GAMES:
     ld a, $00                                     ; $66eb: $3e $00
     cp $01                                        ; $66ed: $fe $01
     ret z                                         ; $66ef: $c8
 
     ld a, $0a                                     ; $66f0: $3e $0a
     ld [$0000], a                                 ; $66f2: $ea $00 $00
-    ld a, $40                                     ; $66f5: $3e $40
-    ld [$4000], a                                 ; $66f7: $ea $00 $40
+
+	; Second RAM enable. Not to be used for MBC5
+    ;ld a, $40                                     ; $66f5: $3e $40
+    ;ld [$4000], a                                 ; $66f7: $ea $00 $40
+REPT 5
+	nop
+ENDR
+	
     ld hl, $c15e                                  ; $66fa: $21 $5e $c1
     ld a, $08                                     ; $66fd: $3e $08
     ldh [$90], a                                  ; $66ff: $e0 $90
 
 jr_005_6701:
     ld b, a                                       ; $6701: $47
-    call Call_005_6889                            ; $6702: $cd $89 $68
+    call READ_FROM_SRAM                            ; $6702: $cd $89 $68
     ld a, d                                       ; $6705: $7a
     ld [hl+], a                                   ; $6706: $22
     ld a, e                                       ; $6707: $7b
@@ -7440,8 +7495,14 @@ jr_005_6718:
 
     ld a, $0a                                     ; $6727: $3e $0a
     ld [$0000], a                                 ; $6729: $ea $00 $00
-    ld a, $40                                     ; $672c: $3e $40
-    ld [$4000], a                                 ; $672e: $ea $00 $40
+	
+	; Second RAM enable. Not to be used for MBC5
+    ;ld a, $40                                     ; $672c: $3e $40
+    ;ld [$4000], a                                 ; $672e: $ea $00 $40
+REPT 5
+	nop
+ENDR
+	
     ld a, [$c15c]                                 ; $6731: $fa $5c $c1
     ld e, a                                       ; $6734: $5f
     sla a                                         ; $6735: $cb $27
@@ -7458,7 +7519,7 @@ jr_005_6718:
 
 jr_005_6749:
     ld b, a                                       ; $6749: $47
-    call Call_005_6889                            ; $674a: $cd $89 $68
+    call READ_FROM_SRAM                            ; $674a: $cd $89 $68
     ld a, d                                       ; $674d: $7a
     ld [hl+], a                                   ; $674e: $22
     ld a, e                                       ; $674f: $7b
@@ -7480,15 +7541,27 @@ jr_005_6749:
 
     ld a, $0a                                     ; $6762: $3e $0a
     ld [$0000], a                                 ; $6764: $ea $00 $00
-    ld a, $40                                     ; $6767: $3e $40
-    ld [$4000], a                                 ; $6769: $ea $00 $40
+	
+	; Second RAM enable. Not to be used for MBC5
+    ;ld a, $40                                     ; $6767: $3e $40
+    ;ld [$4000], a                                 ; $6769: $ea $00 $40
+REPT 5
+	nop
+ENDR
+	
     jp Jump_005_6344                              ; $676c: $c3 $44 $63
 
 
     ld a, $0a                                     ; $676f: $3e $0a
     ld [$0000], a                                 ; $6771: $ea $00 $00
-    ld a, $40                                     ; $6774: $3e $40
-    ld [$4000], a                                 ; $6776: $ea $00 $40
+	
+	; Second RAM enable. Not to be used for MBC5
+    ;ld a, $40                                     ; $6774: $3e $40
+    ;ld [$4000], a                                 ; $6776: $ea $00 $40
+REPT 5
+	nop
+ENDR
+	
     ld a, [$c15c]                                 ; $6779: $fa $5c $c1
     ld e, a                                       ; $677c: $5f
     sla a                                         ; $677d: $cb $27
@@ -7505,7 +7578,7 @@ jr_005_6749:
 
 jr_005_6791:
     ld b, a                                       ; $6791: $47
-    call Call_005_6889                            ; $6792: $cd $89 $68
+    call READ_FROM_SRAM                            ; $6792: $cd $89 $68
     ld a, d                                       ; $6795: $7a
     ld [hl+], a                                   ; $6796: $22
     ld a, e                                       ; $6797: $7b
@@ -7539,7 +7612,7 @@ jr_005_67ad:
     ld [hl+], a                                   ; $67b8: $22
     ld a, e                                       ; $67b9: $7b
     ld [hl+], a                                   ; $67ba: $22
-    jp Jump_005_6619                              ; $67bb: $c3 $19 $66
+    jp SAVE_GAME                                  ; $67bb: $c3 $19 $66
 
 
     nop                                           ; $67be: $00
@@ -7577,29 +7650,47 @@ jr_005_67ad:
     add b                                         ; $67d8: $80
     nop                                           ; $67d9: $00
 
-Call_005_67da:
+EEPROM_WRITE_ENABLE:
     ld hl, $67be                                  ; $67da: $21 $be $67
     ld c, $0e                                     ; $67dd: $0e $0e
 
 jr_005_67df:
     ld a, [hl+]                                   ; $67df: $2a
-    ld [$a080], a                                 ; $67e0: $ea $80 $a0
+    ;ld [$a080], a                                 ; $67e0: $ea $80 $a0
+	nop
+	nop
+	nop
     ld a, [hl+]                                   ; $67e3: $2a
-    ld [$a080], a                                 ; $67e4: $ea $80 $a0
+    ;ld [$a080], a                                 ; $67e4: $ea $80 $a0
+	nop
+	nop
+	nop
     dec c                                         ; $67e7: $0d
     jr nz, jr_005_67df                            ; $67e8: $20 $f5
 
     ret                                           ; $67ea: $c9
 
-
-Call_005_67eb:
-    xor a                                         ; $67eb: $af
-    ld [$a080], a                                 ; $67ec: $ea $80 $a0
-    ld a, $80                                     ; $67ef: $3e $80
-    ld [$a080], a                                 ; $67f1: $ea $80 $a0
-    ld a, $c0                                     ; $67f4: $3e $c0
-    ld [$a080], a                                 ; $67f6: $ea $80 $a0
-    ld a, $82                                     ; $67f9: $3e $82
+WRITE_TO_SRAM:
+	push hl
+	sla b
+	ld c, b
+	ld b, $00
+	ld hl, $a078
+	add hl, bc
+	ld a, d
+	ld [hl+], a
+	ld a, e
+	ld [hl+], a
+	pop hl
+	ret
+	
+    ;xor a                                         ; $67eb: $af
+    ;ld [$a080], a                                 ; $67ec: $ea $80 $a0
+    ;ld a, $80                                     ; $67ef: $3e $80
+    ;ld [$a080], a                                 ; $67f1: $ea $80 $a0
+    ;ld a, $c0                                     ; $67f4: $3e $c0
+    ;ld [$a080], a                                 ; $67f6: $ea $80 $a0
+    ;ld a, $82                                     ; $67f9: $3e $82
     ld [$a080], a                                 ; $67fb: $ea $80 $a0
     ld a, $c2                                     ; $67fe: $3e $c2
     ld [$a080], a                                 ; $6800: $ea $80 $a0
@@ -7656,7 +7747,7 @@ jr_005_6838:
 jr_005_6854:
     ld a, [$a080]                                 ; $6854: $fa $80 $a0
     bit 0, a                                      ; $6857: $cb $47
-    jr z, jr_005_6854                             ; $6859: $28 $f9
+    jr nz, jr_005_6854                             ; $6859: $28 $f9
 
     ret                                           ; $685b: $c9
 
@@ -7699,29 +7790,47 @@ jr_005_6854:
     add b                                         ; $6876: $80
     nop                                           ; $6877: $00
 
-Jump_005_6878:
+EEPROM_WRITE_DISABLE:
     ld hl, $685c                                  ; $6878: $21 $5c $68
     ld c, $0e                                     ; $687b: $0e $0e
 
 jr_005_687d:
     ld a, [hl+]                                   ; $687d: $2a
-    ld [$a080], a                                 ; $687e: $ea $80 $a0
+    ;ld [$a080], a                                 ; $687e: $ea $80 $a0
+	nop
+	nop
+	nop
     ld a, [hl+]                                   ; $6881: $2a
-    ld [$a080], a                                 ; $6882: $ea $80 $a0
+    ;ld [$a080], a                                 ; $6882: $ea $80 $a0
+	nop
+	nop
+	nop
     dec c                                         ; $6885: $0d
     jr nz, jr_005_687d                            ; $6886: $20 $f5
 
     ret                                           ; $6888: $c9
 
-
-Call_005_6889:
-    xor a                                         ; $6889: $af
-    ld [$a080], a                                 ; $688a: $ea $80 $a0
-    ld a, $80                                     ; $688d: $3e $80
-    ld [$a080], a                                 ; $688f: $ea $80 $a0
-    ld a, $c0                                     ; $6892: $3e $c0
-    ld [$a080], a                                 ; $6894: $ea $80 $a0
-    ld a, $82                                     ; $6897: $3e $82
+READ_FROM_SRAM:
+	push hl
+	sla b
+	ld c, b
+	ld b, $00
+	ld hl, $a078
+	add hl, bc
+	ld a, [hl+]
+	ld d, a
+	ld a, [hl+]
+	ld e, a
+	pop hl
+	ret
+	
+    ;xor a                                         ; $6889: $af
+    ;ld [$a080], a                                 ; $688a: $ea $80 $a0
+    ;ld a, $80                                     ; $688d: $3e $80
+    ;ld [$a080], a                                 ; $688f: $ea $80 $a0
+    ;ld a, $c0                                     ; $6892: $3e $c0
+    ;ld [$a080], a                                 ; $6894: $ea $80 $a0
+    ;ld a, $82                                     ; $6897: $3e $82
     ld [$a080], a                                 ; $6899: $ea $80 $a0
     ld a, $c2                                     ; $689c: $3e $c2
     ld [$a080], a                                 ; $689e: $ea $80 $a0
@@ -7778,8 +7887,11 @@ jr_005_68d6:
     ret                                           ; $68fb: $c9
 
 
-Call_005_68fc:
-    call Call_005_67da                            ; $68fc: $cd $da $67
+SETUP_EEPROM_WRITE:
+	ret
+	nop
+	nop
+    ;call EEPROM_WRITE_ENABLE                      ; $68fc: $cd $da $67
     xor a                                         ; $68ff: $af
     ld [$a080], a                                 ; $6900: $ea $80 $a0
     ld a, $80                                     ; $6903: $3e $80
@@ -7858,9 +7970,9 @@ jr_005_6985:
 jr_005_69a1:
     ld a, [$a080]                                 ; $69a1: $fa $80 $a0
     bit 0, a                                      ; $69a4: $cb $47
-    jr z, jr_005_69a1                             ; $69a6: $28 $f9
+    jr nz, jr_005_69a1                             ; $69a6: $28 $f9
 
-    jp Jump_005_6878                              ; $69a8: $c3 $78 $68
+    jp EEPROM_WRITE_DISABLE                       ; $69a8: $c3 $78 $68
 
 
     rst $38                                       ; $69ab: $ff

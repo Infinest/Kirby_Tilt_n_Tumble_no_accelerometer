@@ -362,7 +362,7 @@ jr_01b_4031:
     rst $38                                       ; $4178: $ff
     di                                            ; $4179: $f3
     di                                            ; $417a: $f3
-    call Call_000_3dc3                            ; $417b: $cd $c3 $3d
+    call $3dc3                                    ; $417b: $cd $c3 $3d
     ld bc, $f4fe                                  ; $417e: $01 $fe $f4
     jr @-$04                                      ; $4181: $18 $fa
 

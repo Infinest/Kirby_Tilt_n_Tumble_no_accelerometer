@@ -12761,7 +12761,7 @@ jr_02a_7488:
     add a                                         ; $74c2: $87
     ld a, h                                       ; $74c3: $7c
     rst $30                                       ; $74c4: $f7
-    call z, Call_000_3c3f                         ; $74c5: $cc $3f $3c
+    call z, $3c3f                                 ; $74c5: $cc $3f $3c
     inc bc                                        ; $74c8: $03
     ld [bc], a                                    ; $74c9: $02
     ld bc, $0001                                  ; $74ca: $01 $01 $00

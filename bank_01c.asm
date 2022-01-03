@@ -86,7 +86,7 @@ jr_01c_403f:
     db $fc                                        ; $4055: $fc
     inc c                                         ; $4056: $0c
     db $f4                                        ; $4057: $f4
-    call z, Call_000_3c34                         ; $4058: $cc $34 $3c
+    call z, $3c34                                 ; $4058: $cc $34 $3c
     db $fc                                        ; $405b: $fc
     ld a, [hl]                                    ; $405c: $7e
     jp nz, $82fe                                  ; $405d: $c2 $fe $82

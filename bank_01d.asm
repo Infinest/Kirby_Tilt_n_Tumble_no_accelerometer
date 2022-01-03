@@ -2512,7 +2512,7 @@ jr_01d_4976:
     nop                                           ; $4983: $00
     inc a                                         ; $4984: $3c
     nop                                           ; $4985: $00
-    jp Jump_000_3cc3                              ; $4986: $c3 $c3 $3c
+    jp $3cc3                                      ; $4986: $c3 $c3 $3c
 
 
     rst $38                                       ; $4989: $ff
@@ -2522,7 +2522,7 @@ jr_01d_498a:
     inc a                                         ; $498b: $3c
 
 jr_01d_498c:
-    jp Jump_000_3cc3                              ; $498c: $c3 $c3 $3c
+    jp $3cc3                                      ; $498c: $c3 $c3 $3c
 
 
     inc a                                         ; $498f: $3c
@@ -2761,7 +2761,7 @@ jr_01d_4a3e:
     nop                                           ; $4a7f: $00
     inc a                                         ; $4a80: $3c
     rst $38                                       ; $4a81: $ff
-    jp Jump_000_3cc3                              ; $4a82: $c3 $c3 $3c
+    jp $3cc3                                      ; $4a82: $c3 $c3 $3c
 
 
     inc a                                         ; $4a85: $3c

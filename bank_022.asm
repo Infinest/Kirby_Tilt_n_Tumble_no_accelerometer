@@ -11235,7 +11235,7 @@ jr_022_6d5d:
     rst $38                                       ; $6d81: $ff
     ld bc, $03ff                                  ; $6d82: $01 $ff $03
     cp $ff                                        ; $6d85: $fe $ff
-    jp nz, Jump_000_3e3f                          ; $6d87: $c2 $3f $3e
+    jp nz, $3e3f                                  ; $6d87: $c2 $3f $3e
 
     ld bc, $0001                                  ; $6d8a: $01 $01 $00
     nop                                           ; $6d8d: $00
@@ -11381,7 +11381,7 @@ jr_022_6e0b:
     nop                                           ; $6e21: $00
     nop                                           ; $6e22: $00
     nop                                           ; $6e23: $00
-    jp Jump_000_3cc3                              ; $6e24: $c3 $c3 $3c
+    jp $3cc3                                      ; $6e24: $c3 $c3 $3c
 
 
     rst $38                                       ; $6e27: $ff

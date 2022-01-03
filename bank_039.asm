@@ -973,7 +973,7 @@ jr_039_453a:
 
     db $f4                                        ; $4554: $f4
     push af                                       ; $4555: $f5
-    jp c, Jump_000_3fa1                           ; $4556: $da $a1 $3f
+    jp c, $3fa1                                   ; $4556: $da $a1 $3f
 
     cp e                                          ; $4559: $bb
     cp a                                          ; $455a: $bf
@@ -986,7 +986,7 @@ jr_039_453a:
     jp c, $f7f6                                   ; $4561: $da $f6 $f7
 
     ld hl, sp-$07                                 ; $4564: $f8 $f9
-    jp c, Jump_000_3fa7                           ; $4566: $da $a7 $3f
+    jp c, $3fa7                                   ; $4566: $da $a7 $3f
 
     or d                                          ; $4569: $b2
     cp d                                          ; $456a: $ba
@@ -1186,7 +1186,7 @@ jr_039_459d:
     add sp, -$33                                  ; $4629: $e8 $cd
     jp c, $dada                                   ; $462b: $da $da $da
 
-    call c, Call_000_3fce                         ; $462e: $dc $ce $3f
+    call c, $3fce                                 ; $462e: $dc $ce $3f
     ccf                                           ; $4631: $3f
     ccf                                           ; $4632: $3f
     ccf                                           ; $4633: $3f
@@ -1268,7 +1268,7 @@ jr_039_459d:
     dec a                                         ; $468a: $3d
     jp c, $dada                                   ; $468b: $da $da $da
 
-    jp c, Jump_000_3fa5                           ; $468e: $da $a5 $3f
+    jp c, $3fa5                                   ; $468e: $da $a5 $3f
 
     ccf                                           ; $4691: $3f
     ccf                                           ; $4692: $3f
@@ -3271,7 +3271,7 @@ jr_039_4d9c:
     cp h                                          ; $4e5b: $bc
     xor b                                         ; $4e5c: $a8
     sub $da                                       ; $4e5d: $d6 $da
-    jp c, Jump_000_3f3f                           ; $4e5f: $da $3f $3f
+    jp c, $3f3f                                   ; $4e5f: $da $3f $3f
 
     cp e                                          ; $4e62: $bb
     cp a                                          ; $4e63: $bf
@@ -3351,7 +3351,7 @@ jr_039_4e98:
     ccf                                           ; $4eab: $3f
     jr jr_039_4e76                                ; $4eac: $18 $c8
 
-    jp c, Jump_000_3fda                           ; $4eae: $da $da $3f
+    jp c, $3fda                                   ; $4eae: $da $da $3f
 
     ccf                                           ; $4eb1: $3f
     ccf                                           ; $4eb2: $3f
@@ -3367,7 +3367,7 @@ jr_039_4e98:
     ccf                                           ; $4ebc: $3f
     jr jr_039_4e87                                ; $4ebd: $18 $c8
 
-    jp c, Jump_000_3f3f                           ; $4ebf: $da $3f $3f
+    jp c, $3f3f                                   ; $4ebf: $da $3f $3f
 
     ccf                                           ; $4ec2: $3f
     cp e                                          ; $4ec3: $bb
@@ -3521,7 +3521,7 @@ jr_039_4f20:
 
     jp c, $dada                                   ; $4f66: $da $da $da
 
-    jp c, Jump_000_3fa1                           ; $4f69: $da $a1 $3f
+    jp c, $3fa1                                   ; $4f69: $da $a1 $3f
 
     ccf                                           ; $4f6c: $3f
     ccf                                           ; $4f6d: $3f
@@ -3548,26 +3548,26 @@ jr_039_4f20:
     and d                                         ; $4f85: $a2
     jp c, $dada                                   ; $4f86: $da $da $da
 
-    jp c, Jump_000_3fa1                           ; $4f89: $da $a1 $3f
+    jp c, $3fa1                                   ; $4f89: $da $a1 $3f
 
     ccf                                           ; $4f8c: $3f
     ccf                                           ; $4f8d: $3f
     ccf                                           ; $4f8e: $3f
     ccf                                           ; $4f8f: $3f
-    jp c, Jump_000_3fa1                           ; $4f90: $da $a1 $3f
+    jp c, $3fa1                                   ; $4f90: $da $a1 $3f
 
     ccf                                           ; $4f93: $3f
     ccf                                           ; $4f94: $3f
     and b                                         ; $4f95: $a0
     jp c, $dada                                   ; $4f96: $da $da $da
 
-    jp c, Jump_000_3fa7                           ; $4f99: $da $a7 $3f
+    jp c, $3fa7                                   ; $4f99: $da $a7 $3f
 
     ccf                                           ; $4f9c: $3f
     ccf                                           ; $4f9d: $3f
     ccf                                           ; $4f9e: $3f
     ccf                                           ; $4f9f: $3f
-    jp c, Jump_000_3fa1                           ; $4fa0: $da $a1 $3f
+    jp c, $3fa1                                   ; $4fa0: $da $a1 $3f
 
     sub c                                         ; $4fa3: $91
     ccf                                           ; $4fa4: $3f
@@ -3583,7 +3583,7 @@ jr_039_4f20:
     ccf                                           ; $4fad: $3f
     ccf                                           ; $4fae: $3f
     ccf                                           ; $4faf: $3f
-    jp c, Jump_000_3fa1                           ; $4fb0: $da $a1 $3f
+    jp c, $3fa1                                   ; $4fb0: $da $a1 $3f
 
     sub c                                         ; $4fb3: $91
     ccf                                           ; $4fb4: $3f
@@ -4123,7 +4123,7 @@ jr_039_5084:
     ld b, c                                       ; $51d0: $41
     jp c, $dada                                   ; $51d1: $da $da $da
 
-    jp c, Jump_000_3f44                           ; $51d4: $da $44 $3f
+    jp c, $3f44                                   ; $51d4: $da $44 $3f
 
     ccf                                           ; $51d7: $3f
     ccf                                           ; $51d8: $3f
@@ -4137,7 +4137,7 @@ jr_039_5084:
     ld b, c                                       ; $51e0: $41
     jp c, $dada                                   ; $51e1: $da $da $da
 
-    jp c, Jump_000_3f44                           ; $51e4: $da $44 $3f
+    jp c, $3f44                                   ; $51e4: $da $44 $3f
 
     ccf                                           ; $51e7: $3f
     ccf                                           ; $51e8: $3f
@@ -4425,7 +4425,7 @@ jr_039_5232:
     ld b, c                                       ; $5300: $41
     jp c, $dada                                   ; $5301: $da $da $da
 
-    jp c, Jump_000_3f44                           ; $5304: $da $44 $3f
+    jp c, $3f44                                   ; $5304: $da $44 $3f
 
     ccf                                           ; $5307: $3f
     ccf                                           ; $5308: $3f
@@ -4469,13 +4469,13 @@ jr_039_5232:
     and b                                         ; $5330: $a0
     jp c, Jump_000_2323                           ; $5331: $da $23 $23
 
-    jp c, Jump_000_3fa1                           ; $5334: $da $a1 $3f
+    jp c, $3fa1                                   ; $5334: $da $a1 $3f
 
     ccf                                           ; $5337: $3f
     ccf                                           ; $5338: $3f
     ccf                                           ; $5339: $3f
     and b                                         ; $533a: $a0
-    jp c, Jump_000_3fa7                           ; $533b: $da $a7 $3f
+    jp c, $3fa7                                   ; $533b: $da $a7 $3f
 
     ccf                                           ; $533e: $3f
     cp e                                          ; $533f: $bb
@@ -4494,7 +4494,7 @@ jr_039_5232:
     or c                                          ; $5348: $b1
     ccf                                           ; $5349: $3f
     and [hl]                                      ; $534a: $a6
-    jp c, Jump_000_3fa7                           ; $534b: $da $a7 $3f
+    jp c, $3fa7                                   ; $534b: $da $a7 $3f
 
     ccf                                           ; $534e: $3f
     or d                                          ; $534f: $b2
@@ -7882,7 +7882,7 @@ jr_039_5ef5:
     or h                                          ; $608c: $b4
     cp c                                          ; $608d: $b9
     ccf                                           ; $608e: $3f
-    call nc, Call_000_3f3f                        ; $608f: $d4 $3f $3f
+    call nc, $3f3f                                ; $608f: $d4 $3f $3f
     call nc, $ba3f                                ; $6092: $d4 $3f $ba
     or c                                          ; $6095: $b1
     cp e                                          ; $6096: $bb
@@ -8007,7 +8007,7 @@ jr_039_5ef5:
     cp h                                          ; $6133: $bc
     or a                                          ; $6134: $b7
     ccf                                           ; $6135: $3f
-    call nc, Call_000_3f3f                        ; $6136: $d4 $3f $3f
+    call nc, $3f3f                                ; $6136: $d4 $3f $3f
     ccf                                           ; $6139: $3f
     cp a                                          ; $613a: $bf
     ccf                                           ; $613b: $3f
@@ -8658,7 +8658,7 @@ jr_039_5ef5:
     or h                                          ; $648c: $b4
     cp c                                          ; $648d: $b9
     ccf                                           ; $648e: $3f
-    call nc, Call_000_3f3f                        ; $648f: $d4 $3f $3f
+    call nc, $3f3f                                ; $648f: $d4 $3f $3f
     call nc, $ba3f                                ; $6492: $d4 $3f $ba
     ld e, $1e                                     ; $6495: $1e $1e
     ld e, $1e                                     ; $6497: $1e $1e
@@ -8800,7 +8800,7 @@ jr_039_5ef5:
     cp h                                          ; $6533: $bc
     or a                                          ; $6534: $b7
     ccf                                           ; $6535: $3f
-    call nc, Call_000_3f3f                        ; $6536: $d4 $3f $3f
+    call nc, $3f3f                                ; $6536: $d4 $3f $3f
     ccf                                           ; $6539: $3f
     cp a                                          ; $653a: $bf
     ccf                                           ; $653b: $3f
@@ -8933,7 +8933,7 @@ jr_039_5ef5:
     or d                                          ; $65be: $b2
     cp h                                          ; $65bf: $bc
     or a                                          ; $65c0: $b7
-    call nc, Call_000_3f3f                        ; $65c1: $d4 $3f $3f
+    call nc, $3f3f                                ; $65c1: $d4 $3f $3f
     ccf                                           ; $65c4: $3f
     cp b                                          ; $65c5: $b8
     or l                                          ; $65c6: $b5
@@ -8970,7 +8970,7 @@ jr_039_5ef5:
     or l                                          ; $65e5: $b5
     or a                                          ; $65e6: $b7
     ccf                                           ; $65e7: $3f
-    call nc, Call_000_3f3f                        ; $65e8: $d4 $3f $3f
+    call nc, $3f3f                                ; $65e8: $d4 $3f $3f
     cp l                                          ; $65eb: $bd
     cp [hl]                                       ; $65ec: $be
     ccf                                           ; $65ed: $3f
@@ -9030,7 +9030,7 @@ jr_039_5ef5:
     or a                                          ; $6625: $b7
     ld [$3fbe], a                                 ; $6626: $ea $be $3f
     ccf                                           ; $6629: $3f
-    call nc, Call_000_3f3f                        ; $662a: $d4 $3f $3f
+    call nc, $3f3f                                ; $662a: $d4 $3f $3f
     cp d                                          ; $662d: $ba
     or d                                          ; $662e: $b2
     or a                                          ; $662f: $b7
@@ -9265,7 +9265,7 @@ jr_039_5ef5:
     or [hl]                                       ; $671c: $b6
     cp h                                          ; $671d: $bc
     or a                                          ; $671e: $b7
-    call nc, Call_000_3f3f                        ; $671f: $d4 $3f $3f
+    call nc, $3f3f                                ; $671f: $d4 $3f $3f
     ld [$3fbe], a                                 ; $6722: $ea $be $3f
     ccf                                           ; $6725: $3f
     ccf                                           ; $6726: $3f
@@ -9459,7 +9459,7 @@ jr_039_5ef5:
     ccf                                           ; $67e9: $3f
     ccf                                           ; $67ea: $3f
     ccf                                           ; $67eb: $3f
-    call nc, Call_000_3f3f                        ; $67ec: $d4 $3f $3f
+    call nc, $3f3f                                ; $67ec: $d4 $3f $3f
     ccf                                           ; $67ef: $3f
     ld e, $1e                                     ; $67f0: $1e $1e
     ld e, $39                                     ; $67f2: $1e $39
@@ -10364,7 +10364,7 @@ jr_039_69d6:
     ccf                                           ; $6be9: $3f
     ccf                                           ; $6bea: $3f
     ccf                                           ; $6beb: $3f
-    call nc, Call_000_3f3f                        ; $6bec: $d4 $3f $3f
+    call nc, $3f3f                                ; $6bec: $d4 $3f $3f
     ccf                                           ; $6bef: $3f
     and e                                         ; $6bf0: $a3
     and e                                         ; $6bf1: $a3
@@ -11610,7 +11610,7 @@ jr_039_69d6:
     ld e, $1e                                     ; $7130: $1e $1e
     ld e, $1e                                     ; $7132: $1e $1e
     ld h, $3f                                     ; $7134: $26 $3f
-    call nc, Call_000_3f3f                        ; $7136: $d4 $3f $3f
+    call nc, $3f3f                                ; $7136: $d4 $3f $3f
     ccf                                           ; $7139: $3f
     cp a                                          ; $713a: $bf
     ccf                                           ; $713b: $3f
@@ -11765,7 +11765,7 @@ jr_039_69d6:
     xor [hl]                                      ; $71e5: $ae
     ccf                                           ; $71e6: $3f
     ccf                                           ; $71e7: $3f
-    call nc, Call_000_3f3f                        ; $71e8: $d4 $3f $3f
+    call nc, $3f3f                                ; $71e8: $d4 $3f $3f
     cp l                                          ; $71eb: $bd
     cp [hl]                                       ; $71ec: $be
     ccf                                           ; $71ed: $3f
@@ -11824,7 +11824,7 @@ jr_039_71f5:
     or a                                          ; $7225: $b7
     ld [$3fbe], a                                 ; $7226: $ea $be $3f
     ccf                                           ; $7229: $3f
-    call nc, Call_000_3f3f                        ; $722a: $d4 $3f $3f
+    call nc, $3f3f                                ; $722a: $d4 $3f $3f
     ld e, $1e                                     ; $722d: $1e $1e
     ld e, $3f                                     ; $722f: $1e $3f
     ccf                                           ; $7231: $3f
@@ -11930,7 +11930,7 @@ jr_039_71f5:
     or [hl]                                       ; $72a1: $b6
     cp h                                          ; $72a2: $bc
     or a                                          ; $72a3: $b7
-    call nc, Call_000_3f3f                        ; $72a4: $d4 $3f $3f
+    call nc, $3f3f                                ; $72a4: $d4 $3f $3f
     or [hl]                                       ; $72a7: $b6
     cp h                                          ; $72a8: $bc
     ld e, e                                       ; $72a9: $5b
@@ -12208,7 +12208,7 @@ jr_039_71f5:
     ccf                                           ; $73e9: $3f
     ccf                                           ; $73ea: $3f
     ccf                                           ; $73eb: $3f
-    call nc, Call_000_3f3f                        ; $73ec: $d4 $3f $3f
+    call nc, $3f3f                                ; $73ec: $d4 $3f $3f
     ccf                                           ; $73ef: $3f
     xor [hl]                                      ; $73f0: $ae
     xor [hl]                                      ; $73f1: $ae
@@ -12348,7 +12348,7 @@ jr_039_71f5:
     ld e, $23                                     ; $748a: $1e $23
     ld e, $b9                                     ; $748c: $1e $b9
     ccf                                           ; $748e: $3f
-    call nc, Call_000_3f3f                        ; $748f: $d4 $3f $3f
+    call nc, $3f3f                                ; $748f: $d4 $3f $3f
     call nc, $ba3f                                ; $7492: $d4 $3f $ba
     or c                                          ; $7495: $b1
     cp e                                          ; $7496: $bb
@@ -12490,7 +12490,7 @@ jr_039_71f5:
     cp h                                          ; $7533: $bc
     or a                                          ; $7534: $b7
     ccf                                           ; $7535: $3f
-    call nc, Call_000_3f3f                        ; $7536: $d4 $3f $3f
+    call nc, $3f3f                                ; $7536: $d4 $3f $3f
     ccf                                           ; $7539: $3f
     cp a                                          ; $753a: $bf
     ccf                                           ; $753b: $3f
@@ -12623,7 +12623,7 @@ jr_039_71f5:
     or d                                          ; $75be: $b2
     cp h                                          ; $75bf: $bc
     cp c                                          ; $75c0: $b9
-    call nc, Call_000_3f3f                        ; $75c1: $d4 $3f $3f
+    call nc, $3f3f                                ; $75c1: $d4 $3f $3f
     ccf                                           ; $75c4: $3f
     cp b                                          ; $75c5: $b8
     or l                                          ; $75c6: $b5
@@ -12660,7 +12660,7 @@ jr_039_71f5:
     or l                                          ; $75e5: $b5
     or a                                          ; $75e6: $b7
     ccf                                           ; $75e7: $3f
-    call nc, Call_000_3f3f                        ; $75e8: $d4 $3f $3f
+    call nc, $3f3f                                ; $75e8: $d4 $3f $3f
     cp l                                          ; $75eb: $bd
     cp [hl]                                       ; $75ec: $be
     ccf                                           ; $75ed: $3f
@@ -13111,11 +13111,11 @@ jr_039_71f5:
     cp h                                          ; $77e3: $bc
     or e                                          ; $77e4: $b3
     cp c                                          ; $77e5: $b9
-    call nc, Call_000_3f3f                        ; $77e6: $d4 $3f $3f
+    call nc, $3f3f                                ; $77e6: $d4 $3f $3f
     ccf                                           ; $77e9: $3f
     ccf                                           ; $77ea: $3f
     ccf                                           ; $77eb: $3f
-    call nc, Call_000_3f3f                        ; $77ec: $d4 $3f $3f
+    call nc, $3f3f                                ; $77ec: $d4 $3f $3f
     ccf                                           ; $77ef: $3f
     ld e, $26                                     ; $77f0: $1e $26
     cp h                                          ; $77f2: $bc
@@ -13380,7 +13380,7 @@ jr_039_71f5:
     cp h                                          ; $7933: $bc
     or a                                          ; $7934: $b7
     ccf                                           ; $7935: $3f
-    call nc, Call_000_3f3f                        ; $7936: $d4 $3f $3f
+    call nc, $3f3f                                ; $7936: $d4 $3f $3f
     ccf                                           ; $7939: $3f
     cp a                                          ; $793a: $bf
     ccf                                           ; $793b: $3f
@@ -13551,7 +13551,7 @@ jr_039_71f5:
     or l                                          ; $79e5: $b5
     or a                                          ; $79e6: $b7
     ccf                                           ; $79e7: $3f
-    call nc, Call_000_3f3f                        ; $79e8: $d4 $3f $3f
+    call nc, $3f3f                                ; $79e8: $d4 $3f $3f
     cp l                                          ; $79eb: $bd
     cp [hl]                                       ; $79ec: $be
     ccf                                           ; $79ed: $3f
@@ -13712,7 +13712,7 @@ jr_039_71f5:
     or [hl]                                       ; $7aa1: $b6
     cp h                                          ; $7aa2: $bc
     or a                                          ; $7aa3: $b7
-    call nc, Call_000_3f3f                        ; $7aa4: $d4 $3f $3f
+    call nc, $3f3f                                ; $7aa4: $d4 $3f $3f
     cp b                                          ; $7aa7: $b8
     or h                                          ; $7aa8: $b4
     or h                                          ; $7aa9: $b4
@@ -13817,7 +13817,7 @@ jr_039_71f5:
     or [hl]                                       ; $7b1c: $b6
     cp h                                          ; $7b1d: $bc
     or a                                          ; $7b1e: $b7
-    call nc, Call_000_3fae                        ; $7b1f: $d4 $ae $3f
+    call nc, $3fae                                ; $7b1f: $d4 $ae $3f
     ld [$3fbe], a                                 ; $7b22: $ea $be $3f
     ccf                                           ; $7b25: $3f
     ccf                                           ; $7b26: $3f
@@ -14002,11 +14002,11 @@ jr_039_71f5:
     cp h                                          ; $7be3: $bc
     or e                                          ; $7be4: $b3
     cp c                                          ; $7be5: $b9
-    call nc, Call_000_3f3f                        ; $7be6: $d4 $3f $3f
+    call nc, $3f3f                                ; $7be6: $d4 $3f $3f
     ccf                                           ; $7be9: $3f
     ccf                                           ; $7bea: $3f
     ccf                                           ; $7beb: $3f
-    call nc, Call_000_3f3f                        ; $7bec: $d4 $3f $3f
+    call nc, $3f3f                                ; $7bec: $d4 $3f $3f
     ccf                                           ; $7bef: $3f
     ld e, c                                       ; $7bf0: $59
     or d                                          ; $7bf1: $b2
@@ -14221,7 +14221,7 @@ jr_039_71f5:
     ccf                                           ; $7cda: $3f
     ccf                                           ; $7cdb: $3f
     ccf                                           ; $7cdc: $3f
-    call nc, Call_000_3f3f                        ; $7cdd: $d4 $3f $3f
+    call nc, $3f3f                                ; $7cdd: $d4 $3f $3f
     cp h                                          ; $7ce0: $bc
     or e                                          ; $7ce1: $b3
     or h                                          ; $7ce2: $b4
@@ -14304,7 +14304,7 @@ jr_039_71f5:
     cp h                                          ; $7d33: $bc
     or a                                          ; $7d34: $b7
     ccf                                           ; $7d35: $3f
-    call nc, Call_000_3f3f                        ; $7d36: $d4 $3f $3f
+    call nc, $3f3f                                ; $7d36: $d4 $3f $3f
     ccf                                           ; $7d39: $3f
     cp a                                          ; $7d3a: $bf
     ccf                                           ; $7d3b: $3f
@@ -14476,7 +14476,7 @@ jr_039_71f5:
     or l                                          ; $7de5: $b5
     or a                                          ; $7de6: $b7
     ccf                                           ; $7de7: $3f
-    call nc, Call_000_3f3f                        ; $7de8: $d4 $3f $3f
+    call nc, $3f3f                                ; $7de8: $d4 $3f $3f
     cp l                                          ; $7deb: $bd
     cp [hl]                                       ; $7dec: $be
     ccf                                           ; $7ded: $3f
@@ -14536,7 +14536,7 @@ jr_039_71f5:
     or a                                          ; $7e25: $b7
     ld [$3fbe], a                                 ; $7e26: $ea $be $3f
     ccf                                           ; $7e29: $3f
-    call nc, Call_000_3f3f                        ; $7e2a: $d4 $3f $3f
+    call nc, $3f3f                                ; $7e2a: $d4 $3f $3f
     cp d                                          ; $7e2d: $ba
     or d                                          ; $7e2e: $b2
     or a                                          ; $7e2f: $b7
@@ -14609,7 +14609,7 @@ jr_039_71f5:
     cp h                                          ; $7e75: $bc
     or b                                          ; $7e76: $b0
     cp e                                          ; $7e77: $bb
-    call nc, Call_000_3f3f                        ; $7e78: $d4 $3f $3f
+    call nc, $3f3f                                ; $7e78: $d4 $3f $3f
     cp b                                          ; $7e7b: $b8
     or h                                          ; $7e7c: $b4
     or l                                          ; $7e7d: $b5
@@ -14651,7 +14651,7 @@ jr_039_71f5:
     or [hl]                                       ; $7ea1: $b6
     cp h                                          ; $7ea2: $bc
     or a                                          ; $7ea3: $b7
-    call nc, Call_000_3f3f                        ; $7ea4: $d4 $3f $3f
+    call nc, $3f3f                                ; $7ea4: $d4 $3f $3f
     or [hl]                                       ; $7ea7: $b6
     cp h                                          ; $7ea8: $bc
     or e                                          ; $7ea9: $b3
@@ -14767,7 +14767,7 @@ jr_039_71f5:
     or [hl]                                       ; $7f1c: $b6
     cp h                                          ; $7f1d: $bc
     or a                                          ; $7f1e: $b7
-    call nc, Call_000_3f3f                        ; $7f1f: $d4 $3f $3f
+    call nc, $3f3f                                ; $7f1f: $d4 $3f $3f
     ld [$3fbe], a                                 ; $7f22: $ea $be $3f
     ccf                                           ; $7f25: $3f
     ccf                                           ; $7f26: $3f
@@ -14952,11 +14952,11 @@ jr_039_71f5:
     cp h                                          ; $7fe3: $bc
     or e                                          ; $7fe4: $b3
     cp c                                          ; $7fe5: $b9
-    call nc, Call_000_3f3f                        ; $7fe6: $d4 $3f $3f
+    call nc, $3f3f                                ; $7fe6: $d4 $3f $3f
     ccf                                           ; $7fe9: $3f
     ccf                                           ; $7fea: $3f
     ccf                                           ; $7feb: $3f
-    call nc, Call_000_3f3f                        ; $7fec: $d4 $3f $3f
+    call nc, $3f3f                                ; $7fec: $d4 $3f $3f
     ccf                                           ; $7fef: $3f
     cp d                                          ; $7ff0: $ba
     or d                                          ; $7ff1: $b2

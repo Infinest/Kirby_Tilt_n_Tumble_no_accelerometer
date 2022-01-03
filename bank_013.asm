@@ -6716,7 +6716,7 @@ jr_013_5ca3:
     nop                                           ; $5ca3: $00
     nop                                           ; $5ca4: $00
     nop                                           ; $5ca5: $00
-    jp Jump_000_3ec3                              ; $5ca6: $c3 $c3 $3e
+    jp $3ec3                                      ; $5ca6: $c3 $c3 $3e
 
 
     db $fd                                        ; $5ca9: $fd

@@ -1008,7 +1008,7 @@ jr_00b_4448:
     jr c, jr_00b_4467                             ; $444b: $38 $1a
 
     call Call_00b_448b                            ; $444d: $cd $8b $44
-    call Call_00b_4581                            ; $4450: $cd $81 $45
+    call MOVABLE_PLATFORMS_HANDLER                ; $4450: $cd $81 $45
     ldh a, [$d1]                                  ; $4453: $f0 $d1
     and $06                                       ; $4455: $e6 $06
     cp $04                                        ; $4457: $fe $04
@@ -1239,7 +1239,7 @@ jr_00b_4571:
     ldh [$91], a                                  ; $457d: $e0 $91
     jr jr_00b_4571                                ; $457f: $18 $f0
 
-Call_00b_4581:
+MOVABLE_PLATFORMS_HANDLER:
     ldh a, [$d1]                                  ; $4581: $f0 $d1
     and $06                                       ; $4583: $e6 $06
     srl a                                         ; $4585: $cb $3f
@@ -1252,7 +1252,8 @@ Call_00b_4581:
     ld b, [hl]                                    ; $458d: $46
     xor a                                         ; $458e: $af
     ldh [$92], a                                  ; $458f: $e0 $92
-    ld e, $01                                     ; $4591: $1e $01
+    ;ld e, $01                                     ; $4591: $1e $01
+    ld e, $02                                     ; Allows moving red platforms with the B button
     ldh a, [$d1]                                  ; $4593: $f0 $d1
     and $06                                       ; $4595: $e6 $06
     cp $02                                        ; $4597: $fe $02

@@ -10312,7 +10312,7 @@ jr_012_7a0c:
     jr @+$7d                                      ; $7a60: $18 $7b
 
     or $7a                                        ; $7a62: $f6 $7a
-    call nc, Call_000_3d7a                        ; $7a64: $d4 $7a $3d
+    call nc, $3d7a                                ; $7a64: $d4 $7a $3d
     ld a, e                                       ; $7a67: $7b
     ld h, l                                       ; $7a68: $65
     ld a, e                                       ; $7a69: $7b

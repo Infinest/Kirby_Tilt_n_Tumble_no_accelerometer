@@ -196,7 +196,7 @@ SECTION "ROM Bank $01f", ROMX[$4000], BANK[$1f]
     rst $38                                       ; $40ce: $ff
     rst $38                                       ; $40cf: $ff
     cp l                                          ; $40d0: $bd
-    jp Jump_000_3cff                              ; $40d1: $c3 $ff $3c
+    jp $3cff                                      ; $40d1: $c3 $ff $3c
 
 
     rst $38                                       ; $40d4: $ff
@@ -5223,7 +5223,7 @@ jr_01f_556f:
     db $fc                                        ; $5571: $fc
     ld [c], a                                     ; $5572: $e2
     db $fc                                        ; $5573: $fc
-    call nz, Call_000_3cf8                        ; $5574: $c4 $f8 $3c
+    call nz, $3cf8                                ; $5574: $c4 $f8 $3c
     ld hl, sp+$3c                                 ; $5577: $f8 $3c
     ld hl, sp-$48                                 ; $5579: $f8 $b8
     ld [hl], b                                    ; $557b: $70
