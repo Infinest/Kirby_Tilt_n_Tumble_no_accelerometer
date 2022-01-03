@@ -2071,31 +2071,46 @@ jr_012_4c35:
     ld c, [hl]                                    ; $4c45: $4e
     inc hl                                        ; $4c46: $23
     ld b, [hl]                                    ; $4c47: $46
-    ldh a, [$f6]                                  ; $4c48: $f0 $f6
-    ld e, a                                       ; $4c4a: $5f
-    ldh a, [$f5]                                  ; $4c4b: $f0 $f5
-    ld d, a                                       ; $4c4d: $57
-    srl d                                         ; $4c4e: $cb $3a
-    rr e                                          ; $4c50: $cb $1b
-    srl d                                         ; $4c52: $cb $3a
-    rr e                                          ; $4c54: $cb $1b
-    srl d                                         ; $4c56: $cb $3a
-    rr e                                          ; $4c58: $cb $1b
-    srl d                                         ; $4c5a: $cb $3a
-    rr e                                          ; $4c5c: $cb $1b
-    ld a, e                                       ; $4c5e: $7b
-    sub c                                         ; $4c5f: $91
-    ld e, a                                       ; $4c60: $5f
-    ld a, d                                       ; $4c61: $7a
-    sbc b                                         ; $4c62: $98
-    jr c, jr_012_4c77                             ; $4c63: $38 $12
+    ;ldh a, [$f6]                                  ; $4c48: $f0 $f6
+    ;ld e, a                                       ; $4c4a: $5f
+    ;ldh a, [$f5]                                  ; $4c4b: $f0 $f5
+    ;ld d, a                                       ; $4c4d: $57
+    ;srl d                                         ; $4c4e: $cb $3a
+    ;rr e                                          ; $4c50: $cb $1b
+    ;srl d                                         ; $4c52: $cb $3a
+    ;rr e                                          ; $4c54: $cb $1b
+    ;srl d                                         ; $4c56: $cb $3a
+    ;rr e                                          ; $4c58: $cb $1b
+    ;srl d                                         ; $4c5a: $cb $3a
+    ;rr e                                          ; $4c5c: $cb $1b
+    ;ld a, e                                       ; $4c5e: $7b
+    ;sub c                                         ; $4c5f: $91
+    ;ld e, a                                       ; $4c60: $5f
+    ;ld a, d                                       ; $4c61: $7a
+    ;sbc b                                         ; $4c62: $98
+    ;jr c, jr_012_4c77                             ; $4c63: $38 $12
 
-    ld a, e                                       ; $4c65: $7b
-    cp $28                                        ; $4c66: $fe $28
-    jr c, jr_012_4c77                             ; $4c68: $38 $0d
+    ;ld a, e                                       ; $4c65: $7b
+    ;cp $28                                        ; $4c66: $fe $28
+    ;jr c, jr_012_4c77                             ; $4c68: $38 $0d
+	
+REPT 17
+	nop
+ENDR
+	
+	sbc b
+    jr c, jr_012_4c77
+	
+	ld a, [ARROW_COUNT]
+	cp $6
+	jr z, jr_012_4c77
+	
+	ld a, [BUTTON_DOWN_VALUES]                    ; Allows reloading arrows with the B button
+	bit 1, a
+	jr z, jr_012_4c77
 
     ld a, $06                                     ; $4c6a: $3e $06
-    ld [$d0ed], a                                 ; $4c6c: $ea $ed $d0
+    ld [ARROW_COUNT], a                           ; $4c6c: $ea $ed $d0
     call Call_012_59f2                            ; $4c6f: $cd $f2 $59
     ld a, $18                                     ; $4c72: $3e $18
     ld [$c109], a                                 ; $4c74: $ea $09 $c1

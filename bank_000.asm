@@ -11188,121 +11188,48 @@ jr_000_3847:
 
     ret                                           ; $384e: $c9
 
+	
+REPT 64
+	nop
+ENDR
 
 Call_000_384f:
-    ldh a, [$f8]                                  ; $384f: $f0 $f8
-    ld e, a                                       ; $3851: $5f
-    ldh a, [$f7]                                  ; $3852: $f0 $f7
-    ld d, a                                       ; $3854: $57
-    ldh a, [$f4]                                  ; $3855: $f0 $f4
-    sub e                                         ; $3857: $93
-    ld e, a                                       ; $3858: $5f
-    ldh a, [$f3]                                  ; $3859: $f0 $f3
-    sbc d                                         ; $385b: $9a
-    ld d, a                                       ; $385c: $57
-    bit 7, a                                      ; $385d: $cb $7f
-    jr nz, jr_000_3873                            ; $385f: $20 $12
-
-    cp $04                                        ; $3861: $fe $04
-    jr c, jr_000_3885                             ; $3863: $38 $20
-
-    jr nz, jr_000_386c                            ; $3865: $20 $05
-
-    ld a, e                                       ; $3867: $7b
-    cp $b0                                        ; $3868: $fe $b0
-    jr c, jr_000_3885                             ; $386a: $38 $19
-
-jr_000_386c:
-    ld a, $9b                                     ; $386c: $3e $9b
-    ld [$d10e], a                                 ; $386e: $ea $0e $d1
-    jr jr_000_3896                                ; $3871: $18 $23
-
-jr_000_3873:
-    cp $fb                                        ; $3873: $fe $fb
-    jr c, jr_000_387e                             ; $3875: $38 $07
-
-    jr nz, jr_000_3885                            ; $3877: $20 $0c
-
-    ld a, e                                       ; $3879: $7b
-    cp $40                                        ; $387a: $fe $40
-    jr nc, jr_000_3885                            ; $387c: $30 $07
-
-jr_000_387e:
-    ld a, $04                                     ; $387e: $3e $04
-    ld [$d10e], a                                 ; $3880: $ea $0e $d1
-    jr jr_000_3896                                ; $3883: $18 $11
-
-jr_000_3885:
-    ld a, d                                       ; $3885: $7a
-    and $0f                                       ; $3886: $e6 $0f
-    swap a                                        ; $3888: $cb $37
-    ld d, a                                       ; $388a: $57
-    ld a, e                                       ; $388b: $7b
-    and $f0                                       ; $388c: $e6 $f0
-    swap a                                        ; $388e: $cb $37
-    or d                                          ; $3890: $b2
-    add $50                                       ; $3891: $c6 $50
-    ld [$d10e], a                                 ; $3893: $ea $0e $d1
-
-jr_000_3896:
-    ldh a, [$fa]                                  ; $3896: $f0 $fa
-    ld e, a                                       ; $3898: $5f
-    ldh a, [$f9]                                  ; $3899: $f0 $f9
-    ld d, a                                       ; $389b: $57
-    ldh a, [$f6]                                  ; $389c: $f0 $f6
-    sub e                                         ; $389e: $93
-    ld e, a                                       ; $389f: $5f
-    ldh a, [$f5]                                  ; $38a0: $f0 $f5
-    sbc d                                         ; $38a2: $9a
-    ld d, a                                       ; $38a3: $57
-    bit 7, a                                      ; $38a4: $cb $7f
-    jr nz, jr_000_38b9                            ; $38a6: $20 $11
-
-    cp $03                                        ; $38a8: $fe $03
-    jr c, jr_000_38ca                             ; $38aa: $38 $1e
-
-    jr nz, jr_000_38b3                            ; $38ac: $20 $05
-
-    ld a, e                                       ; $38ae: $7b
-    cp $70                                        ; $38af: $fe $70
-    jr c, jr_000_38ca                             ; $38b1: $38 $17
-
-jr_000_38b3:
-    ld a, $73                                     ; $38b3: $3e $73
-    ld [$d111], a                                 ; $38b5: $ea $11 $d1
-    ret                                           ; $38b8: $c9
-
-
-jr_000_38b9:
-    cp $fc                                        ; $38b9: $fe $fc
-    jr c, jr_000_38c4                             ; $38bb: $38 $07
-
-    jr nz, jr_000_38ca                            ; $38bd: $20 $0b
-
-    ld a, e                                       ; $38bf: $7b
-    cp $80                                        ; $38c0: $fe $80
-    jr nc, jr_000_38ca                            ; $38c2: $30 $06
+	ld a, [BUTTON_VALUES]
+	ld b, a
+	bit 4, b
+	jr z, CURSOR_NOT_RIGHT
+	ld a, [CURSOR_X]
+	add a, 2
+	ld [CURSOR_X], a
+CURSOR_NOT_RIGHT:
+	bit 5, b
+	jr z, CURSOR_NOT_LEFT
+	ld a, [CURSOR_X]
+	sub a, 2
+	ld [CURSOR_X], a
+CURSOR_NOT_LEFT:
+	bit 6, b
+	jr z, CURSOR_NOT_UP
+	ld a, [CURSOR_Y]
+	sub a, 2
+	ld [CURSOR_Y], a
+CURSOR_NOT_UP:
+	bit 7, b
+	jr z, CURSOR_NOT_DOWN
+	ld a, [CURSOR_Y]
+	add a, 2
+	ld [CURSOR_Y], a
+CURSOR_NOT_DOWN:
+	ret
 
 Call_000_38c4:
-jr_000_38c4:
     ld a, $04                                     ; $38c4: $3e $04
     ld [$d111], a                                 ; $38c6: $ea $11 $d1
     ret                                           ; $38c9: $c9
-
-
-jr_000_38ca:
-    ld a, d                                       ; $38ca: $7a
-    and $0f                                       ; $38cb: $e6 $0f
-    swap a                                        ; $38cd: $cb $37
-    ld d, a                                       ; $38cf: $57
-    ld a, e                                       ; $38d0: $7b
-    and $f0                                       ; $38d1: $e6 $f0
-    swap a                                        ; $38d3: $cb $37
-    or d                                          ; $38d5: $b2
-    add $3c                                       ; $38d6: $c6 $3c
-    ld [$d111], a                                 ; $38d8: $ea $11 $d1
-    ret                                           ; $38db: $c9
-
+	
+REPT 18
+	nop
+ENDR
 
     ld bc, $0101                                  ; $38dc: $01 $01 $01
     ld [bc], a                                    ; $38df: $02
