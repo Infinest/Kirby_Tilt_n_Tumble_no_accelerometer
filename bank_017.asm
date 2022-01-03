@@ -5889,9 +5889,12 @@ Call_017_5fdc:
     cpl                                           ; $5ff2: $2f
     db $76                                        ; $5ff3: $76
     call Call_017_60d8                            ; $5ff4: $cd $d8 $60
-    ld a, [$c100]                                 ; $5ff7: $fa $00 $c1
-    bit 5, a                                      ; $5ffa: $cb $6f
-    ret z                                         ; $5ffc: $c8
+    ;ld a, [$c100]                                 ; $5ff7: $fa $00 $c1
+    ;bit 5, a                                      ; $5ffa: $cb $6f
+    ;ret z                                         ; $5ffc: $c8
+REPT 6
+	nop                                           ; Removes the need to hold left on top of the A button
+ENDR
 
     ld a, [$c100]                                 ; $5ffd: $fa $00 $c1
     bit 0, a                                      ; $6000: $cb $47
@@ -5920,9 +5923,13 @@ Call_017_5fdc:
     jp Jump_017_72e7                              ; $602f: $c3 $e7 $72
 
 
-    ld a, [$c100]                                 ; $6032: $fa $00 $c1
-    bit 5, a                                      ; $6035: $cb $6f
-    jr z, jr_017_6040                             ; $6037: $28 $07
+    ;ld a, [$c100]                                 ; $6032: $fa $00 $c1
+    ;bit 5, a                                      ; $6035: $cb $6f
+    ;jr z, jr_017_6040                             ; $6037: $28 $07
+REPT 7
+	nop                                           ; Removes the need to hold left on top of the A button
+ENDR
+
 
     ld a, [$c100]                                 ; $6039: $fa $00 $c1
     bit 0, a                                      ; $603c: $cb $47
@@ -5945,7 +5952,7 @@ jr_017_6040:
 
 
 jr_017_605f:
-    call Call_017_7544                            ; $605f: $cd $44 $75
+    call WIND_UP_HANDLER                          ; $605f: $cd $44 $75
     call Call_017_60c5                            ; $6062: $cd $c5 $60
     ld hl, $d0f4                                  ; $6065: $21 $f4 $d0
     ld a, [hl-]                                   ; $6068: $3a
@@ -6036,19 +6043,25 @@ Jump_017_60d8:
 jr_017_60e3:
     ld a, e                                       ; $60e3: $7b
     add $f0                                       ; $60e4: $c6 $f0
-    ld hl, $d08f                                  ; $60e6: $21 $8f $d0
+    ;ld hl, $d08f                                  ; $60e6: $21 $8f $d0
+	ld hl, $d08c                                  ; Move A button in chicken race mini game
     ld [hl+], a                                   ; $60e9: $22
     ld [hl], a                                    ; $60ea: $77
     inc a                                         ; $60eb: $3c
-    ld hl, $d0af                                  ; $60ec: $21 $af $d0
+    ;ld hl, $d0af                                  ; $60ec: $21 $af $d0
+    ld hl, $d0ac                                  ; Move A button in chicken race mini game
     ld [hl+], a                                   ; $60ef: $22
     ld [hl], a                                    ; $60f0: $77
     ld a, $13                                     ; $60f1: $3e $13
     ldh [$90], a                                  ; $60f3: $e0 $90
     ld e, $00                                     ; $60f5: $1e $00
-    ld a, [$c100]                                 ; $60f7: $fa $00 $c1
-    bit 5, a                                      ; $60fa: $cb $6f
-    jr z, jr_017_6100                             ; $60fc: $28 $02
+    ;ld a, [$c100]                                 ; $60f7: $fa $00 $c1
+    ;bit 5, a                                      ; $60fa: $cb $6f
+    ;jr z, jr_017_6100                             ; $60fc: $28 $02
+	jr jr_017_6100                                ; Disable sprite animation when holding left
+REPT 5
+	nop
+ENDR
 
     ld e, $40                                     ; $60fe: $1e $40
 
@@ -9910,36 +9923,53 @@ jr_017_7523:
     ret                                           ; $7543: $c9
 
 
-Call_017_7544:
-    xor a                                         ; $7544: $af
-    ldh [$91], a                                  ; $7545: $e0 $91
-    ldh [$92], a                                  ; $7547: $e0 $92
-    ld hl, $d109                                  ; $7549: $21 $09 $d1
-    ldh a, [$f3]                                  ; $754c: $f0 $f3
-    sub [hl]                                      ; $754e: $96
-    ldh [$90], a                                  ; $754f: $e0 $90
-    and $80                                       ; $7551: $e6 $80
-    ld hl, $d10b                                  ; $7553: $21 $0b $d1
-    xor [hl]                                      ; $7556: $ae
-    and $80                                       ; $7557: $e6 $80
-    jr nz, jr_017_7569                            ; $7559: $20 $0e
+WIND_UP_HANDLER:
+    ld a, [BUTTON_DOWN_VALUES]
+	and $f0
+	ret z                                         ; Return if direction button has been pressed
+	ld h, a
+	ld a, [$d10b]
+	cp h
+	ret z                                         ; Return if the same direction button has been pressed twice
+	ld a, h
+	ld [$d10b], a
+	ld a, $50
+	call ADD_TO_WIND_UP_VALUE
+	ld a,[$d10a]
+	xor $ff
+	ld [$d10a], a
+	jr TRIGGER_WIND_UP_SOUND
+	
+    ;xor a                                         ; $7544: $af
+    ;ldh [$91], a                                  ; $7545: $e0 $91
+    ;ldh [$92], a                                  ; $7547: $e0 $92
+    ;ld hl, $d109                                  ; $7549: $21 $09 $d1
+    ;ldh a, [$f3]                                  ; $754c: $f0 $f3
+    ;sub [hl]                                      ; $754e: $96
+    ;ldh [$90], a                                  ; $754f: $e0 $90
+    ;and $80                                       ; $7551: $e6 $80
+    ;ld hl, $d10b                                  ; $7553: $21 $0b $d1
+    ;xor [hl]                                      ; $7556: $ae
+    ;and $80                                       ; $7557: $e6 $80
+    ;jr nz, jr_017_7569                            ; $7559: $20 $0e
 
-    ldh a, [$90]                                  ; $755b: $f0 $90
-    bit 7, a                                      ; $755d: $cb $7f
-    jr z, jr_017_7564                             ; $755f: $28 $03
+    ;ldh a, [$90]                                  ; $755b: $f0 $90
+    ;bit 7, a                                      ; $755d: $cb $7f
+    ;jr z, jr_017_7564                             ; $755f: $28 $03
 
-    xor $ff                                       ; $7561: $ee $ff
+    ;xor $ff                                       ; $7561: $ee $ff
     inc a                                         ; $7563: $3c
 
 jr_017_7564:
     ldh [$91], a                                  ; $7564: $e0 $91
-    call Call_017_75c7                            ; $7566: $cd $c7 $75
+    call ADD_TO_WIND_UP_VALUE                     ; $7566: $cd $c7 $75
 
 jr_017_7569:
     ldh a, [$f3]                                  ; $7569: $f0 $f3
     ld [$d109], a                                 ; $756b: $ea $09 $d1
     ldh a, [$90]                                  ; $756e: $f0 $90
     and $80                                       ; $7570: $e6 $80
+
     ld [$d10b], a                                 ; $7572: $ea $0b $d1
     ld hl, $d10a                                  ; $7575: $21 $0a $d1
     ldh a, [$f5]                                  ; $7578: $f0 $f5
@@ -9960,7 +9990,7 @@ jr_017_7569:
 
 jr_017_7590:
     ldh [$92], a                                  ; $7590: $e0 $92
-    call Call_017_75c7                            ; $7592: $cd $c7 $75
+    call ADD_TO_WIND_UP_VALUE                     ; $7592: $cd $c7 $75
 
 jr_017_7595:
     ldh a, [$f5]                                  ; $7595: $f0 $f5
@@ -9974,6 +10004,7 @@ jr_017_7595:
     cp $02                                        ; $75a6: $fe $02
     ret c                                         ; $75a8: $d8
 
+TRIGGER_WIND_UP_SOUND:
     ld hl, $d0f3                                  ; $75a9: $21 $f3 $d0
     ld e, [hl]                                    ; $75ac: $5e
     inc hl                                        ; $75ad: $23
@@ -9993,7 +10024,7 @@ jr_017_7595:
     ret                                           ; $75c6: $c9
 
 
-Call_017_75c7:
+ADD_TO_WIND_UP_VALUE:
     ld e, a                                       ; $75c7: $5f
     ld hl, $d0f3                                  ; $75c8: $21 $f3 $d0
     ld a, [hl]                                    ; $75cb: $7e

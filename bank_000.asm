@@ -509,7 +509,8 @@ Jump_000_01c3:
 jr_000_01c9:
     ld a, [$c14b]                                 ; $01c9: $fa $4b $c1
     and a                                         ; $01cc: $a7
-    jr nz, jr_000_01d9                            ; $01cd: $20 $0a
+    ;jr nz, jr_000_01d9                            ; $01cd: $20 $0a
+	jr jr_000_01d9                                ; Skip accelerometer calibration at bootup
 
     ld a, $05                                     ; $01cf: $3e $05
     call Call_000_0986                            ; $01d1: $cd $86 $09
