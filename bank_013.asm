@@ -12792,11 +12792,17 @@ Call_013_7aa9:
     ret                                           ; $7ab1: $c9
 
 
-Call_013_7ab2:
-    ld hl, $d10c                                  ; $7ab2: $21 $0c $d1
-    ldh a, [$f5]                                  ; $7ab5: $f0 $f5
-    sub [hl]                                      ; $7ab7: $96
-    ldh [$90], a                                  ; $7ab8: $e0 $90
+Call_013_7ab2:                                    ; Allows kirby to jump with a press of the directional up button in the hurdle race
+	ld a, [BUTTON_DOWN_VALUES]
+	xor $40
+	rla
+	rla
+	ret
+	
+    ;ld hl, $d10c                                  ; $7ab2: $21 $0c $d1
+    ;ldh a, [$f5]                                  ; $7ab5: $f0 $f5
+    ;sub [hl]                                      ; $7ab7: $96
+    ;ldh [$90], a                                  ; $7ab8: $e0 $90
     ldh a, [$f5]                                  ; $7aba: $f0 $f5
     ld [hl], a                                    ; $7abc: $77
     ld hl, $d0f9                                  ; $7abd: $21 $f9 $d0
