@@ -11190,11 +11190,6 @@ jr_000_3847:
 
     ret                                           ; $384e: $c9
 
-	
-REPT 22
-	nop
-ENDR
-
 Call_000_384f:
 	ld a, [BUTTON_VALUES]
 	ld b, a
@@ -11247,6 +11242,10 @@ DONT_CLAMP_MAX_Y:
 DONT_CLAMP_MIN_Y:
 	ret
 
+REPT 22
+	nop
+ENDR
+	
 Call_000_38c4:
     ld a, $04                                     ; $38c4: $3e $04
     ld [$d111], a                                 ; $38c6: $ea $11 $d1

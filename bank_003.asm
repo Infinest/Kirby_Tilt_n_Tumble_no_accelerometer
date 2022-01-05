@@ -10939,12 +10939,6 @@ DOWN_NOT_PRESSED:
 	bit 6, a
 	jr z, UP_NOT_PRESSED
 	
-	;push af
-	;ld a, c
-	;sub $f0
-	;ld c, a
-	;pop af
-	
 	push af
 	ld a, c
 	sub l
@@ -10966,12 +10960,6 @@ UP_NOT_PRESSED:
 	sbc a, h
 	ld d, a
 	pop af
-	
-	;push af
-	;ld a, e
-	;sub $f0
-	;ld e, a
-	;pop af
 	
 LEFT_NOT_PRESSED:
 	bit 4, a
