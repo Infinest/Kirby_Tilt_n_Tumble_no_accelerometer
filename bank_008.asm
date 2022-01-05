@@ -9572,21 +9572,18 @@ TRIGGER_BLOCK_CHANGES_ON_A_PRESS:                ; This function triggers the an
     ld a, e
     ldh [$95], a
 	ld b, $04
-	ld a, [BUTTON_VALUES]                        ; Since the player is only able to jump out of directional hole
-	and $f0                                      ; if a directional button is held, dont show animation for directional hole
-	jr nz, TRIGGER_DIRECTIONAL_HOLE_ANIMATION    ; if no directional button is held
+	ld a, [IN_DIRECTIONAL_HOLE]                  ; Since the player is only able to jump out of directional hole
+	rra                                          ; if a directional button is held, dont show animation for directional hole
+	jr nc, TRIGGER_DIRECTIONAL_HOLE_ANIMATION    ; if the player is in a directional hole and no directional button is held
+	ld a, [BUTTON_VALUES]
+	and $f0
+	jr nz, TRIGGER_DIRECTIONAL_HOLE_ANIMATION
 	ld b, $02
 TRIGGER_DIRECTIONAL_HOLE_ANIMATION:
 	ld a, b
     ldh [$96], a
     jp Jump_000_10cc
 
-    rst $38                                       ; $7637: $ff
-    rst $38                                       ; $7638: $ff
-    rst $38                                       ; $7639: $ff
-    rst $38                                       ; $763a: $ff
-    rst $38                                       ; $763b: $ff
-    rst $38                                       ; $763c: $ff
     rst $38                                       ; $763d: $ff
     rst $38                                       ; $763e: $ff
     rst $38                                       ; $763f: $ff

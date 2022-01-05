@@ -11896,15 +11896,13 @@ jr_000_3bbc:
 
 	
 CHECK_A_BUTTON_PRESSED_CONDITIONAL:
-	ld a, [$c112]								  ; Check if ingame. If not, don't make further checks and just check if A was pressed
+	ld a, [IS_INGAME]                             ; Check if ingame. If not, don't make further checks and just check if A was pressed
 	and a
 	jr z, CHECK_A_BUTTON_PRESSED
-	ld a, [$C25B]                                 ; Check if player is flying. If so, we instead check if B is pressed
+	ld a, [IS_FLYING]                             ; Check if player is flying. If so, we instead check if B is pressed
 	cp $10
 	jr z, CHECK_B_BUTTON_PRESSED
-	;ld a, [$ffdb]								  ; Check player state
-	;cp $50
-	ld a, [$c264]                                 ; Check that player has control
+	ld a, [CAN_MOVE]                              ; Check that player has control
 	and a
 	jr nz, CHECK_A_BUTTON_PRESSED
 	xor a
