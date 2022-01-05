@@ -11191,7 +11191,7 @@ jr_000_3847:
     ret                                           ; $384e: $c9
 
 	
-REPT 64
+REPT 22
 	nop
 ENDR
 
@@ -11222,6 +11222,29 @@ CURSOR_NOT_UP:
 	add a, 2
 	ld [CURSOR_Y], a
 CURSOR_NOT_DOWN:
+	; The following code limits the Cursors minimum and maximum coordinates
+	ld a, [CURSOR_X]
+	cp $9b
+	jr c, DONT_CLAMP_MAX_X
+	ld a, $9b
+	ld [CURSOR_X], a
+DONT_CLAMP_MAX_X:
+	cp $4
+	jr nc, DONT_CLAMP_MIN_X
+	ld a, $4
+	ld [CURSOR_X], a
+DONT_CLAMP_MIN_X:
+	ld a, [CURSOR_Y]
+	cp $73
+	jr c, DONT_CLAMP_MAX_Y
+	ld a, $73
+	ld [CURSOR_Y], a
+DONT_CLAMP_MAX_Y:
+	cp $4
+	jr nc, DONT_CLAMP_MIN_Y
+	ld a, $4
+	ld [CURSOR_Y],a
+DONT_CLAMP_MIN_Y:
 	ret
 
 Call_000_38c4:
