@@ -598,8 +598,9 @@ Call_000_0238:
     ldh a, [rIE]                                  ; $0263: $f0 $ff
     or $01                                        ; $0265: $f6 $01
     ldh [rIE], a                                  ; $0267: $e0 $ff
-    xor a                                         ; $0269: $af
-    ldh [rLYC], a                                 ; $026a: $e0 $45
+    ;xor a                                         ; $0269: $af
+    ;ldh [rLYC], a                                 ; $026a: $e0 $45
+	call INTRO
 
 Jump_000_026c:
 jr_000_026c:
@@ -11895,3 +11896,221 @@ CHECK_B_BUTTON_PRESSED:
 	rra
 	rra
 	ret
+	
+INTRO:
+	di
+	call INITIALIZE_SRAM_CHECK
+	call LOAD_TILES
+	call LOAD_CREDITS_MAP
+	call INITIALIZE_PALETTE
+	
+	ld b, $20
+SLEEP_CREDITS:
+	call WAIT_FOR_VBLANK
+	dec b
+	jr nz, SLEEP_CREDITS
+	
+CHECK_FOR_BUTTON:
+	call Call_000_098c
+	ld a,[BUTTON_DOWN_VALUES]
+	and $0f                                       ; If any button except a directional button is pressed, continue
+	jr z, CHECK_FOR_BUTTON
+	
+	xor a
+	ldh [$f0], a
+FADE_OUT:
+	ld de, $0000
+	ldh a, [$f0]
+	cp $1f
+	jr z, FADE_OUT_COMPLETED                      ; If the number is exactly $1f, it means the cycle was run once with the vale $f1, therefore we can quit
+	add $5
+	cp $1f
+	jr c, MAXIMUM_NOT_REACHED                     ; If the number passes the maximum of $1f, it will pass one more cycle with $1f
+	or $1f
+MAXIMUM_NOT_REACHED:
+	and $1f
+	ldh [$f0], a
+	push af
+	push af
+	ld e, a
+	ld b, $5
+	call SHIFT_LEFT
+	or e
+	ld e, a
+	pop af
+	ld b, $3
+	call SHIFT_RIGHT
+	or d
+	ld d, a
+	pop af
+	ld b, $2
+	call SHIFT_LEFT
+	or d
+	ld d, a
+	
+	push af
+	ld b, $1a
+	call DELAY                                    ; Makes the fade to white slower and smoother
+	pop af
+
+	ld a, $80
+	ld [rBCPS], a
+	ld a, e
+	ld [rBCPD], a
+	ld a, d
+	ld [rBCPD], a
+	ld a, $ff
+	ld [rBCPD], a
+	ld [rBCPD], a
+	ld a, e
+	ld [rBCPD], a
+	ld a, d
+	ld [rBCPD], a
+	ld a, e
+	ld [rBCPD], a
+	ld a, d
+	ld [rBCPD], a
+	jr FADE_OUT
+	
+FADE_OUT_COMPLETED:
+	ld b, $10
+	call DELAY
+	ei
+	xor a
+    ldh [rLYC], a
+	ret
+	
+LOAD_TILES:
+	ld a, $1
+	ld [rVBK], a
+	ld hl, _SCRN0
+	ld bc, $0339
+ATTRIBUTE_INITIALIZATION_LOOP:
+	xor a
+	call WAIT_FOR_BLANKING_PERIOD
+	ld [hl+], a
+	ld a, c
+	sub $1
+	ld c, a
+	ld a, b
+	sbc $0
+	ld b, a
+	and b
+	jr nz, ATTRIBUTE_INITIALIZATION_LOOP
+	
+	call WAIT_FOR_VBLANK
+	ld a, $1b
+	ld [rROMB0], a
+	ld a, $53
+	ld [rHDMA1], a
+	xor a
+	ld [rVBK], a
+	ld [rHDMA2], a
+	ld a, $88
+	ld [rHDMA3], a
+	xor a
+	ld [rHDMA4], a
+	ld a, $3f
+	ld [rHDMA5], a
+ret
+	
+LOAD_CREDITS_MAP:
+	ld hl, _SCRN0
+	ld de, CREDITS_MAP
+LOAD_CREDITS_MAP_LOOP:
+	ld a, [de]
+	cp $ff
+	ret z
+	call WAIT_FOR_BLANKING_PERIOD
+	ld [hl+], a
+	inc de
+	jr LOAD_CREDITS_MAP_LOOP
+
+INITIALIZE_PALETTE:
+	call WAIT_FOR_VBLANK
+	ld a, $80
+	ld [rBCPS], a
+	xor a
+	ld [rBCPD], a
+	ld [rBCPD], a
+	ld a, $ff
+	ld [rBCPD], a
+	ld [rBCPD], a
+	xor a
+	ld [rBCPD], a
+	ld [rBCPD], a
+	ld [rBCPD], a
+	ld [rBCPD], a
+	ret
+	
+	
+SHIFT_LEFT:
+	sla a
+	dec b
+	jr nz, SHIFT_LEFT
+ret
+
+SHIFT_RIGHT:
+	srl a
+	dec b
+	jr nz, SHIFT_RIGHT
+	ret
+
+DELAY:
+	call WAIT_FOR_VBLANK
+	dec b
+	jr nz, DELAY
+	ret
+	
+WAIT_FOR_BLANKING_PERIOD:
+	push hl
+	ld hl, rSTAT
+WAIT_FOR_BLANKING:
+	bit 1,[hl]
+	jr nz, WAIT_FOR_BLANKING
+	pop hl
+	ret
+	
+WAIT_FOR_VBLANK:
+	ld a, [rLY]
+	cp $90
+	jr nz, WAIT_FOR_VBLANK
+	ret
+	
+INITIALIZE_SRAM_CHECK:
+	ld b, $4
+	ld hl, _SRAM
+	ld de, SRAM_IDENTIFIER
+SRAM_INITIALIZATION_CHECK_LOOP:
+	ld a, [hl+]
+	ld c, a
+	ld a, [de]
+	inc de
+	cp c
+	jr nz, INITIALIZE_SRAM
+	dec b
+	jr nz, SRAM_INITIALIZATION_CHECK_LOOP
+	ret
+INITIALIZE_SRAM:
+	ld b, $4
+	ld hl, _SRAM
+	ld de, SRAM_IDENTIFIER
+SRAM_INITIALIZATION_LOOP_1:
+	ld a, [de]
+	inc de
+	ld [hl+], a
+	dec b
+	jr nz, SRAM_INITIALIZATION_LOOP_1
+SRAM_INITIALIZATION_LOOP_2:
+	xor a
+	ld [hl+], a
+	ld a, h
+	cp $c0
+	jr nz, SRAM_INITIALIZATION_LOOP_2
+ret
+
+SRAM_IDENTIFIER:
+db "TAMA"
+	
+CREDITS_MAP:
+incbin "credits.bin"
