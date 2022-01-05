@@ -7457,8 +7457,9 @@ Call_008_69d2:
     cp $01                                        ; $6a13: $fe $01
     jr z, jr_008_6a2c                             ; $6a15: $28 $15
 
-    call CHECK_SWITCH_RED_BLOCKS                  ; $6a17: $cd $4d $6b
-    call Call_008_6f94                            ; $6a1a: $cd $94 $6f
+    call TRIGGER_BLOCK_CHANGES_ON_B_PRESS         ; $6a17: $cd $4d $6b
+    ;call Call_008_6f94                            ; $6a1a: $cd $94 $6f
+	call DETOUR
     call Call_008_7098                            ; $6a1d: $cd $98 $70
     call Call_008_6aa6                            ; $6a20: $cd $a6 $6a
     call Call_008_6a35                            ; $6a23: $cd $35 $6a
@@ -7671,7 +7672,7 @@ jr_008_6b47:
     ret                                           ; $6b4c: $c9
 
 
-CHECK_SWITCH_RED_BLOCKS:
+TRIGGER_BLOCK_CHANGES_ON_B_PRESS:
     ld a, [$c1c5]                                 ; $6b4d: $fa $c5 $c1
     and $33                                       ; $6b50: $e6 $33
     ld [$c1c5], a                                 ; $6b52: $ea $c5 $c1
@@ -7721,13 +7722,13 @@ jr_008_6b82:
     ld [$c106], a                                 ; $6b9f: $ea $06 $c1
 
 jr_008_6ba2:
-    ld hl, $4080                                  ; $6ba2: $21 $80 $40
-    ld de, $8800                                  ; $6ba5: $11 $00 $88
+    ld hl, $40c0                                  ; $6ba2: $21 $80 $40
+    ld de, $8840                                  ; $6ba5: $11 $00 $88
     ld a, [$c1c5]                                 ; $6ba8: $fa $c5 $c1
     bit 0, a                                      ; $6bab: $cb $47
     jr nz, jr_008_6bb2                            ; $6bad: $20 $03
 
-    ld hl, $4000                                  ; $6baf: $21 $00 $40
+    ld hl, $4040                                  ; $6baf: $21 $00 $40
 
 jr_008_6bb2:
     ld a, $18                                     ; $6bb2: $3e $18
@@ -7742,7 +7743,7 @@ jr_008_6bb2:
     ldh [$94], a                                  ; $6bc1: $e0 $94
     ld a, e                                       ; $6bc3: $7b
     ldh [$95], a                                  ; $6bc4: $e0 $95
-    ld a, $08                                     ; $6bc6: $3e $08
+    ld a, $04                                     ; $6bc6: $3e $08
     ldh [$96], a                                  ; $6bc8: $e0 $96
     jp Jump_000_10cc                              ; $6bca: $c3 $cc $10
 
@@ -9547,62 +9548,39 @@ SELECT_CHECK_2:
 	jp SELECT_CHECK_SUCCESS_2
 	
 
-    rst $38                                       ; $75ff: $ff
-    rst $38                                       ; $7600: $ff
-    rst $38                                       ; $7601: $ff
-    rst $38                                       ; $7602: $ff
-    rst $38                                       ; $7603: $ff
-    rst $38                                       ; $7604: $ff
-    rst $38                                       ; $7605: $ff
-    rst $38                                       ; $7606: $ff
-    rst $38                                       ; $7607: $ff
-    rst $38                                       ; $7608: $ff
-    rst $38                                       ; $7609: $ff
-    rst $38                                       ; $760a: $ff
-    rst $38                                       ; $760b: $ff
-    rst $38                                       ; $760c: $ff
-    rst $38                                       ; $760d: $ff
-    rst $38                                       ; $760e: $ff
-    rst $38                                       ; $760f: $ff
-    rst $38                                       ; $7610: $ff
-    rst $38                                       ; $7611: $ff
-    rst $38                                       ; $7612: $ff
-    rst $38                                       ; $7613: $ff
-    rst $38                                       ; $7614: $ff
-    rst $38                                       ; $7615: $ff
-    rst $38                                       ; $7616: $ff
-    rst $38                                       ; $7617: $ff
-    rst $38                                       ; $7618: $ff
-    rst $38                                       ; $7619: $ff
-    rst $38                                       ; $761a: $ff
-    rst $38                                       ; $761b: $ff
-    rst $38                                       ; $761c: $ff
-    rst $38                                       ; $761d: $ff
-    rst $38                                       ; $761e: $ff
-    rst $38                                       ; $761f: $ff
-    rst $38                                       ; $7620: $ff
-    rst $38                                       ; $7621: $ff
-    rst $38                                       ; $7622: $ff
-    rst $38                                       ; $7623: $ff
-    rst $38                                       ; $7624: $ff
-    rst $38                                       ; $7625: $ff
-    rst $38                                       ; $7626: $ff
-    rst $38                                       ; $7627: $ff
-    rst $38                                       ; $7628: $ff
-    rst $38                                       ; $7629: $ff
-    rst $38                                       ; $762a: $ff
-    rst $38                                       ; $762b: $ff
-    rst $38                                       ; $762c: $ff
-    rst $38                                       ; $762d: $ff
-    rst $38                                       ; $762e: $ff
-    rst $38                                       ; $762f: $ff
-    rst $38                                       ; $7630: $ff
-    rst $38                                       ; $7631: $ff
-    rst $38                                       ; $7632: $ff
-    rst $38                                       ; $7633: $ff
-    rst $38                                       ; $7634: $ff
-    rst $38                                       ; $7635: $ff
-    rst $38                                       ; $7636: $ff
+DETOUR:
+	call TRIGGER_BLOCK_CHANGES_ON_A_PRESS
+	call Call_008_6f94
+	ret
+	
+TRIGGER_BLOCK_CHANGES_ON_A_PRESS:                ; This function triggers the animation of the holes that Kirby can be catapulted from
+	ld a, [BUTTON_DOWN_VALUES]                   ; Originally this animation was triggered in TRIGGER_BLOCK_CHANGES_ON_B_PRESS but since
+	bit 0, a                                     ; this function obviously is now triggered on a B press and Kirby still jumps from a hole
+	ret z                                        ; on an A press, we need to trigger this animation separately here
+    ld hl, $4000
+    ld de, $8800
+	ld a, $18
+    ldh [$90], a
+    ld a, h
+    ldh [$91], a
+    ld a, l
+    ldh [$92], a
+    ld a, $00
+    ldh [$93], a
+    ld a, d
+    ldh [$94], a
+    ld a, e
+    ldh [$95], a
+	ld b, $04
+	ld a, [BUTTON_VALUES]                        ; Since the player is only able to jump out of directional hole
+	and $f0                                      ; if a directional button is held, dont show animation for directional hole
+	jr nz, TRIGGER_DIRECTIONAL_HOLE_ANIMATION    ; if no directional button is held
+	ld b, $02
+TRIGGER_DIRECTIONAL_HOLE_ANIMATION:
+	ld a, b
+    ldh [$96], a
+    jp Jump_000_10cc
+
     rst $38                                       ; $7637: $ff
     rst $38                                       ; $7638: $ff
     rst $38                                       ; $7639: $ff
