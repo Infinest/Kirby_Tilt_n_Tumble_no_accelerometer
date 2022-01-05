@@ -8173,7 +8173,9 @@ jr_00b_68cb:
     call Call_000_2969                            ; $6975: $cd $69 $29
     jp c, Jump_00b_6f30                           ; $6978: $da $30 $6f
 
+	;jp DIRECTIONAL_CLOUD_CAMERA_DETOUR
     call Call_00b_6984                            ; $697b: $cd $84 $69
+DIRECTIONAL_CLOUD_CAMERA_RETURN:
     call Call_00b_655a                            ; $697e: $cd $5a $65
     jp Jump_00b_6f30                              ; $6981: $c3 $30 $6f
 
@@ -8484,12 +8486,16 @@ Jump_00b_6b0f:
     inc b                                         ; $6b12: $04
     inc c                                         ; $6b13: $0c
     ld [$cd00], sp                                ; $6b14: $08 $00 $cd
-    call $fa70                                    ; $6b17: $cd $70 $fa
-    ld bc, $e6c1                                  ; $6b1a: $01 $c1 $e6
-    ld bc, $21c8                                  ; $6b1d: $01 $c8 $21
-    add e                                         ; $6b20: $83
-    add $09                                       ; $6b21: $c6 $09
-    ld a, [hl]                                    ; $6b23: $7e
+	db $cd, $70
+    ;ld a, [BUTTON_DOWN_VALUES]                    ; $6b19: $fa $01 $c1
+    ;and $01                                       ; $6b1c: $e6 $01
+	call DIRECTIONAL_CLOUD_JUMP_DETOUR
+	nop
+	nop
+    ret z                                         ; $6b1e: $c8
+    ld hl, $c683                                  ; $6b1f: $21 $83 $c6
+    add hl, bc                                    ; $6b22: $09
+	ld a, [hl]                                    ; $6b23: $7e
     cp $02                                        ; $6b24: $fe $02
     jr z, jr_00b_6b2f                             ; $6b26: $28 $07
 
@@ -9509,8 +9515,11 @@ jr_00b_708e:
     call Call_000_1631                            ; $7091: $cd $31 $16
 
 jr_00b_7094:
-    ld a, [$c101]                                 ; $7094: $fa $01 $c1
-    and $01                                       ; $7097: $e6 $01
+    ;ld a, [$c101]                                 ; $7094: $fa $01 $c1
+    ;and $01                                       ; $7097: $e6 $01
+	call DIRECTIONAL_CLOUD_JUMP_DETOUR
+	nop
+	nop
     jr z, jr_00b_70ca                             ; $7099: $28 $2f
 
     call Call_00b_710e                            ; $709b: $cd $0e $71
@@ -9706,8 +9715,11 @@ jr_00b_7192:
     ld e, a                                       ; $71b0: $5f
     ldh a, [$90]                                  ; $71b1: $f0 $90
     sub e                                         ; $71b3: $93
-    ldh [$90], a                                  ; $71b4: $e0 $90
-    jp Jump_000_25f6                              ; $71b6: $c3 $f6 $25
+	nop
+	nop
+	jp DIRECTIONAL_CLOUD_CAMERA_DETOUR
+    ;ldh [$90], a                                  ; $71b4: $e0 $90
+    ;jp Jump_000_25f6                              ; $71b6: $c3 $f6 $25
 
 
     ld [bc], a                                    ; $71b9: $02
@@ -12324,53 +12336,33 @@ jr_00b_7f89:
     ldh [$90], a                                  ; $7fca: $e0 $90
     jp Jump_000_25f6                              ; $7fcc: $c3 $f6 $25
 
-
-    rst $38                                       ; $7fcf: $ff
-    rst $38                                       ; $7fd0: $ff
-    rst $38                                       ; $7fd1: $ff
-    rst $38                                       ; $7fd2: $ff
-    rst $38                                       ; $7fd3: $ff
-    rst $38                                       ; $7fd4: $ff
-    rst $38                                       ; $7fd5: $ff
-    rst $38                                       ; $7fd6: $ff
-    rst $38                                       ; $7fd7: $ff
-    rst $38                                       ; $7fd8: $ff
-    rst $38                                       ; $7fd9: $ff
-    rst $38                                       ; $7fda: $ff
-    rst $38                                       ; $7fdb: $ff
-    rst $38                                       ; $7fdc: $ff
-    rst $38                                       ; $7fdd: $ff
-    rst $38                                       ; $7fde: $ff
-    rst $38                                       ; $7fdf: $ff
-    rst $38                                       ; $7fe0: $ff
-    rst $38                                       ; $7fe1: $ff
-    rst $38                                       ; $7fe2: $ff
-    rst $38                                       ; $7fe3: $ff
-    rst $38                                       ; $7fe4: $ff
-    rst $38                                       ; $7fe5: $ff
-    rst $38                                       ; $7fe6: $ff
-    rst $38                                       ; $7fe7: $ff
-    rst $38                                       ; $7fe8: $ff
-    rst $38                                       ; $7fe9: $ff
-    rst $38                                       ; $7fea: $ff
-    rst $38                                       ; $7feb: $ff
-    rst $38                                       ; $7fec: $ff
-    rst $38                                       ; $7fed: $ff
-    rst $38                                       ; $7fee: $ff
-    rst $38                                       ; $7fef: $ff
-    rst $38                                       ; $7ff0: $ff
-    rst $38                                       ; $7ff1: $ff
-    rst $38                                       ; $7ff2: $ff
-    rst $38                                       ; $7ff3: $ff
-    rst $38                                       ; $7ff4: $ff
-    rst $38                                       ; $7ff5: $ff
-    rst $38                                       ; $7ff6: $ff
-    rst $38                                       ; $7ff7: $ff
-    rst $38                                       ; $7ff8: $ff
-    rst $38                                       ; $7ff9: $ff
-    rst $38                                       ; $7ffa: $ff
-    rst $38                                       ; $7ffb: $ff
-    rst $38                                       ; $7ffc: $ff
-    rst $38                                       ; $7ffd: $ff
-    rst $38                                       ; $7ffe: $ff
-    rst $38                                       ; $7fff: $ff
+DIRECTIONAL_CLOUD_CAMERA_DETOUR:                  ; This detour makes it so that the camera wont automatically go downwards when in a cloud
+	push af                                       ; with a directional jump without pressing a button but actually center on the player
+	ld a, [BUTTON_VALUES]                         ; it will also hide the star pointer showing the direction if no direction is pressed
+	and $f0
+	jr nz, DO_NOT_RESET_DIRECTIONAL_CLOUD_CAMERA
+	ld a, $02
+	ldh [$90], a
+	call Call_000_1613
+	ld a, $02
+	ldh [$90], a
+	call Call_000_1638
+	pop af
+	ldh [$90], a
+	ret
+DO_NOT_RESET_DIRECTIONAL_CLOUD_CAMERA:
+	pop af
+    ldh [$90], a
+    jp Jump_000_25f6
+	
+DIRECTIONAL_CLOUD_JUMP_DETOUR:                    ; This detour only allows jumping from a cloud with a directional jump if a direction is pressed
+	ld a, [BUTTON_VALUES]
+	and $f0
+	ret z
+	ld a, [BUTTON_DOWN_VALUES]
+	and $1
+	ret
+	
+REPT 5
+	db $ff
+ENDR

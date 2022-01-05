@@ -9463,8 +9463,8 @@ jr_010_7437:
 OPTIONS_MENU_SELECTION_DETOUR:
     add [hl]
 	ld b, a
-	ld a, [$c115]
-	cp MENU_STATE_OPTIONS
+	ld a, [GAME_STATE]
+	cp GAME_STATE_OPTIONS
 	jr z, IS_OPTIONS_MENU
 	ld a, b
     and $03

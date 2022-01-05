@@ -10932,7 +10932,7 @@ DONT_JUMP_OUT_OF_HOLE:
 DIRECTIONAL_HOLE_CAMERA_DETOUR:                   ; This detour makes it so that the camera wont automatically go downwards when in a hole
 	ld a, [BUTTON_VALUES]                         ; with a directional jump without pressing a button but actually center on the player
 	and $f0                                       ; Only check directional buttons
-	jr nz, DO_NOT_RESET_CAMERA                    ; If no directional button is pressed return
+	jr nz, DO_NOT_RESET_DIRECTIONAL_HOLE_CAMERA   ; If no directional button is pressed return
 	ld a, $02
 	ldh [$90], a
 	call Call_000_1613
@@ -10940,7 +10940,7 @@ DIRECTIONAL_HOLE_CAMERA_DETOUR:                   ; This detour makes it so that
 	ldh [$90], a
 	call Call_000_1638
 	ret
-DO_NOT_RESET_CAMERA:
+DO_NOT_RESET_DIRECTIONAL_HOLE_CAMERA:
 	call Call_00c_4948
 	jp jr_00c_51c4
 	

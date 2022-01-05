@@ -10925,7 +10925,16 @@ ACCELEROMETER_BYPASS:
 	ld hl, $05FF
 	ld d, b
 	ld e, c
-	ld a, [$c100]
+	
+	ld a,[GAME_STATE]                             ; If we are ingame and select for moving the camera is held, we want to lock player movement
+	cp GAME_STATE_INGAME
+	ld a, [BUTTON_VALUES]
+	jr nz, DONT_CHECK_FOR_SELECT_HELD
+	ld a, [BUTTON_VALUES]
+	bit 2, a
+	jr nz, RIGHT_NOT_PRESSED
+DONT_CHECK_FOR_SELECT_HELD:
+	
 	bit 7, a
 	jr z, DOWN_NOT_PRESSED
 	
@@ -10980,10 +10989,9 @@ RIGHT_NOT_PRESSED:
 	ld [hl], b
 	inc hl
 	ld [hl], c
-DONT_JUMP:
 	pop bc
 	ret
 	
-REPT 1255
+REPT 1241
 	db $ff
 ENDR
