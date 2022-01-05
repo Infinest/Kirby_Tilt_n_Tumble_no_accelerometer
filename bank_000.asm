@@ -12135,3 +12135,7 @@ db "TAMA"
 	
 CREDITS_MAP:
 incbin "credits.bin"
+
+REPT 113
+	db $ff
+ENDR

@@ -7974,7 +7974,6 @@ jr_005_69a1:
 
     jp EEPROM_WRITE_DISABLE                       ; $69a8: $c3 $78 $68
 
-
     rst $38                                       ; $69ab: $ff
     rst $38                                       ; $69ac: $ff
     rst $38                                       ; $69ad: $ff

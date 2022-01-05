@@ -12499,7 +12499,7 @@ jr_026_7594:
     nop                                           ; $779e: $00
     nop                                           ; $779f: $00
     ;ld bc, $2101                                  ; $77a0: $01 $01 $21
-    db $01, $01, $01							  ; Fix incorrect attribute for tile on level select screen. This caused an incorrectly flipped tile.
+    db $01, $01, $01                              ; Fix incorrect attribute for tile on level select screen. This caused an incorrectly flipped tile.
     ld bc, $0101                                  ; $77a3: $01 $01 $01
     ld bc, $0701                                  ; $77a6: $01 $01 $07
     ld bc, $0101                                  ; $77a9: $01 $01 $01

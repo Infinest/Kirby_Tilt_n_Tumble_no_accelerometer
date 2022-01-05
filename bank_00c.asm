@@ -10943,3 +10943,7 @@ DIRECTIONAL_HOLE_CAMERA_DETOUR:                   ; This detour makes it so that
 DO_NOT_RESET_CAMERA:
 	call Call_00c_4948
 	jp jr_00c_51c4
+	
+REPT 618
+	db $ff
+ENDR

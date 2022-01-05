@@ -10995,3 +10995,7 @@ RIGHT_NOT_PRESSED:
 DONT_JUMP:
 	pop bc
 	ret
+	
+REPT 1255
+	db $ff
+ENDR

@@ -9507,3 +9507,7 @@ STAR_COORDINATES:
 	; XY 5
 	db $74
 	db $08
+	
+REPT 2953
+	db $ff
+ENDR
