@@ -12136,8 +12136,11 @@ SRAM_INITIALIZATION_LOOP_1:
 SRAM_INITIALIZATION_LOOP_2:
 	xor a
 	ld [hl+], a
+	ld a, l
+	cp $ff
+	jr nz, SRAM_INITIALIZATION_LOOP_2
 	ld a, h
-	cp $c0
+	cp $a7
 	jr nz, SRAM_INITIALIZATION_LOOP_2
 ret
 
@@ -12147,6 +12150,6 @@ db "TAMA"
 CREDITS_MAP:
 incbin "credits.bin"
 
-REPT 94
+REPT 89
 	db $ff
 ENDR
