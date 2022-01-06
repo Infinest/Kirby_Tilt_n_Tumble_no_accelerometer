@@ -11919,16 +11919,21 @@ CHECK_B_BUTTON_PRESSED:
 	
 INTRO:
 	di
-	call INITIALIZE_SRAM_CHECK
+	xor a
+	ld [rNR52], a
+	ld [rLCDC], a
+
+	call INITIALIZE_OAM
 	call LOAD_TILES
 	call LOAD_CREDITS_MAP
 	call INITIALIZE_PALETTE
+	call INITIALIZE_SRAM_CHECK
+
+	ld a, $87
+	ld [rLCDC], a
 	
 	ld b, $20
-SLEEP_CREDITS:
-	call WAIT_FOR_VBLANK
-	dec b
-	jr nz, SLEEP_CREDITS
+	call DELAY
 	
 CHECK_FOR_BUTTON:
 	call Call_000_098c
@@ -11996,6 +12001,8 @@ FADE_OUT_COMPLETED:
 	ld b, $10
 	call DELAY
 	ei
+	ld a, $ff
+	ld [rNR52], a
 	xor a
     ldh [rLYC], a
 	ret
@@ -12007,7 +12014,6 @@ LOAD_TILES:
 	ld bc, $0339
 ATTRIBUTE_INITIALIZATION_LOOP:
 	xor a
-	call WAIT_FOR_BLANKING_PERIOD
 	ld [hl+], a
 	ld a, c
 	sub $1
@@ -12017,8 +12023,6 @@ ATTRIBUTE_INITIALIZATION_LOOP:
 	ld b, a
 	and b
 	jr nz, ATTRIBUTE_INITIALIZATION_LOOP
-	
-	call WAIT_FOR_VBLANK
 	ld a, $1b
 	ld [rROMB0], a
 	ld a, $53
@@ -12047,7 +12051,6 @@ LOAD_CREDITS_MAP_LOOP:
 	jr LOAD_CREDITS_MAP_LOOP
 
 INITIALIZE_PALETTE:
-	call WAIT_FOR_VBLANK
 	ld a, $80
 	ld [rBCPS], a
 	xor a
@@ -12061,6 +12064,15 @@ INITIALIZE_PALETTE:
 	ld [rBCPD], a
 	ld [rBCPD], a
 	ld [rBCPD], a
+	ret
+	
+INITIALIZE_OAM:
+	ld a, $c0
+	ld [rDMA], a
+	ld a, $28
+WAIT_FOR_DMA:
+	dec a
+	jr nz, WAIT_FOR_DMA
 	ret
 	
 	
@@ -12135,6 +12147,6 @@ db "TAMA"
 CREDITS_MAP:
 incbin "credits.bin"
 
-REPT 113
+REPT 94
 	db $ff
 ENDR
