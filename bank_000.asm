@@ -386,9 +386,7 @@ Jump_000_0101:
 
 
 HeaderLogo::
-    db $ce, $ed, $66, $66, $cc, $0d, $00, $0b, $03, $73, $00, $83, $00, $0c, $00, $0d
-    db $00, $08, $11, $1f, $88, $89, $00, $0e, $dc, $cc, $6e, $e6, $dd, $dd, $d9, $99
-    db $bb, $bb, $67, $63, $6e, $0e, $ec, $cc, $dd, $dc, $99, $9f, $bb, $b9, $33, $3e
+	NINTENDO_LOGO
 
 HeaderTitle::
     db "KIRBY TNT", $00, $00
@@ -573,7 +571,8 @@ Jump_000_0204:
     ldh [rOBP1], a                                ; $022a: $e0 $49
     xor a                                         ; $022c: $af
     ld [$c111], a                                 ; $022d: $ea $11 $c1
-    ld a, $87                                     ; $0230: $3e $87
+    ;ld a, $87                                     ; $0230: $3e $87
+    ld a, %11100001
     ldh [rLCDC], a                                ; $0232: $e0 $40
     ld a, $07                                     ; $0234: $3e $07
     ldh [rSVBK], a                                ; $0236: $e0 $70
@@ -823,7 +822,8 @@ Jump_000_03bd:
     push de                                       ; $03c0: $d5
     push hl                                       ; $03c1: $e5
     ldh a, [rLCDC]                                ; $03c2: $f0 $40
-    or $02                                        ; $03c4: $f6 $02
+    ;or $02                                        ; $03c4: $f6 $02
+    or %01000000
     ldh [rLCDC], a                                ; $03c6: $e0 $40
     ld a, [$c117]                                 ; $03c8: $fa $17 $c1
     cp $08                                        ; $03cb: $fe $08
@@ -947,7 +947,8 @@ jr_000_0484:
 
 jr_000_048d:
     ldh a, [rSTAT]                                ; $048d: $f0 $41
-    and $03                                       ; $048f: $e6 $03
+    ;and $03                                       ; $048f: $e6 $03
+    and %11000000
     jr z, jr_000_048d                             ; $0491: $28 $fa
 
     ld a, $01                                     ; $0493: $3e $01
@@ -981,7 +982,8 @@ Jump_000_04b3:
     jp z, Jump_000_04a0                           ; $04b8: $ca $a0 $04
 
     ldh a, [rSTAT]                                ; $04bb: $f0 $41
-    and $03                                       ; $04bd: $e6 $03
+    ;and $03                                       ; $04bd: $e6 $03
+    and %11000000
     jp z, Jump_000_04a0                           ; $04bf: $ca $a0 $04
 
     ld a, $01                                     ; $04c2: $3e $01
@@ -1233,7 +1235,8 @@ Jump_000_065d:
     ldh [rSCX], a                                 ; $065d: $e0 $43
     ldh a, [$df]                                  ; $065f: $f0 $df
     ldh [rSCY], a                                 ; $0661: $e0 $42
-    ld a, $48                                     ; $0663: $3e $48
+    ;ld a, $48                                     ; $0663: $3e $48
+    ld a, %00010010
     ldh [rSTAT], a                                ; $0665: $e0 $41
 
 Call_000_0667:
@@ -1245,7 +1248,8 @@ Call_000_0667:
     or $02                                        ; $0670: $f6 $02
     ldh [rIE], a                                  ; $0672: $e0 $ff
     ldh a, [rLCDC]                                ; $0674: $f0 $40
-    and $df                                       ; $0676: $e6 $df
+    ;and $df                                       ; $0676: $e6 $df
+    and %11111011
     ldh [rLCDC], a                                ; $0678: $e0 $40
     jp Jump_000_04ad                              ; $067a: $c3 $ad $04
 
@@ -1321,7 +1325,8 @@ Jump_000_06c4:
 
 jr_000_06e4:
     ldh a, [rSTAT]                                ; $06e4: $f0 $41
-    and $03                                       ; $06e6: $e6 $03
+    ;and $03                                       ; $06e6: $e6 $03
+    and %11000000
     jr z, jr_000_06e4                             ; $06e8: $28 $fa
 
     ld a, $00                                     ; $06ea: $3e $00
@@ -1370,11 +1375,13 @@ jr_000_0711:
 
 jr_000_0727:
     ldh a, [rSTAT]                                ; $0727: $f0 $41
-    and $03                                       ; $0729: $e6 $03
+    ;and $03                                       ; $0729: $e6 $03
+    and %11000000
     jr nz, jr_000_0727                            ; $072b: $20 $fa
 
     ldh a, [rLCDC]                                ; $072d: $f0 $40
-    and $fd                                       ; $072f: $e6 $fd
+    ;and $fd                                       ; $072f: $e6 $fd
+    and %10111111
     ldh [rLCDC], a                                ; $0731: $e0 $40
 
 jr_000_0733:
@@ -1397,7 +1404,8 @@ jr_000_073c:
 
 jr_000_0748:
     ldh a, [rSTAT]                                ; $0748: $f0 $41
-    and $03                                       ; $074a: $e6 $03
+    ;and $03                                       ; $074a: $e6 $03
+    and %11000000
     jr z, jr_000_0748                             ; $074c: $28 $fa
 
     ld a, $00                                     ; $074e: $3e $00
@@ -1463,7 +1471,8 @@ Jump_000_0799:
 
 jr_000_07a3:
     ldh a, [rSTAT]                                ; $07a3: $f0 $41
-    and $03                                       ; $07a5: $e6 $03
+    ;and $03                                       ; $07a5: $e6 $03
+    and %11000000
     jr nz, jr_000_07a3                            ; $07a7: $20 $fa
 
     ldh a, [$f1]                                  ; $07a9: $f0 $f1
@@ -1476,7 +1485,8 @@ jr_000_07a3:
 
 jr_000_07b7:
     ldh a, [rSTAT]                                ; $07b7: $f0 $41
-    and $03                                       ; $07b9: $e6 $03
+    ;and $03                                       ; $07b9: $e6 $03
+    and %11000000
     jr nz, jr_000_07b7                            ; $07bb: $20 $fa
 
     ldh a, [$dd]                                  ; $07bd: $f0 $dd
@@ -1490,7 +1500,8 @@ jr_000_07b7:
 Call_000_07cb:
 jr_000_07cb:
     ldh a, [rLCDC]                                ; $07cb: $f0 $40
-    and $fd                                       ; $07cd: $e6 $fd
+    ;and $fd                                       ; $07cd: $e6 $fd
+    and %10111111
     ldh [rLCDC], a                                ; $07cf: $e0 $40
     jr jr_000_0763                                ; $07d1: $18 $90
 
@@ -1926,7 +1937,8 @@ jr_000_0a90:
     jr nz, jr_000_0a90                            ; $0a94: $20 $fa
 
     ldh a, [rLCDC]                                ; $0a96: $f0 $40
-    and $7f                                       ; $0a98: $e6 $7f
+    ;and $7f                                       ; $0a98: $e6 $7f
+    and %11111110
     ldh [rLCDC], a                                ; $0a9a: $e0 $40
     xor a                                         ; $0a9c: $af
     ldh [rIF], a                                  ; $0a9d: $e0 $0f
@@ -2834,12 +2846,14 @@ Call_000_0edf:
     ld [$c112], a                                 ; $0ee6: $ea $12 $c1
     ld a, $00                                     ; $0ee9: $3e $00
     ld [$c117], a                                 ; $0eeb: $ea $17 $c1
-    ld a, $44                                     ; $0eee: $3e $44
+    ;ld a, $44                                     ; $0eee: $3e $44
+    ld a, %00100010
     ldh [rSTAT], a                                ; $0ef0: $e0 $41
     ldh a, [rIE]                                  ; $0ef2: $f0 $ff
     or $02                                        ; $0ef4: $f6 $02
     ldh [rIE], a                                  ; $0ef6: $e0 $ff
-    ld a, $e7                                     ; $0ef8: $3e $e7
+    ;ld a, $e7                                     ; $0ef8: $3e $e7
+    ld a, %11100111
     ldh [rLCDC], a                                ; $0efa: $e0 $40
     ret                                           ; $0efc: $c9
 
@@ -11929,7 +11943,8 @@ INTRO:
 	call INITIALIZE_PALETTE
 	call INITIALIZE_SRAM_CHECK
 
-	ld a, $87
+	;ld a, $87
+	ld a, %11100001
 	ld [rLCDC], a
 	
 	ld b, $20
@@ -12098,7 +12113,8 @@ WAIT_FOR_BLANKING_PERIOD:
 	push hl
 	ld hl, rSTAT
 WAIT_FOR_BLANKING:
-	bit 1,[hl]
+	;bit 1,[hl]
+	bit 6,[hl]
 	jr nz, WAIT_FOR_BLANKING
 	pop hl
 	ret
@@ -12136,8 +12152,11 @@ SRAM_INITIALIZATION_LOOP_1:
 SRAM_INITIALIZATION_LOOP_2:
 	xor a
 	ld [hl+], a
+	ld a, l
+	cp $ff
+	jr nz, SRAM_INITIALIZATION_LOOP_2
 	ld a, h
-	cp $c0
+	cp $a7
 	jr nz, SRAM_INITIALIZATION_LOOP_2
 ret
 
@@ -12147,6 +12166,6 @@ db "TAMA"
 CREDITS_MAP:
 incbin "credits.bin"
 
-REPT 94
+REPT 89
 	db $ff
 ENDR

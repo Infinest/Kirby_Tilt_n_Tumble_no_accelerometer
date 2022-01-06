@@ -477,7 +477,8 @@ jr_004_4247:
     ld [$c117], a                                 ; $4254: $ea $17 $c1
     ld a, $00                                     ; $4257: $3e $00
     ld [$c112], a                                 ; $4259: $ea $12 $c1
-    ld a, $87                                     ; $425c: $3e $87
+    ;ld a, $87                                     ; $425c: $3e $87
+    ld a, %11100001
     ldh [rLCDC], a                                ; $425e: $e0 $40
     ldh [rIF], a                                  ; $4260: $e0 $0f
     ld a, $01                                     ; $4262: $3e $01
@@ -1903,7 +1904,8 @@ jr_004_4a16:
     ld [$c117], a                                 ; $4a7e: $ea $17 $c1
     ld a, $00                                     ; $4a81: $3e $00
     ld [$c112], a                                 ; $4a83: $ea $12 $c1
-    ld a, $87                                     ; $4a86: $3e $87
+    ;ld a, $87                                     ; $4a86: $3e $87
+    ld a, %11100001
     ldh [rLCDC], a                                ; $4a88: $e0 $40
     xor a                                         ; $4a8a: $af
     ldh [rIF], a                                  ; $4a8b: $e0 $0f
@@ -2725,7 +2727,8 @@ jr_004_4ed4:
     ld [$c14d], a                                 ; $4f59: $ea $4d $c1
     ld a, $09                                     ; $4f5c: $3e $09
     ld [$c117], a                                 ; $4f5e: $ea $17 $c1
-    ld a, $87                                     ; $4f61: $3e $87
+    ;ld a, $87                                     ; $4f61: $3e $87
+    ld a, %11100001
     ldh [rLCDC], a                                ; $4f63: $e0 $40
     xor a                                         ; $4f65: $af
     ldh [rSTAT], a                                ; $4f66: $e0 $41
@@ -2885,7 +2888,8 @@ jr_004_504e:
     ld [$c112], a                                 ; $5076: $ea $12 $c1
     ld a, $02                                     ; $5079: $3e $02
     ld [$c117], a                                 ; $507b: $ea $17 $c1
-    ld a, $87                                     ; $507e: $3e $87
+    ;ld a, $87                                     ; $507e: $3e $87
+    ld a, %11100001
     ldh [rLCDC], a                                ; $5080: $e0 $40
     ldh [rIF], a                                  ; $5082: $e0 $0f
     ld a, $01                                     ; $5084: $3e $01
@@ -3709,7 +3713,8 @@ jr_004_5527:
     ld [$c112], a                                 ; $5563: $ea $12 $c1
     ld a, $02                                     ; $5566: $3e $02
     ld [$c117], a                                 ; $5568: $ea $17 $c1
-    ld a, $87                                     ; $556b: $3e $87
+    ;ld a, $87                                     ; $556b: $3e $87
+    ld a, %11100001
     ldh [rLCDC], a                                ; $556d: $e0 $40
     xor a                                         ; $556f: $af
     ldh [rIF], a                                  ; $5570: $e0 $0f
@@ -4319,9 +4324,11 @@ jr_004_582f:
     call Call_000_0b44                            ; $58cf: $cd $44 $0b
     pop af                                        ; $58d2: $f1
     ldh [rSVBK], a                                ; $58d3: $e0 $70
-    ld a, $87                                     ; $58d5: $3e $87
+    ;ld a, $87                                     ; $58d5: $3e $87
+    ld a, %11100001
     ldh [rLCDC], a                                ; $58d7: $e0 $40
-    ld a, $44                                     ; $58d9: $3e $44
+    ;ld a, $44                                     ; $58d9: $3e $44
+    ld a, %00100010
     ldh [rSTAT], a                                ; $58db: $e0 $41
     xor a                                         ; $58dd: $af
     ldh [rIF], a                                  ; $58de: $e0 $0f
@@ -4585,7 +4592,8 @@ jr_004_5a0a:
     ld [$c117], a                                 ; $5a65: $ea $17 $c1
     ld a, $00                                     ; $5a68: $3e $00
     ld [$c112], a                                 ; $5a6a: $ea $12 $c1
-    ld a, $87                                     ; $5a6d: $3e $87
+    ;ld a, $87                                     ; $5a6d: $3e $87
+    ld a, %11100001
     ldh [rLCDC], a                                ; $5a6f: $e0 $40
     ldh [rIF], a                                  ; $5a71: $e0 $0f
     ld a, $01                                     ; $5a73: $3e $01
@@ -4781,7 +4789,8 @@ jr_004_5b7f:
     ld [$c117], a                                 ; $5bad: $ea $17 $c1
     ld a, $00                                     ; $5bb0: $3e $00
     ld [$c112], a                                 ; $5bb2: $ea $12 $c1
-    ld a, $87                                     ; $5bb5: $3e $87
+    ;ld a, $87                                     ; $5bb5: $3e $87
+    ld a, %11100001
     ldh [rLCDC], a                                ; $5bb7: $e0 $40
     xor a                                         ; $5bb9: $af
     ldh [rIF], a                                  ; $5bba: $e0 $0f
@@ -5314,9 +5323,11 @@ jr_004_5e87:
     ld [$c117], a                                 ; $5ebd: $ea $17 $c1
     ld a, $01                                     ; $5ec0: $3e $01
     ld [$c112], a                                 ; $5ec2: $ea $12 $c1
-    ld a, $e7                                     ; $5ec5: $3e $e7
+    ;ld a, $e7                                     ; $5ec5: $3e $e7
+    ld a, %11100111
     ldh [rLCDC], a                                ; $5ec7: $e0 $40
-    ld a, $44                                     ; $5ec9: $3e $44
+    ;ld a, $44                                     ; $5ec9: $3e $44
+    ld a, %00100010
     ldh [rSTAT], a                                ; $5ecb: $e0 $41
     xor a                                         ; $5ecd: $af
     ldh [rIF], a                                  ; $5ece: $e0 $0f
@@ -5603,7 +5614,8 @@ jr_004_6015:
     ld [$c112], a                                 ; $6050: $ea $12 $c1
     ld a, $02                                     ; $6053: $3e $02
     ld [$c117], a                                 ; $6055: $ea $17 $c1
-    ld a, $87                                     ; $6058: $3e $87
+    ;ld a, $87                                     ; $6058: $3e $87
+    ld a, %11100001
     ldh [rLCDC], a                                ; $605a: $e0 $40
     xor a                                         ; $605c: $af
     ldh [rSTAT], a                                ; $605d: $e0 $41

@@ -2391,14 +2391,14 @@ jr_00c_4d4b:
     ld b, b                                       ; $4d59: $40
     nop                                           ; $4d5a: $00
     ld d, b                                       ; $4d5b: $50
-    ldh [rLCDC], a                                ; $4d5c: $e0 $40
+    ldh [$ff40], a                                ; $4d5c: $e0 $40
     ldh [$50], a                                  ; $4d5e: $e0 $50
     ret nz                                        ; $4d60: $c0
 
     ld b, b                                       ; $4d61: $40
     or b                                          ; $4d62: $b0
     ld d, b                                       ; $4d63: $50
-    ldh [rLCDC], a                                ; $4d64: $e0 $40
+    ldh [$ff40], a                                ; $4d64: $e0 $40
     ldh [$50], a                                  ; $4d66: $e0 $50
 
 Call_00c_4d68:

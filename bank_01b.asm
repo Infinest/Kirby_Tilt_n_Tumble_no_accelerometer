@@ -1302,7 +1302,7 @@ jr_01b_4508:
     jr c, jr_01b_4597                             ; $4585: $38 $10
 
     ldh a, [rNR41]                                ; $4587: $f0 $20
-    ldh [rLCDC], a                                ; $4589: $e0 $40
+    ldh [$ff40], a                                ; $4589: $e0 $40
     ret nz                                        ; $458b: $c0
 
     add b                                         ; $458c: $80
@@ -3858,7 +3858,7 @@ jr_01b_4fc6:
     db $10                                        ; $4ffb: $10
     db $fc                                        ; $4ffc: $fc
     ld hl, sp-$04                                 ; $4ffd: $f8 $fc
-    ldh a, [rLCDC]                                ; $4fff: $f0 $40
+    ldh a, [$ff40]                                ; $4fff: $f0 $40
     ccf                                           ; $5001: $3f
     ld b, b                                       ; $5002: $40
     ccf                                           ; $5003: $3f

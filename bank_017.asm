@@ -9674,9 +9674,11 @@ jr_017_7381:
     ld [$c126], a                                 ; $73d4: $ea $26 $c1
     ld a, $01                                     ; $73d7: $3e $01
     ld [$c112], a                                 ; $73d9: $ea $12 $c1
-    ld a, $44                                     ; $73dc: $3e $44
+    ;ld a, $44                                     ; $73dc: $3e $44
+    ld a, %00100010
     ldh [rSTAT], a                                ; $73de: $e0 $41
-    ld a, $e7                                     ; $73e0: $3e $e7
+    ;ld a, $e7                                     ; $73e0: $3e $e7
+    ld a, %11100111
     ldh [rLCDC], a                                ; $73e2: $e0 $40
     xor a                                         ; $73e4: $af
     ldh [rIF], a                                  ; $73e5: $e0 $0f

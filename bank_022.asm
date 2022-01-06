@@ -833,7 +833,7 @@ jr_022_434d:
     db $10                                        ; $4356: $10
     ldh a, [rNR10]                                ; $4357: $f0 $10
     ldh a, [rNR41]                                ; $4359: $f0 $20
-    ldh [rLCDC], a                                ; $435b: $e0 $40
+    ldh [$ff40], a                                ; $435b: $e0 $40
     ret nz                                        ; $435d: $c0
 
     ret nz                                        ; $435e: $c0
@@ -1451,7 +1451,7 @@ jr_022_452c:
     db $10                                        ; $45f6: $10
     ldh a, [rNR10]                                ; $45f7: $f0 $10
     ldh a, [rNR41]                                ; $45f9: $f0 $20
-    ldh [rLCDC], a                                ; $45fb: $e0 $40
+    ldh [$ff40], a                                ; $45fb: $e0 $40
     ret nz                                        ; $45fd: $c0
 
     ret nz                                        ; $45fe: $c0
@@ -3008,7 +3008,7 @@ jr_022_4c55:
     ldh a, [rNR10]                                ; $4c77: $f0 $10
     ldh a, [rNR41]                                ; $4c79: $f0 $20
     ldh [rNR41], a                                ; $4c7b: $e0 $20
-    ldh [rLCDC], a                                ; $4c7d: $e0 $40
+    ldh [$ff40], a                                ; $4c7d: $e0 $40
     ret nz                                        ; $4c7f: $c0
 
     inc bc                                        ; $4c80: $03

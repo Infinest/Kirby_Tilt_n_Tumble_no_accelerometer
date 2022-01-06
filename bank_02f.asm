@@ -4054,7 +4054,7 @@ jr_02f_4fb1:
     ld hl, sp+$70                                 ; $50ea: $f8 $70
     ld hl, sp+$70                                 ; $50ec: $f8 $70
     ldh a, [$60]                                  ; $50ee: $f0 $60
-    ldh [rLCDC], a                                ; $50f0: $e0 $40
+    ldh [$ff40], a                                ; $50f0: $e0 $40
     ret nz                                        ; $50f2: $c0
 
     add b                                         ; $50f3: $80

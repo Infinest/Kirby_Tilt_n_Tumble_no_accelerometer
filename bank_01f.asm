@@ -6162,7 +6162,7 @@ jr_01f_593a:
 
     ret nz                                        ; $5952: $c0
 
-    ldh [rLCDC], a                                ; $5953: $e0 $40
+    ldh [$ff40], a                                ; $5953: $e0 $40
     ldh [$c0], a                                  ; $5955: $e0 $c0
     ret nz                                        ; $5957: $c0
 
@@ -14186,7 +14186,7 @@ jr_01f_7a5c:
     ldh [$e0], a                                  ; $7ac9: $e0 $e0
     ret nz                                        ; $7acb: $c0
 
-    ldh [rLCDC], a                                ; $7acc: $e0 $40
+    ldh [$ff40], a                                ; $7acc: $e0 $40
     ld b, b                                       ; $7ace: $40
     nop                                           ; $7acf: $00
     rra                                           ; $7ad0: $1f
@@ -14392,7 +14392,7 @@ jr_01f_7a5c:
     ldh [$e0], a                                  ; $7bb9: $e0 $e0
     ret nz                                        ; $7bbb: $c0
 
-    ldh [rLCDC], a                                ; $7bbc: $e0 $40
+    ldh [$ff40], a                                ; $7bbc: $e0 $40
     ld b, b                                       ; $7bbe: $40
     nop                                           ; $7bbf: $00
     nop                                           ; $7bc0: $00

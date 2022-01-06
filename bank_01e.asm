@@ -5936,7 +5936,7 @@ jr_01e_5883:
     ldh [$e0], a                                  ; $58c7: $e0 $e0
     ret nz                                        ; $58c9: $c0
 
-    ldh [rLCDC], a                                ; $58ca: $e0 $40
+    ldh [$ff40], a                                ; $58ca: $e0 $40
     ldh [rP1], a                                  ; $58cc: $e0 $00
     ld b, b                                       ; $58ce: $40
     add b                                         ; $58cf: $80

@@ -4064,7 +4064,7 @@ jr_023_505d:
     ld h, b                                       ; $50a4: $60
     ldh [$60], a                                  ; $50a5: $e0 $60
     ldh [$60], a                                  ; $50a7: $e0 $60
-    ldh [rLCDC], a                                ; $50a9: $e0 $40
+    ldh [$ff40], a                                ; $50a9: $e0 $40
     ret nz                                        ; $50ab: $c0
 
     ld b, b                                       ; $50ac: $40
@@ -7465,7 +7465,7 @@ jr_023_5ea5:
     ldh a, [rNR10]                                ; $5eab: $f0 $10
     ldh a, [rNR41]                                ; $5ead: $f0 $20
     ldh [rNR41], a                                ; $5eaf: $e0 $20
-    ldh [rLCDC], a                                ; $5eb1: $e0 $40
+    ldh [$ff40], a                                ; $5eb1: $e0 $40
     ret nz                                        ; $5eb3: $c0
 
     ret nz                                        ; $5eb4: $c0

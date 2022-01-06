@@ -1250,7 +1250,7 @@ jr_02b_458a:
     nop                                           ; $45a1: $00
     ld b, b                                       ; $45a2: $40
     nop                                           ; $45a3: $00
-    ldh [rLCDC], a                                ; $45a4: $e0 $40
+    ldh [$ff40], a                                ; $45a4: $e0 $40
     ldh a, [$60]                                  ; $45a6: $f0 $60
     ret c                                         ; $45a8: $d8
 
@@ -1268,7 +1268,7 @@ jr_02b_45a9:
 jr_02b_45b7:
     ld [hl], b                                    ; $45b7: $70
     ldh a, [$60]                                  ; $45b8: $f0 $60
-    ldh [rLCDC], a                                ; $45ba: $e0 $40
+    ldh [$ff40], a                                ; $45ba: $e0 $40
     ld b, b                                       ; $45bc: $40
     nop                                           ; $45bd: $00
     nop                                           ; $45be: $00
@@ -5174,8 +5174,8 @@ jr_02b_551f:
     ret nz                                        ; $562a: $c0
 
     nop                                           ; $562b: $00
-    ldh [rLCDC], a                                ; $562c: $e0 $40
-    ldh [rLCDC], a                                ; $562e: $e0 $40
+    ldh [$ff40], a                                ; $562c: $e0 $40
+    ldh [$ff40], a                                ; $562e: $e0 $40
     ret nz                                        ; $5630: $c0
 
     add b                                         ; $5631: $80
@@ -5694,8 +5694,8 @@ jr_02b_585c:
     inc b                                         ; $585d: $04
     rrca                                          ; $585e: $0f
     ld bc, $0040                                  ; $585f: $01 $40 $00
-    ldh [rLCDC], a                                ; $5862: $e0 $40
-    ldh [rLCDC], a                                ; $5864: $e0 $40
+    ldh [$ff40], a                                ; $5862: $e0 $40
+    ldh [$ff40], a                                ; $5864: $e0 $40
     cp h                                          ; $5866: $bc
     ret nz                                        ; $5867: $c0
 

@@ -246,7 +246,7 @@ jr_01d_4088:
     jr c, jr_01d_4117                             ; $4105: $38 $10
 
     ldh a, [rNR41]                                ; $4107: $f0 $20
-    ldh [rLCDC], a                                ; $4109: $e0 $40
+    ldh [$ff40], a                                ; $4109: $e0 $40
     ret nz                                        ; $410b: $c0
 
     add b                                         ; $410c: $80
@@ -8667,7 +8667,7 @@ jr_01d_6353:
     rst $38                                       ; $63b9: $ff
     ld bc, $07fe                                  ; $63ba: $01 $fe $07
     ld hl, sp+$1c                                 ; $63bd: $f8 $1c
-    ldh [rLCDC], a                                ; $63bf: $e0 $40
+    ldh [$ff40], a                                ; $63bf: $e0 $40
     rst $38                                       ; $63c1: $ff
     ld bc, $07fe                                  ; $63c2: $01 $fe $07
     ld hl, sp+$1c                                 ; $63c5: $f8 $1c

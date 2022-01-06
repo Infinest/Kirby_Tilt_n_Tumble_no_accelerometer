@@ -90,11 +90,13 @@ SECTION "ROM Bank $012", ROMX[$4000], BANK[$12]
     ld [$c10a], a                                 ; $4098: $ea $0a $c1
     ld a, $07                                     ; $409b: $3e $07
     ld [$c117], a                                 ; $409d: $ea $17 $c1
-    ld a, $87                                     ; $40a0: $3e $87
+    ;ld a, $87                                     ; $40a0: $3e $87
+    ld a, %11100001
     ldh [rLCDC], a                                ; $40a2: $e0 $40
     ld a, $00                                     ; $40a4: $3e $00
     ld [$c112], a                                 ; $40a6: $ea $12 $c1
-    ld a, $00                                     ; $40a9: $3e $00
+    ;ld a, $00                                     ; $40a9: $3e $00
+    ld a, %00000000
     ldh [rSTAT], a                                ; $40ab: $e0 $41
     xor a                                         ; $40ad: $af
     ldh [rIF], a                                  ; $40ae: $e0 $0f
@@ -490,7 +492,8 @@ jr_012_4235:
     ld [$c10a], a                                 ; $42d7: $ea $0a $c1
     ld a, $07                                     ; $42da: $3e $07
     ld [$c117], a                                 ; $42dc: $ea $17 $c1
-    ld a, $87                                     ; $42df: $3e $87
+    ;ld a, $87                                     ; $42df: $3e $87
+    ld a, %11100001
     ldh [rLCDC], a                                ; $42e1: $e0 $40
     ld a, $00                                     ; $42e3: $3e $00
     ld [$c112], a                                 ; $42e5: $ea $12 $c1
@@ -642,7 +645,8 @@ jr_012_432b:
     ld [$c10a], a                                 ; $43dc: $ea $0a $c1
     ld a, $07                                     ; $43df: $3e $07
     ld [$c117], a                                 ; $43e1: $ea $17 $c1
-    ld a, $87                                     ; $43e4: $3e $87
+    ;ld a, $87                                     ; $43e4: $3e $87
+    ld a, %11100001
     ldh [rLCDC], a                                ; $43e6: $e0 $40
     xor a                                         ; $43e8: $af
     ldh [rIF], a                                  ; $43e9: $e0 $0f
@@ -1350,11 +1354,13 @@ Call_012_47bf:
     ld [$c125], a                                 ; $47e8: $ea $25 $c1
     ld a, $78                                     ; $47eb: $3e $78
     ld [$c126], a                                 ; $47ed: $ea $26 $c1
-    ld a, $e7                                     ; $47f0: $3e $e7
+    ;ld a, $e7                                     ; $47f0: $3e $e7
+    ld a, %11100111
     ldh [rLCDC], a                                ; $47f2: $e0 $40
     ld a, [hl]                                    ; $47f4: $7e
     ld [$c112], a                                 ; $47f5: $ea $12 $c1
-    ld a, $44                                     ; $47f8: $3e $44
+    ;ld a, $44                                     ; $47f8: $3e $44
+    ld a, %00100010
     ldh [rSTAT], a                                ; $47fa: $e0 $41
     xor a                                         ; $47fc: $af
     ldh [rIF], a                                  ; $47fd: $e0 $0f
@@ -1537,7 +1543,8 @@ jr_012_4873:
     ld [$c112], a                                 ; $48fd: $ea $12 $c1
     xor a                                         ; $4900: $af
     ldh [rSTAT], a                                ; $4901: $e0 $41
-    ld a, $87                                     ; $4903: $3e $87
+    ;ld a, $87                                     ; $4903: $3e $87
+    ld a, %11100001
     ldh [rLCDC], a                                ; $4905: $e0 $40
     xor a                                         ; $4907: $af
     ldh [rIF], a                                  ; $4908: $e0 $0f

@@ -8687,7 +8687,7 @@ jr_02c_6252:
 
     ld d, l                                       ; $63c9: $55
     ldh [rWY], a                                  ; $63ca: $e0 $4a
-    ldh [rLCDC], a                                ; $63cc: $e0 $40
+    ldh [$ff40], a                                ; $63cc: $e0 $40
     rst $38                                       ; $63ce: $ff
     ld b, b                                       ; $63cf: $40
     rst $38                                       ; $63d0: $ff
@@ -9302,7 +9302,8 @@ jr_02c_6650:
     db $fc                                        ; $6672: $fc
     di                                            ; $6673: $f3
     pop af                                        ; $6674: $f1
-    xor $e1                                       ; $6675: $ee $e1
+    ;xor $e1                                       ; $6675: $ee $e1
+    xor %10000111
     jp c, $b0d6                                   ; $6677: $da $d6 $b0
 
     ld [c], a                                     ; $667a: $e2
@@ -9313,7 +9314,7 @@ jr_02c_6650:
     ld b, b                                       ; $6680: $40
     add b                                         ; $6681: $80
     nop                                           ; $6682: $00
-    ldh [rLCDC], a                                ; $6683: $e0 $40
+    ldh [$ff40], a                                ; $6683: $e0 $40
     nop                                           ; $6685: $00
     nop                                           ; $6686: $00
     nop                                           ; $6687: $00
@@ -9623,7 +9624,7 @@ jr_02c_67bb:
 
     ld d, l                                       ; $67c9: $55
     ldh [rWY], a                                  ; $67ca: $e0 $4a
-    ldh [rLCDC], a                                ; $67cc: $e0 $40
+    ldh [$ff40], a                                ; $67cc: $e0 $40
     rst $38                                       ; $67ce: $ff
     ld b, b                                       ; $67cf: $40
     rst $38                                       ; $67d0: $ff
@@ -10541,7 +10542,7 @@ jr_02c_6b7b:
 
     ld d, l                                       ; $6bc9: $55
     ldh [rWY], a                                  ; $6bca: $e0 $4a
-    ldh [rLCDC], a                                ; $6bcc: $e0 $40
+    ldh [$ff40], a                                ; $6bcc: $e0 $40
     rst $38                                       ; $6bce: $ff
     ld b, b                                       ; $6bcf: $40
     rst $38                                       ; $6bd0: $ff
@@ -11446,7 +11447,7 @@ jr_02c_6f78:
 
     ld d, l                                       ; $6fc9: $55
     ldh [rWY], a                                  ; $6fca: $e0 $4a
-    ldh [rLCDC], a                                ; $6fcc: $e0 $40
+    ldh [$ff40], a                                ; $6fcc: $e0 $40
     rst $38                                       ; $6fce: $ff
     ld b, b                                       ; $6fcf: $40
     rst $38                                       ; $6fd0: $ff
@@ -11802,7 +11803,7 @@ jr_02c_6f78:
     db $fc                                        ; $714d: $fc
     rrca                                          ; $714e: $0f
     ldh a, [$08]                                  ; $714f: $f0 $08
-    ldh a, [rLCDC]                                ; $7151: $f0 $40
+    ldh a, [$ff40]                                ; $7151: $f0 $40
     add a                                         ; $7153: $87
     inc bc                                        ; $7154: $03
     ccf                                           ; $7155: $3f

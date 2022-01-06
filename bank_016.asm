@@ -5829,7 +5829,8 @@ jr_016_5edd:
     xor a                                         ; $5eeb: $af
     ldh [rSCX], a                                 ; $5eec: $e0 $43
     ldh [rSCY], a                                 ; $5eee: $e0 $42
-    ld a, $00                                     ; $5ef0: $3e $00
+    ;ld a, $00                                     ; $5ef0: $3e $00
+    ld a, %00000000
     ldh [rSTAT], a                                ; $5ef2: $e0 $41
     xor a                                         ; $5ef4: $af
     ldh [rIF], a                                  ; $5ef5: $e0 $0f
@@ -5845,7 +5846,8 @@ Jump_016_5f05:
     ld [$c2f8], a                                 ; $5f06: $ea $f8 $c2
     ld a, $32                                     ; $5f09: $3e $32
     ld [$c2cf], a                                 ; $5f0b: $ea $cf $c2
-    ld a, $c7                                     ; $5f0e: $3e $c7
+    ;ld a, $c7                                     ; $5f0e: $3e $c7
+    ld a, %11100011
     ldh [rLCDC], a                                ; $5f10: $e0 $40
     ei                                            ; $5f12: $fb
     jp Jump_016_5cb2                              ; $5f13: $c3 $b2 $5c
@@ -6070,7 +6072,8 @@ Call_016_600a:
     ld [$c2f8], a                                 ; $6058: $ea $f8 $c2
     ld a, $64                                     ; $605b: $3e $64
     ld [$c2cf], a                                 ; $605d: $ea $cf $c2
-    ld a, $c7                                     ; $6060: $3e $c7
+    ;ld a, $c7                                     ; $6060: $3e $c7
+    ld a, %11100011
     ldh [rLCDC], a                                ; $6062: $e0 $40
     ei                                            ; $6064: $fb
     jp Jump_016_5cb2                              ; $6065: $c3 $b2 $5c
@@ -9232,7 +9235,8 @@ jr_016_70e9:
     ld [$c117], a                                 ; $713f: $ea $17 $c1
     ld a, $00                                     ; $7142: $3e $00
     ld [$c112], a                                 ; $7144: $ea $12 $c1
-    ld a, $87                                     ; $7147: $3e $87
+    ;ld a, $87                                     ; $7147: $3e $87
+    ld a, %11100001
     ldh [rLCDC], a                                ; $7149: $e0 $40
     xor a                                         ; $714b: $af
     ldh [rIF], a                                  ; $714c: $e0 $0f
@@ -9284,9 +9288,11 @@ jr_016_716c:
     ld [$c117], a                                 ; $71a9: $ea $17 $c1
     ld a, $01                                     ; $71ac: $3e $01
     ld [$c112], a                                 ; $71ae: $ea $12 $c1
-    ld a, $e7                                     ; $71b1: $3e $e7
+    ;ld a, $e7                                     ; $71b1: $3e $e7
+    ld a, %11100111
     ldh [rLCDC], a                                ; $71b3: $e0 $40
-    ld a, $44                                     ; $71b5: $3e $44
+    ;ld a, $44                                     ; $71b5: $3e $44
+    ld a, %00100010
     ldh [rSTAT], a                                ; $71b7: $e0 $41
     xor a                                         ; $71b9: $af
     ldh [rIF], a                                  ; $71ba: $e0 $0f
