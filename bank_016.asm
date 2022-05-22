@@ -9133,7 +9133,7 @@ jr_016_6ffa:
     ld hl, $c800                                  ; $706a: $21 $00 $c8
     ld de, $d000                                  ; $706d: $11 $00 $d0
     ld bc, $0800                                  ; $7070: $01 $00 $08
-    call Call_000_0b5c                            ; $7073: $cd $5c $0b
+    call COPY_DATA                                ; $7073: $cd $5c $0b
     xor a                                         ; $7076: $af
     ldh [rSVBK], a                                ; $7077: $e0 $70
     ldh a, [$dd]                                  ; $7079: $f0 $dd
@@ -9222,7 +9222,7 @@ jr_016_70e9:
     ld hl, $7020                                  ; $7122: $21 $20 $70
     ld de, $dd80                                  ; $7125: $11 $80 $dd
     ld bc, $0040                                  ; $7128: $01 $40 $00
-    call Call_000_0b5c                            ; $712b: $cd $5c $0b
+    call COPY_DATA                                ; $712b: $cd $5c $0b
     pop af                                        ; $712e: $f1
     ldh [rSVBK], a                                ; $712f: $e0 $70
     xor a                                         ; $7131: $af
@@ -9271,7 +9271,7 @@ jr_016_716c:
     ld hl, $d000                                  ; $717f: $21 $00 $d0
     ld de, $c800                                  ; $7182: $11 $00 $c8
     ld bc, $0800                                  ; $7185: $01 $00 $08
-    call Call_000_0b5c                            ; $7188: $cd $5c $0b
+    call COPY_DATA                                ; $7188: $cd $5c $0b
     xor a                                         ; $718b: $af
     ldh [rSVBK], a                                ; $718c: $e0 $70
     call Call_000_0d8d                            ; $718e: $cd $8d $0d
