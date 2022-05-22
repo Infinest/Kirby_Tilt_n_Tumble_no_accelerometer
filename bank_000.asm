@@ -1621,13 +1621,13 @@ Call_000_0862:
     ld hl, $cc00                                  ; $08ca: $21 $00 $cc
     ld de, $9800                                  ; $08cd: $11 $00 $98
     ld bc, $0400                                  ; $08d0: $01 $00 $04
-    call Call_000_0b5c                            ; $08d3: $cd $5c $0b
+    call COPY_DATA                                ; $08d3: $cd $5c $0b
     ld a, $00                                     ; $08d6: $3e $00
     ldh [rVBK], a                                 ; $08d8: $e0 $4f
     ld hl, $c800                                  ; $08da: $21 $00 $c8
     ld de, $9800                                  ; $08dd: $11 $00 $98
     ld bc, $0400                                  ; $08e0: $01 $00 $04
-    call Call_000_0b5c                            ; $08e3: $cd $5c $0b
+    call COPY_DATA                                ; $08e3: $cd $5c $0b
     ld a, $00                                     ; $08e6: $3e $00
     ld [$c117], a                                 ; $08e8: $ea $17 $c1
     ld a, $08                                     ; $08eb: $3e $08
@@ -2037,14 +2037,15 @@ Jump_000_0b44:
     pop af                                        ; $0b4a: $f1
     ldh [$a1], a                                  ; $0b4b: $e0 $a1
     ld [$2100], a                                 ; $0b4d: $ea $00 $21
-    call Call_000_0b5c                            ; $0b50: $cd $5c $0b
+    call COPY_DATA                                ; $0b50: $cd $5c $0b
     ld a, [$c144]                                 ; $0b53: $fa $44 $c1
     ldh [$a1], a                                  ; $0b56: $e0 $a1
     ld [$2100], a                                 ; $0b58: $ea $00 $21
     ret                                           ; $0b5b: $c9
 
 
-Call_000_0b5c:
+; function COPY_DATA(uint copyFrom[hl], uint copyTo[de], uint bytesToCopy[bc])
+COPY_DATA:
 Jump_000_0b5c:
 jr_000_0b5c:
     ld a, [hl+]                                   ; $0b5c: $2a
@@ -2590,7 +2591,7 @@ Call_000_0d8d:
     ld hl, $cc00                                  ; $0d91: $21 $00 $cc
     ld de, $9800                                  ; $0d94: $11 $00 $98
     ld bc, $0400                                  ; $0d97: $01 $00 $04
-    call Call_000_0b5c                            ; $0d9a: $cd $5c $0b
+    call COPY_DATA                                ; $0d9a: $cd $5c $0b
     xor a                                         ; $0d9d: $af
     ldh [rVBK], a                                 ; $0d9e: $e0 $4f
     ld hl, $c800                                  ; $0da0: $21 $00 $c8
@@ -12000,6 +12001,8 @@ MAXIMUM_NOT_REACHED:
 FADE_OUT_COMPLETED:
 	ld b, $10
 	call DELAY
+    ld a, $06
+    ld [$c117], a
 	ei
 	ld a, $ff
 	ld [rNR52], a
@@ -12142,6 +12145,14 @@ SRAM_INITIALIZATION_LOOP_2:
 	ld a, h
 	cp $a7
 	jr nz, SRAM_INITIALIZATION_LOOP_2
+
+
+    ld a, $10
+    ld [rROMB0], a                                ; Load ROM bank 10
+    ld hl, $6b6a                                  ; Copy from initial high score values in ROM
+    ld de, $c15e                                  ; to work RAM
+    ld bc, $002a                                  ; Amount of bytes to copy
+    call COPY_DATA
 ret
 
 SRAM_IDENTIFIER:
@@ -12150,6 +12161,6 @@ db "TAMA"
 CREDITS_MAP:
 incbin "credits.bin"
 
-REPT 89
+REPT 67
 	db $ff
 ENDR

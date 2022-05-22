@@ -1298,12 +1298,12 @@ jr_012_4736:
     ld hl, $d000                                  ; $4781: $21 $00 $d0
     ld de, $9c00                                  ; $4784: $11 $00 $9c
     ld bc, $0060                                  ; $4787: $01 $60 $00
-    call Call_000_0b5c                            ; $478a: $cd $5c $0b
+    call COPY_DATA                                ; $478a: $cd $5c $0b
     xor a                                         ; $478d: $af
     ldh [rVBK], a                                 ; $478e: $e0 $4f
     ld de, $9c00                                  ; $4790: $11 $00 $9c
     ld bc, $0060                                  ; $4793: $01 $60 $00
-    call Call_000_0b5c                            ; $4796: $cd $5c $0b
+    call COPY_DATA                                ; $4796: $cd $5c $0b
     ld a, [$d0c0]                                 ; $4799: $fa $c0 $d0
     ld c, $00                                     ; $479c: $0e $00
     sra a                                         ; $479e: $cb $2f
@@ -1654,7 +1654,7 @@ jr_012_4979:
 
 jr_012_4998:
     ld bc, $0008                                  ; $4998: $01 $08 $00
-    call Call_000_0b5c                            ; $499b: $cd $5c $0b
+    call COPY_DATA                                ; $499b: $cd $5c $0b
     ld bc, $0018                                  ; $499e: $01 $18 $00
     add hl, bc                                    ; $49a1: $09
     ld a, e                                       ; $49a2: $7b
@@ -1664,7 +1664,7 @@ jr_012_4998:
     adc b                                         ; $49a6: $88
     ld d, a                                       ; $49a7: $57
     ld bc, $0008                                  ; $49a8: $01 $08 $00
-    call Call_000_0b5c                            ; $49ab: $cd $5c $0b
+    call COPY_DATA                                ; $49ab: $cd $5c $0b
     pop hl                                        ; $49ae: $e1
     ld a, [hl+]                                   ; $49af: $2a
     add $00                                       ; $49b0: $c6 $00
@@ -1680,7 +1680,7 @@ jr_012_4998:
     ld h, a                                       ; $49be: $67
     ld l, c                                       ; $49bf: $69
     ld bc, $0008                                  ; $49c0: $01 $08 $00
-    call Call_000_0b5c                            ; $49c3: $cd $5c $0b
+    call COPY_DATA                                ; $49c3: $cd $5c $0b
     ld bc, $0018                                  ; $49c6: $01 $18 $00
     add hl, bc                                    ; $49c9: $09
     ld a, e                                       ; $49ca: $7b
@@ -1690,7 +1690,7 @@ jr_012_4998:
     adc b                                         ; $49ce: $88
     ld d, a                                       ; $49cf: $57
     ld bc, $0008                                  ; $49d0: $01 $08 $00
-    call Call_000_0b5c                            ; $49d3: $cd $5c $0b
+    call COPY_DATA                                ; $49d3: $cd $5c $0b
     ldh a, [$91]                                  ; $49d6: $f0 $91
     inc a                                         ; $49d8: $3c
     ldh [$91], a                                  ; $49d9: $e0 $91
@@ -1716,7 +1716,7 @@ jr_012_49e2:
     ld d, a                                       ; $49f6: $57
     ld hl, $c8a8                                  ; $49f7: $21 $a8 $c8
     ld bc, $0008                                  ; $49fa: $01 $08 $00
-    call Call_000_0b5c                            ; $49fd: $cd $5c $0b
+    call COPY_DATA                                ; $49fd: $cd $5c $0b
     ld bc, $0018                                  ; $4a00: $01 $18 $00
     add hl, bc                                    ; $4a03: $09
     ld a, e                                       ; $4a04: $7b
@@ -1726,7 +1726,7 @@ jr_012_49e2:
     adc b                                         ; $4a08: $88
     ld d, a                                       ; $4a09: $57
     ld bc, $0008                                  ; $4a0a: $01 $08 $00
-    call Call_000_0b5c                            ; $4a0d: $cd $5c $0b
+    call COPY_DATA                                ; $4a0d: $cd $5c $0b
     pop hl                                        ; $4a10: $e1
     ld a, [hl+]                                   ; $4a11: $2a
     add $00                                       ; $4a12: $c6 $00
@@ -1736,7 +1736,7 @@ jr_012_49e2:
     ld d, a                                       ; $4a18: $57
     ld hl, $c8a8                                  ; $4a19: $21 $a8 $c8
     ld bc, $0008                                  ; $4a1c: $01 $08 $00
-    call Call_000_0b5c                            ; $4a1f: $cd $5c $0b
+    call COPY_DATA                                ; $4a1f: $cd $5c $0b
     ld bc, $0018                                  ; $4a22: $01 $18 $00
     add hl, bc                                    ; $4a25: $09
     ld a, e                                       ; $4a26: $7b
@@ -1746,7 +1746,7 @@ jr_012_49e2:
     adc b                                         ; $4a2a: $88
     ld d, a                                       ; $4a2b: $57
     ld bc, $0008                                  ; $4a2c: $01 $08 $00
-    call Call_000_0b5c                            ; $4a2f: $cd $5c $0b
+    call COPY_DATA                                ; $4a2f: $cd $5c $0b
     ld hl, $69e8                                  ; $4a32: $21 $e8 $69
     call Call_012_4af6                            ; $4a35: $cd $f6 $4a
     ld a, [$d0c7]                                 ; $4a38: $fa $c7 $d0
@@ -8352,7 +8352,7 @@ Jump_012_6fbe:
     ld hl, $7f51                                  ; $6fe8: $21 $51 $7f
     ld de, $dd20                                  ; $6feb: $11 $20 $dd
     ld bc, $0010                                  ; $6fee: $01 $10 $00
-    call Call_000_0b5c                            ; $6ff1: $cd $5c $0b
+    call COPY_DATA                                ; $6ff1: $cd $5c $0b
     pop af                                        ; $6ff4: $f1
     ldh [rSVBK], a                                ; $6ff5: $e0 $70
     ld a, $01                                     ; $6ff7: $3e $01

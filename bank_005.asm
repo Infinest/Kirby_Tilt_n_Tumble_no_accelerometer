@@ -7462,7 +7462,7 @@ ENDR
 
 jr_005_6701:
     ld b, a                                       ; $6701: $47
-    call READ_FROM_SRAM                            ; $6702: $cd $89 $68
+    call READ_FROM_SRAM                           ; $6702: $cd $89 $68
     ld a, d                                       ; $6705: $7a
     ld [hl+], a                                   ; $6706: $22
     ld a, e                                       ; $6707: $7b
